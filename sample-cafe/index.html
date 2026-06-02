@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Niigata | 新潟の恵みを、一杯に。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --brown-dark: #5C3D2E;
+      --brown-mid: #8B6347;
+      --brown-light: #E8D5C4;
+      --cream: #FAF6F2;
+      --white: #FFFFFF;
+      --text-dark: #2C1810;
+      --text-mid: #5C3D2E;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-dark);
+      background-color: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(92, 61, 46, 0.92);
+      backdrop-filter: blur(6px);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--brown-light);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: var(--brown-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 20px;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    /* ===== HAMBURGER ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 201;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--brown-light);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* モバイルメニューオーバーレイ */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 24, 16, 0.97);
+      z-index: 200;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+    }
+
+    .nav-overlay a {
+      color: var(--brown-light);
+      text-decoration: none;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.5rem;
+      padding: 18px 0;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      border-bottom: 1px solid rgba(232, 213, 196, 0.1);
+      width: 200px;
+      text-align: center;
+    }
+
+    .nav-overlay a:last-child { border-bottom: none; }
+    .nav-overlay a:hover { opacity: 1; }
+
+    @media (max-width: 639px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .nav-overlay { display: flex; pointer-events: none; }
+      .nav-overlay.open { pointer-events: auto; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #3B2314 0%, #5C3D2E 40%, #8B6347 80%, #C4956A 100%);
+      background-image: url(images/hero.jpg), linear-gradient(160deg, #3B2314 0%, #5C3D2E 40%, #8B6347 80%, #C4956A 100%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30, 15, 5, 0.45) 0%,
+        rgba(30, 15, 5, 0.35) 40%,
+        rgba(30, 15, 5, 0.55) 100%
+      );
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(232, 213, 196, 0.2);
+      border: 1px solid rgba(232, 213, 196, 0.4);
+      color: var(--brown-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--white);
+      font-size: clamp(2rem, 7vw, 3.6rem);
+      line-height: 1.35;
+      margin-bottom: 20px;
+      position: relative;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1 span {
+      color: var(--brown-light);
+    }
+
+    .hero p {
+      color: rgba(232, 213, 196, 0.95);
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      max-width: 480px;
+      margin-bottom: 40px;
+      position: relative;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--brown-light);
+      color: var(--brown-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(92, 61, 46, 0.4);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(232, 213, 196, 0.6);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(232, 213, 196, 0.5), transparent);
+    }
+
+    /* ===== SECTION BASE ===== */
+    section {
+      padding: 80px 24px;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: var(--brown-mid);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--brown-dark);
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
+
+    /* ===== CONCEPT / STRENGTHS ===== */
+    .concept {
+      background: var(--white);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid rgba(232, 213, 196, 0.8);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(92, 61, 46, 0.1);
+    }
+
+    .card-icon {
+      display: none;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      color: var(--brown-dark);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--brown-mid);
+      line-height: 1.7;
+    }
+
+    /* ===== MENU ===== */
+    .menu {
+      background: var(--cream);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 640px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .menu-item {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(92, 61, 46, 0.08);
+      transition: transform 0.2s;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .menu-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    img.menu-img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      font-size: initial;
+    }
+
+    .menu-img.coffee {
+      background: linear-gradient(135deg, #3B2314, #6B4226);
+    }
+
+    .menu-img.rice {
+      background: linear-gradient(135deg, #6B7C3A, #9BA85C);
+    }
+
+    .menu-img.salad {
+      background: linear-gradient(135deg, #4A7C59, #7DB88A);
+    }
+
+    .menu-body {
+      padding: 20px;
+    }
+
+    .menu-body h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      color: var(--brown-dark);
+      margin-bottom: 8px;
+    }
+
+    .menu-body p {
+      font-size: 0.85rem;
+      color: #7A6055;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .menu-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--brown-dark);
+    }
+
+    .menu-price span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--brown-mid);
+    }
+
+    /* ===== ACCESS ===== */
+    .access {
+      background: var(--white);
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 720px) {
+      .access-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .access-info dt {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--brown-mid);
+      margin-bottom: 4px;
+      margin-top: 20px;
+    }
+
+    .access-info dt:first-child {
+      margin-top: 0;
+    }
+
+    .access-info dd {
+      font-size: 0.97rem;
+      color: var(--text-dark);
+    }
+
+    .map-placeholder {
+      background: var(--brown-light);
+      border-radius: 16px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--brown-mid);
+      font-size: 0.9rem;
+    }
+
+    .map-placeholder span {
+      font-size: 2.5rem;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--brown-dark), var(--brown-mid));
+      text-align: center;
+    }
+
+    .cta-section .section-label {
+      color: rgba(232, 213, 196, 0.7);
+    }
+
+    .cta-section .section-title {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(232, 213, 196, 0.85);
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+    }
+
+    .btn-white {
+      display: inline-block;
+      background: var(--white);
+      color: var(--brown-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--text-dark);
+      color: rgba(232, 213, 196, 0.6);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.82rem;
+    }
+
+    footer .footer-logo {
+      font-family: 'Noto Serif JP', serif;
+      color: var(--brown-light);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      line-height: 1.8;
+    }
+
+    /* ---- STORY ---- */
+    .story {
+      background: #FAF6F2;
+      padding: 80px 24px 90px;
+    }
+    .story-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 56px;
+      align-items: center;
+    }
+    .story-image {
+      flex: 0 0 42%;
+    }
+    .story-image img {
+      width: 100%;
+      border-radius: 12px;
+      transform: rotate(-1.5deg);
+      display: block;
+    }
+    .story-text {
+      flex: 1;
+    }
+    .story-heading {
+      font-family: 'Caveat', cursive;
+      font-size: 2.4rem;
+      color: #5C3D2E;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+    .story-text p {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: #444;
+      margin-bottom: 14px;
+    }
+    .story-sign {
+      text-align: right;
+      font-style: italic;
+      color: #7a5c46;
+      margin-top: 20px;
+    }
+
+    /* ---- REVIEWS ---- */
+    .reviews {
+      background: #FFFFFF;
+      padding: 80px 24px 100px;
+    }
+    .reviews-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .reviews-grid {
+      display: flex;
+      gap: 24px;
+      margin-top: 40px;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .review-card {
+      background: #FAF6F2;
+      border-radius: 16px;
+      flex: 1;
+    }
+    /* intentional slight variation in padding/height across cards */
+    .review-card--1 { padding: 28px 26px 32px; }
+    .review-card--2 { padding: 34px 28px 28px; margin-top: 12px; }
+    .review-card--3 { padding: 26px 24px 36px; }
+    .stars {
+      color: #C4956A;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .review-body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .review-name {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.78rem;
+      color: #7a5c46;
+      text-align: right;
+      font-style: italic;
+    }
+
+    /* ---- FLOATING CTA ---- */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .floating-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .floating-cta a {
+      display: inline-block;
+      background: var(--brown-dark, #5C3D2E);
+      color: var(--brown-light, #FAF6F2);
+      border-radius: 50px;
+      padding: 14px 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(92,61,46,0.35);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .story-inner {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .story-image { flex: none; width: 100%; }
+      .reviews-grid {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .review-card--2 { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Café Niigata</div>
+    <nav>
+      <a href="#concept">こだわり</a>
+      <a href="#menu">メニュー</a>
+      <a href="#story">ストーリー</a>
+      <a href="#reviews">口コミ</a>
+      <a href="#access">アクセス</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="#concept" class="nav-link">こだわり</a>
+    <a href="#menu" class="nav-link">メニュー</a>
+    <a href="#story" class="nav-link">ストーリー</a>
+    <a href="#reviews" class="nav-link">口コミ</a>
+    <a href="#access" class="nav-link">アクセス</a>
+    <a href="#contact" class="nav-link">お問い合わせ</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-tag">新潟産食材 × 自家焙煎コーヒー</span>
+    <h1>新潟の恵みを、<br><span>一杯に。一皿に。</span></h1>
+    <p>地元農家との繋がりから生まれた、新鮮でやさしい味。<br>新潟の四季を、ここでゆっくり味わってください。</p>
+    <a href="#menu" class="btn-primary">メニューを見る</a>
+    <div class="hero-scroll">SCROLL</div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="concept" id="concept">
+    <div class="section-inner">
+      <p class="section-label">Our Concept</p>
+      <h2 class="section-title">Café Niigataの<br>3つのこだわり</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🌾</span>
+          <img src="images/vegetables.jpg" alt="新鮮野菜" class="card-img">
+          <h3>地元農家の新鮮野菜</h3>
+          <p>新潟市近郊の農家と直接契約。毎朝届く旬の野菜を、その日のうちに調理しています。</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🍚</span>
+          <img src="images/niigata-rice.jpg" alt="新潟米" class="card-img">
+          <h3>新潟米のライスボウル</h3>
+          <p>新潟が誇るコシヒカリを中心に、季節の食材と合わせたオリジナルライスボウルをご提供。</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">☕</span>
+          <img src="images/roasted-beans.jpg" alt="自家焙煎コーヒー豆" class="card-img">
+          <h3>自家焙煎コーヒー</h3>
+          <p>厳選した生豆を店内で丁寧に焙煎。産地・焙煎度合いにこだわった本格的な一杯をどうぞ。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="section-inner">
+      <p class="section-label">Menu</p>
+      <h2 class="section-title">おすすめメニュー</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <img class="menu-img coffee" src="images/coffee.jpg" alt="コーヒー">
+          <div class="menu-body">
+            <h3>自家焙煎ブレンドコーヒー</h3>
+            <p>その日の気候に合わせて焙煎度を調整。新潟の水と組み合わせた、まろやかで深みのある味わい。</p>
+            <p class="menu-price">¥550 <span>（税込）</span></p>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img class="menu-img rice" src="images/rice-bowl.jpg" alt="ライスボウル">
+          <div class="menu-body">
+            <h3>新潟米ライスボウル</h3>
+            <p>コシヒカリに季節の野菜と地元食材のトッピング。ランチタイムに人気のボリューム満点メニュー。</p>
+            <p class="menu-price">¥1,100 <span>（税込）</span></p>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/salad.jpg" alt="農家直送サラダプレート" class="menu-img">
+          <div class="menu-body">
+            <h3>農家直送サラダプレート</h3>
+            <p>その日入荷した旬の野菜をたっぷりと。自家製ドレッシングで野菜本来の甘みを引き立てます。</p>
+            <p class="menu-price">¥880 <span>（税込）</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <div class="story-image">
+        <img src="images/hero.jpg" alt="店内の様子" />
+      </div>
+      <div class="story-text">
+        <h2 class="story-heading">わたしたちの、想い。</h2>
+        <p>新潟に生まれ、新潟で育ちました。</p>
+        <p>地元の農家さんと話すうちに、「この野菜をもっと多くの人に食べてほしい」という気持ちが芽生えて、このカフェを始めました。</p>
+        <p>素材の良さをシンプルに伝えること。地元の人が気軽に立ち寄れる場所であること。それだけを、ずっと大切にしています。</p>
+        <p class="story-sign">— 店主より</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="reviews-inner">
+      <p class="section-label">VOICE</p>
+      <h2 class="section-title">お客様の声</h2>
+      <div class="reviews-grid">
+        <div class="review-card review-card--1">
+          <p class="stars">★★★★★</p>
+          <p class="review-body">野菜の甘みに驚きました。スーパーで買うのとは全然違う。コーヒーも香りが豊かで、ついつい長居してしまいます。</p>
+          <p class="review-name">— 新潟市在住 T.M さん</p>
+        </div>
+        <div class="review-card review-card--2">
+          <p class="stars">★★★★★</p>
+          <p class="review-body">ランチのライスボウルが最高です！お米がもちもちで、地元産って感じがしっかりする。毎週来たいくらい。</p>
+          <p class="review-name">— 新潟市在住 K.Y さん</p>
+        </div>
+        <div class="review-card review-card--3">
+          <p class="stars">★★★★★</p>
+          <p class="review-body">友人に連れてきてもらって以来、ひとりでも来るようになりました。窓から見える景色がきれいで、ほっとする場所です。</p>
+          <p class="review-name">— 長岡市在住 A.S さん</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section class="access" id="access">
+    <div class="section-inner">
+      <p class="section-label">Access</p>
+      <h2 class="section-title">アクセス</h2>
+      <div class="access-grid">
+        <dl class="access-info">
+          <dt>店名</dt>
+          <dd>Café Niigata（カフェ・ニイガタ）</dd>
+          <dt>住所</dt>
+          <dd>新潟県新潟市中央区本町通1丁目〇〇番地</dd>
+          <dt>電話</dt>
+          <dd>025-000-0000</dd>
+          <dt>営業時間</dt>
+          <dd>10:00 〜 19:00（L.O. 18:30）</dd>
+          <dt>定休日</dt>
+          <dd>毎週火曜日</dd>
+        </dl>
+        <div class="map-placeholder">
+          <span>📍</span>
+          <p>Googleマップ</p>
+          <p style="font-size:0.8rem; opacity:0.7;">（地図を埋め込みます）</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="section-inner">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">ご予約・お問い合わせ</h2>
+      <p>ご来店のご予約、貸切のご相談など、<br>お気軽にお電話またはフォームよりご連絡ください。</p>
+      <a href="tel:025-000-0000" class="btn-white">📞 025-000-0000</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-logo">Café Niigata</p>
+    <p>新潟県新潟市中央区本町通1丁目〇〇番地<br>
+    営業時間 10:00〜19:00 ／ 火曜定休</p>
+    <p style="margin-top: 16px; font-size: 0.75rem; opacity: 0.5;">© 2026 Café Niigata. All rights reserved.</p>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <a href="tel:025-000-0000">📞 ご予約はこちら</a>
+  </div>
+
+  <script>
+    // フローティングCTA
+    const cta = document.getElementById('floatingCta');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight * 0.8) {
+        cta.classList.add('visible');
+      } else {
+        cta.classList.remove('visible');
+      }
+    });
+
+    // ハンバーガーメニュー
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // オーバーレイのリンクをタップしたら閉じる
+    navOverlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+
+</body>
+</html>
