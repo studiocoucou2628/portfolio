@@ -565,17 +565,13 @@ img {
   transform: translateX(4px);
 }
 
-/* Featured large card */
+/* Featured card — gold border highlight only, no row span */
 .product-card.featured {
-  grid-row: span 2;
-}
-.product-card.featured .product-img {
-  aspect-ratio: unset;
-  height: calc(100% - 140px);
-  min-height: 420px;
+  outline: 1px solid rgba(212,175,55,0.35);
+  outline-offset: -1px;
 }
 .product-card.featured .product-img-placeholder {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 /* ============================================================
@@ -689,8 +685,12 @@ img {
   background: var(--bg-card);
 }
 .quality-icon {
-  font-size: 2.2rem;
-  margin-bottom: 24px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 28px;
   display: block;
 }
 .quality-num {
@@ -755,8 +755,19 @@ img {
   justify-content: center;
   font-size: 2.8rem;
   overflow: hidden;
+  position: relative;
+}
+.gift-card-img span {
+  position: relative;
+  z-index: 0;
 }
 .gift-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
   transition: transform 0.6s ease;
 }
 .gift-card:hover img {
@@ -877,14 +888,17 @@ img {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: #1e1e1e;
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--gold);
   flex-shrink: 0;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(212,175,55,0.3);
   overflow: hidden;
+  letter-spacing: 0;
 }
 .review-author-info {}
 .review-name {
@@ -1055,10 +1069,15 @@ img {
   text-align: center;
 }
 .map-pin-icon {
-  font-size: 2.2rem;
-  animation: map-bounce 2.5s ease-in-out infinite;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(212,175,55,0.5));
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  margin: 0 auto 6px;
+  animation: map-bounce 2.5s ease-in-out infinite;
+  box-shadow: 0 4px 10px rgba(212,175,55,0.55);
 }
 .map-pin-label {
   background: var(--gold);
@@ -1266,11 +1285,6 @@ img {
   }
   .product-card.featured {
     grid-column: span 2;
-    grid-row: span 1;
-  }
-  .product-card.featured .product-img {
-    aspect-ratio: 16/9;
-    height: auto;
   }
   .brand-story-grid { grid-template-columns: 1fr; gap: 48px; }
   .quality-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -1288,6 +1302,82 @@ img {
   .product-card.featured { grid-column: auto; }
   .gift-grid { grid-template-columns: 1fr; }
   .floating-cta { bottom: 16px; flex-direction: column; gap: 8px; }
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, background 0.35s ease;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(0,0,0,0.93);
+}
+.lightbox-inner {
+  position: relative;
+  max-width: min(640px, 90vw);
+  transform: scale(0.88);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  text-align: center;
+}
+.lightbox.open .lightbox-inner {
+  transform: scale(1);
+}
+.lightbox-img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+  border: 1px solid rgba(212,175,55,0.3);
+}
+.lightbox-caption {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-align: center;
+  margin-top: 18px;
+  opacity: 0.85;
+}
+.lightbox-price {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+}
+.lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  background: none;
+  border: 1px solid rgba(212,175,55,0.45);
+  color: var(--gold);
+  font-size: 0.95rem;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  transition: background 0.3s, border-color 0.3s;
+  z-index: 2001;
+}
+.lightbox-close:hover {
+  background: rgba(212,175,55,0.12);
+  border-color: var(--gold);
 }
 </style>
 </head>
@@ -1392,9 +1482,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-ring.jpg" alt="ダイヤモンドリング" onerror="this.style.display='none'">
-            <div class="product-img-placeholder" style="display: none;">💍</div>
-            <!-- 画像がない場合 -->
-            <div class="product-img-placeholder">💍</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Ring</span>
@@ -1413,7 +1501,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-necklace.jpg" alt="K18ゴールドネックレス" onerror="this.style.display='none'">
-            <div class="product-img-placeholder">📿</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Necklace</span>
@@ -1431,7 +1519,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-earring.jpg" alt="サファイアピアス" onerror="this.style.display='none'">
-            <div class="product-img-placeholder">💎</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Earring</span>
@@ -1450,7 +1538,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-bracelet.jpg" alt="パールブレスレット" onerror="this.style.display='none'">
-            <div class="product-img-placeholder">🤍</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Bracelet</span>
@@ -1468,7 +1556,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-pendant.jpg" alt="エメラルドペンダント" onerror="this.style.display='none'">
-            <div class="product-img-placeholder">💚</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Pendant</span>
@@ -1486,7 +1574,7 @@ img {
         <div class="product-card-inner">
           <div class="product-img">
             <img src="images/product-ruby.jpg" alt="ルビーイヤリング" onerror="this.style.display='none'">
-            <div class="product-img-placeholder">❤️</div>
+            <div class="product-img-placeholder">◆</div>
           </div>
           <div class="product-info">
             <span class="product-category">Earring</span>
@@ -1512,7 +1600,7 @@ img {
     <div class="brand-story-grid">
       <div class="brand-story-img reveal">
         <img src="images/owner.jpg" alt="代表 桐島 明子" onerror="this.style.display='none'">
-        <div class="brand-story-img-placeholder">✨</div>
+        <div class="brand-story-img-placeholder">◆</div>
         <div class="story-frame"></div>
       </div>
       <div class="brand-story-text reveal reveal-delay-2">
@@ -1551,21 +1639,21 @@ img {
     </div>
     <div class="quality-grid">
       <div class="quality-card reveal reveal-delay-1">
-        <span class="quality-icon">💎</span>
+        <span class="quality-icon">◆</span>
         <span class="quality-num">GIA</span>
         <span class="quality-unit">全ダイヤモンド 国際鑑定書付き</span>
         <div class="quality-title">鑑定書付き天然ダイヤモンド</div>
         <p class="quality-desc">GIA（米国宝石学会）発行の鑑定書が付属。品質・カット・色・透明度をすべて証明します。</p>
       </div>
       <div class="quality-card reveal reveal-delay-2">
-        <span class="quality-icon">⚒️</span>
+        <span class="quality-icon">✦</span>
         <span class="quality-num">31<span style="font-size:1.2rem">年</span></span>
         <span class="quality-unit">職人の技術の積み重ね</span>
         <div class="quality-title">熟練職人によるハンドクラフト</div>
         <p class="quality-desc">新潟の工房で一点一点手作業。量産品と一線を画す仕上がりの細部は、職人歴31年の桐島が直接担当。</p>
       </div>
       <div class="quality-card reveal reveal-delay-3">
-        <span class="quality-icon">🛡️</span>
+        <span class="quality-icon">◇</span>
         <span class="quality-num">永久</span>
         <span class="quality-unit">保証・無料メンテナンス</span>
         <div class="quality-title">永久保証・クリーニング無料</div>
@@ -1589,7 +1677,6 @@ img {
       <div class="gift-card reveal reveal-delay-1">
         <div class="gift-card-img">
           <img src="images/gift-birthday.jpg" alt="誕生日" onerror="this.style.display='none'">
-          <span>🎂</span>
         </div>
         <div class="gift-card-body">
           <span class="gift-occasion">Birthday</span>
@@ -1600,7 +1687,6 @@ img {
       <div class="gift-card reveal reveal-delay-2">
         <div class="gift-card-img">
           <img src="images/gift-anniversary.jpg" alt="記念日" onerror="this.style.display='none'">
-          <span>💑</span>
         </div>
         <div class="gift-card-body">
           <span class="gift-occasion">Anniversary</span>
@@ -1611,7 +1697,6 @@ img {
       <div class="gift-card reveal reveal-delay-3">
         <div class="gift-card-img">
           <img src="images/gift-christmas.jpg" alt="クリスマス" onerror="this.style.display='none'">
-          <span>🎄</span>
         </div>
         <div class="gift-card-body">
           <span class="gift-occasion">Christmas</span>
@@ -1622,7 +1707,6 @@ img {
       <div class="gift-card reveal reveal-delay-4">
         <div class="gift-card-img">
           <img src="images/gift-bespoke.jpg" alt="オーダーメイド" onerror="this.style.display='none'">
-          <span>✍️</span>
         </div>
         <div class="gift-card-body">
           <span class="gift-occasion">Bespoke</span>
@@ -1654,10 +1738,7 @@ img {
         <span class="review-stars">★★★★★</span>
         <p class="review-text">プロポーズ用のリングをオーダーしました。予算の相談から石の選定まで、桐島さんが丁寧に付き合ってくださって。緊張しすぎて最初うまく話せなかったのですが（笑）、彼女が「こんなに美しいものを選んでくれたの」と涙を流してくれました。人生で一番うれしい瞬間でした。</p>
         <div class="review-author">
-          <div class="review-avatar">
-            <img src="images/review1.jpg" alt="" onerror="this.style.display='none'">
-            👨
-          </div>
+          <div class="review-avatar">N</div>
           <div class="review-author-info">
             <div class="review-name">中川 拓哉 様</div>
             <div class="review-meta">プロポーズリング / 2025年3月</div>
@@ -1669,7 +1750,7 @@ img {
         <span class="review-stars">★★★★☆</span>
         <p class="review-text">母への誕生日プレゼントにパールネックレスを購入しました。ギフトラッピングも上品で、本当に喜んでもらえました。ただ、人気商品はすぐ売り切れるので早めの予約をおすすめします。また利用したいです。</p>
         <div class="review-author">
-          <div class="review-avatar">👩</div>
+          <div class="review-avatar">W</div>
           <div class="review-author-info">
             <div class="review-name">渡辺 佐知子 様</div>
             <div class="review-meta">パールネックレス / 2025年8月</div>
@@ -1681,7 +1762,7 @@ img {
         <span class="review-stars">★★★★★</span>
         <p class="review-text">結婚10周年の記念に、ふたりでお店へ伺いました。仕事で忙しい夫がわざわざ半日時間を作って「本物を贈りたい」と言ってくれて……正直最初は「え、ジュエリー？」と思ったんですが（笑）、実際に手に取ったらもう離せなくて。GIA鑑定書つきのダイヤモンドが、これほど温かく感じるとは思いませんでした。</p>
         <div class="review-author">
-          <div class="review-avatar">👩‍🦰</div>
+          <div class="review-avatar">O</div>
           <div class="review-author-info">
             <div class="review-name">小野寺 香織 様</div>
             <div class="review-meta">記念日ジュエリー / 2025年11月</div>
@@ -1835,13 +1916,13 @@ img {
           <div class="map-road-label" style="top:55%; right:8%;">万代通</div>
           <!-- ピン -->
           <div class="map-pin-wrap">
-            <span class="map-pin-icon">📍</span>
+            <span class="map-pin-icon"></span>
             <div class="map-pin-label">ÉCLAT BIJOUX</div>
           </div>
           <!-- 周辺スポット -->
-          <div class="map-station" style="bottom:16%; left:22%;">🚌 古町</div>
+          <div class="map-station" style="bottom:16%; left:22%;">古町駅</div>
           <div class="map-station" style="top:14%; right:10%;">徒歩2分</div>
-          <div class="map-station" style="top:14%; left:10%;">🏛️ 古町商店街</div>
+          <div class="map-station" style="top:14%; left:10%;">古町商店街</div>
         </div>
       </div>
     </div>
@@ -1988,6 +2069,61 @@ if (storyImg) {
   storyImg.addEventListener('load', () => { if (storyPh) storyPh.style.display = 'none'; });
   checkImg();
 }
+
+// ---- Product Lightbox ----
+(() => {
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.className = 'lightbox';
+  lb.setAttribute('aria-hidden', 'true');
+  lb.innerHTML = `
+    <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">✕</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-price" id="lightboxPrice"></div>
+    </div>
+  `;
+  document.body.appendChild(lb);
+
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCaption = document.getElementById('lightboxCaption');
+  const lbPrice = document.getElementById('lightboxPrice');
+  const lbClose = document.getElementById('lightboxClose');
+
+  function openLb(src, name, price) {
+    lbImg.src = src;
+    lbImg.alt = name;
+    lbCaption.textContent = name;
+    lbPrice.textContent = price;
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLb() {
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(() => { if (!lb.classList.contains('open')) lbImg.src = ''; }, 350);
+  }
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('.product-img img');
+      const name = card.querySelector('.product-name')?.textContent.trim() || '';
+      const price = (card.querySelector('.product-price')?.textContent.trim() || '')
+                  + (card.querySelector('.product-price-sub')?.textContent.trim() || '');
+      if (img && img.src && img.naturalWidth > 0) {
+        openLb(img.src, name, price);
+      }
+    });
+  });
+
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+})();
 </script>
 
 </body>
