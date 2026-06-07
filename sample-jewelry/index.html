@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÉCLAT BIJOUX｜光の宝飾 新潟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg:          #0a0a0a;
+  --bg-card:     #141414;
+  --bg-section:  #0f0f0f;
+  --gold:        #D4AF37;
+  --gold-light:  #F5E6A3;
+  --gold-dark:   #C4A028;
+  --gold-glow:   rgba(212,175,55,0.25);
+  --text:        #F8F4E8;
+  --text-muted:  #9a9487;
+  --text-dim:    #666;
+  --border:      rgba(212,175,55,0.18);
+  --border-soft: rgba(212,175,55,0.08);
+  --radius:      4px;
+  --radius-lg:   10px;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.gold-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 20px 0 28px;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+.nav.scrolled {
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+}
+.nav-logo span {
+  display: block;
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  font-family: 'Cinzel', serif;
+  transition: all 0.3s;
+}
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 60% 45%, rgba(212,175,55,0.06) 0%, transparent 70%),
+    #0a0a0a;
+  z-index: 0;
+}
+
+/* 背景画像（生成後に使用） */
+.hero-bg img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  opacity: 0.6;
+  mix-blend-mode: luminosity;
+}
+
+/* パーティクル（輝き） */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: particle-float linear infinite;
+  opacity: 0;
+}
+.particle:nth-child(1)  { width:2px; height:2px; left:8%;  top:20%; animation-duration:7s;  animation-delay:0s;    }
+.particle:nth-child(2)  { width:1px; height:1px; left:18%; top:65%; animation-duration:9s;  animation-delay:1.2s;  }
+.particle:nth-child(3)  { width:3px; height:3px; left:30%; top:40%; animation-duration:6s;  animation-delay:2.5s;  }
+.particle:nth-child(4)  { width:1px; height:1px; left:55%; top:15%; animation-duration:11s; animation-delay:0.7s;  }
+.particle:nth-child(5)  { width:2px; height:2px; left:70%; top:75%; animation-duration:8s;  animation-delay:3s;    }
+.particle:nth-child(6)  { width:1px; height:1px; left:80%; top:35%; animation-duration:10s; animation-delay:1.8s;  }
+.particle:nth-child(7)  { width:2px; height:2px; left:90%; top:55%; animation-duration:7s;  animation-delay:4s;    }
+.particle:nth-child(8)  { width:1px; height:1px; left:45%; top:80%; animation-duration:9s;  animation-delay:0.3s;  }
+.particle:nth-child(9)  { width:3px; height:3px; left:25%; top:90%; animation-duration:12s; animation-delay:5s;    }
+.particle:nth-child(10) { width:1px; height:1px; left:62%; top:45%; animation-duration:6s;  animation-delay:2s;    }
+.particle:nth-child(11) { width:2px; height:2px; left:14%; top:50%; animation-duration:8s;  animation-delay:3.5s;  }
+.particle:nth-child(12) { width:1px; height:1px; left:85%; top:20%; animation-duration:10s; animation-delay:1s;    }
+
+@keyframes particle-float {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  20%  { opacity: 0.8; }
+  80%  { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
+}
+
+/* 中央コンテンツ */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fade-up 1s 0.4s forwards;
+}
+
+.hero-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fade-up 1s 0.65s forwards;
+}
+
+.hero-title-en {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fade-up 1s 0.85s forwards;
+}
+
+.hero-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fade-up 1s 1s forwards;
+}
+
+.hero-cta-wrap {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.2s forwards;
+}
+
+/* ゴールドCTAボタン */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  padding: 16px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: glow-pulse 3s 2s infinite;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.btn-primary:hover::after { left: 160%; }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,175,55,0.45);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 16px 36px;
+  transition: all 0.35s;
+}
+.btn-outline:hover {
+  background: rgba(212,175,55,0.08);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.2); }
+  50%       { box-shadow: 0 0 35px rgba(212,175,55,0.55), 0 0 60px rgba(212,175,55,0.2); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* スクロールインジケーター */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fade-up 1s 1.8s forwards;
+}
+.hero-scroll span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: var(--text-dim);
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scroll-down 2s 2s infinite;
+}
+@keyframes scroll-down {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  overflow: hidden;
+  padding: 14px 0;
+}
+.ticker-inner {
+  display: flex;
+  gap: 0;
+  animation: ticker-scroll 30s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  padding: 0 48px;
+  text-transform: uppercase;
+}
+.ticker-item .dot {
+  color: var(--gold);
+  margin: 0 12px;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   COLLECTION
+   ============================================================ */
+.collection {
+  padding: 120px 0;
+}
+.collection-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.product-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  cursor: pointer;
+  group: true;
+}
+.product-card-inner {
+  position: relative;
+  overflow: hidden;
+}
+.product-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #1a1a1a;
+  position: relative;
+  overflow: hidden;
+}
+/* 商品画像プレースホルダー */
+.product-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: radial-gradient(ellipse at center, #1e1e1e 0%, #0f0f0f 100%);
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.product-card:hover .product-img-placeholder {
+  transform: scale(1.06);
+}
+/* 実際の画像があるとき */
+.product-img img {
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.product-card:hover .product-img img {
+  transform: scale(1.06);
+}
+
+/* シマーエフェクト */
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(212,175,55,0.2) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.product-card:hover::after {
+  transform: translateX(100%);
+}
+
+/* ゴールドボーダー on hover */
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  transition: border-color 0.4s;
+  z-index: 3;
+  pointer-events: none;
+}
+.product-card:hover::before {
+  border-color: rgba(212,175,55,0.4);
+}
+
+.product-info {
+  padding: 20px 22px 24px;
+  border-top: 1px solid var(--border-soft);
+}
+.product-category {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.product-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+.product-price {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.product-price-sub {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-left: 6px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+.product-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  font-family: 'Cinzel', serif;
+  transition: color 0.3s;
+}
+.product-action::after {
+  content: '→';
+  transition: transform 0.3s;
+}
+.product-card:hover .product-action {
+  color: var(--gold);
+}
+.product-card:hover .product-action::after {
+  transform: translateX(4px);
+}
+
+/* Featured large card */
+.product-card.featured {
+  grid-row: span 2;
+}
+.product-card.featured .product-img {
+  aspect-ratio: unset;
+  height: calc(100% - 140px);
+  min-height: 420px;
+}
+.product-card.featured .product-img-placeholder {
+  font-size: 5rem;
+}
+
+/* ============================================================
+   BRAND STORY
+   ============================================================ */
+.brand-story {
+  padding: 120px 0;
+  background: var(--bg-section);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+.brand-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.brand-story-img {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.brand-story-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: radial-gradient(ellipse at 30% 40%, #1e1a10 0%, #0f0f0f 80%);
+}
+.brand-story-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+/* ゴールドフレーム装飾 */
+.story-frame {
+  position: absolute;
+  top: 16px;
+  right: -16px;
+  bottom: -16px;
+  left: 16px;
+  border: 1px solid rgba(212,175,55,0.2);
+  pointer-events: none;
+  z-index: -1;
+}
+.brand-story-text {}
+.brand-story-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.brand-story-quote em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+.brand-story-body {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 2;
+  margin-bottom: 40px;
+}
+.signature {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  margin-top: 16px;
+}
+.signature strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   QUALITY / FEATURES
+   ============================================================ */
+.quality {
+  padding: 120px 0;
+}
+.quality-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-soft);
+}
+.quality-card {
+  background: var(--bg);
+  padding: 52px 40px;
+  text-align: center;
+  transition: background 0.35s;
+}
+.quality-card:hover {
+  background: var(--bg-card);
+}
+.quality-icon {
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  display: block;
+}
+.quality-num {
+  font-family: 'Cinzel', serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+}
+.quality-unit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+.quality-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 20px 0 12px;
+  letter-spacing: 0.08em;
+}
+.quality-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 2;
+}
+
+/* ============================================================
+   GIFT SCENES
+   ============================================================ */
+.gift {
+  padding: 100px 0;
+  background: var(--bg-section);
+  border-top: 1px solid var(--border-soft);
+}
+.gift-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.gift-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  transition: border-color 0.35s, transform 0.35s;
+}
+.gift-card:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+}
+.gift-card-img {
+  aspect-ratio: 1;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  overflow: hidden;
+}
+.gift-card img {
+  transition: transform 0.6s ease;
+}
+.gift-card:hover img {
+  transform: scale(1.08);
+}
+.gift-card-body {
+  padding: 22px 20px;
+}
+.gift-occasion {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+.gift-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.gift-range {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews {
+  padding: 120px 0;
+}
+.reviews-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 100px;
+  margin: 0 auto 56px;
+  display: flex;
+  width: fit-content;
+}
+.google-badge-stars {
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+.google-badge-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+.google-badge-score {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  padding: 36px 32px;
+  position: relative;
+  transition: border-color 0.35s;
+}
+.review-card:hover {
+  border-color: var(--border);
+}
+.review-quote-mark {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  color: var(--gold);
+  opacity: 0.25;
+  display: block;
+  margin-bottom: 12px;
+}
+.review-stars {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 16px;
+}
+.review-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  line-height: 2;
+  font-weight: 300;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-soft);
+}
+.review-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.review-author-info {}
+.review-name {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+}
+.review-meta {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq {
+  padding: 100px 0;
+  background: var(--bg-section);
+  border-top: 1px solid var(--border-soft);
+}
+.faq-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border-soft);
+}
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+.faq-question:hover { color: var(--gold-light); }
+.faq-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--gold);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.faq-answer-inner {
+  padding: 0 0 28px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 2;
+}
+
+/* ============================================================
+   ACCESS
+   ============================================================ */
+.access {
+  padding: 120px 0;
+}
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.access-info {}
+.access-address {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 2;
+  margin-bottom: 36px;
+}
+.access-address strong {
+  display: block;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 400;
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.access-table {
+  width: 100%;
+  font-size: 0.85rem;
+}
+.access-table tr { border-bottom: 1px solid var(--border-soft); }
+.access-table td {
+  padding: 14px 0;
+  vertical-align: top;
+}
+.access-table td:first-child {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  width: 100px;
+  padding-right: 20px;
+}
+
+/* CSSマップ */
+.access-map {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #111;
+  border: 1px solid var(--border);
+}
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg,   rgba(212,175,55,0.06) 0 1px, transparent 1px 50px),
+    repeating-linear-gradient(90deg,  rgba(212,175,55,0.06) 0 1px, transparent 1px 50px);
+}
+.map-road-h {
+  position: absolute;
+  left: 0; right: 0;
+  background: #1e1e1e;
+  opacity: 0.9;
+}
+.map-road-v {
+  position: absolute;
+  top: 0; bottom: 0;
+  background: #1e1e1e;
+  opacity: 0.9;
+}
+.map-road-label {
+  position: absolute;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.map-pin-wrap {
+  position: absolute;
+  top: 42%;
+  left: 48%;
+  transform: translate(-50%, -100%);
+  text-align: center;
+}
+.map-pin-icon {
+  font-size: 2.2rem;
+  animation: map-bounce 2.5s ease-in-out infinite;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(212,175,55,0.5));
+}
+.map-pin-label {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.map-station {
+  position: absolute;
+  background: rgba(20,20,20,0.9);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-radius: 100px;
+}
+@keyframes map-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta {
+  padding: 130px 0;
+  text-align: center;
+  border-top: 1px solid var(--border-soft);
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.final-cta-en {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 24px;
+}
+.final-cta-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.final-cta-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 52px;
+}
+.final-cta-btns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: #050505;
+  border-top: 1px solid var(--border-soft);
+  padding: 60px 0 32px;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 16px;
+}
+.footer-tagline {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 2;
+}
+.footer-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   FLOATING CTA
+   ============================================================ */
+.floating-cta {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.floating-cta.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.floating-cta .btn-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 13px 24px;
+  box-shadow: 0 4px 20px rgba(212,175,55,0.35);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.floating-cta .btn-line:hover {
+  background: var(--gold-light);
+  box-shadow: 0 6px 28px rgba(212,175,55,0.55);
+}
+.floating-cta .btn-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10,10,10,0.92);
+  color: var(--gold);
+  border: 1px solid var(--border);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 13px 22px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.floating-cta .btn-tel:hover {
+  background: var(--bg-card);
+  border-color: var(--gold);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .product-card.featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .product-card.featured .product-img {
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+  .brand-story-grid { grid-template-columns: 1fr; gap: 48px; }
+  .quality-grid { grid-template-columns: 1fr; gap: 1px; }
+  .gift-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .access-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .nav { padding: 18px 20px; }
+  .hero-cta-wrap { flex-direction: column; align-items: center; }
+  .collection-grid { grid-template-columns: 1fr; }
+  .product-card.featured { grid-column: auto; }
+  .gift-grid { grid-template-columns: 1fr; }
+  .floating-cta { bottom: 16px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    ÉCLAT BIJOUX
+    <span>光の宝飾 · 新潟</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#quality">Quality</a></li>
+    <li><a href="#gift">Gift</a></li>
+    <li><a href="#access">Access</a></li>
+  </ul>
+  <a href="tel:025-228-7143" class="nav-cta">Contact</a>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="images/hero.jpg" alt="ÉCLAT BIJOUX ジュエリー" onerror="this.style.display='none'">
+  </div>
+
+  <div class="hero-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Niigata · Handcrafted Jewelry</p>
+    <h1 class="hero-title">
+      身に纏う、<br>特別。
+    </h1>
+    <span class="hero-title-en">Light Becomes Jewelry</span>
+    <p class="hero-subtitle">職人の手が生み出す、一点ものの輝き</p>
+    <div class="hero-cta-wrap">
+      <a href="#collection" class="btn-primary">コレクションを見る ✦</a>
+      <a href="tel:025-228-7143" class="btn-outline">ご相談・ご予約</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TICKER
+     ============================================================ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <!-- 2セット（ループ用） -->
+    <span class="ticker-item">Handcrafted in Niigata<span class="dot">✦</span></span>
+    <span class="ticker-item">18K Gold &amp; Platinum<span class="dot">✦</span></span>
+    <span class="ticker-item">Natural Gemstones<span class="dot">✦</span></span>
+    <span class="ticker-item">Lifetime Warranty<span class="dot">✦</span></span>
+    <span class="ticker-item">Bespoke Order Available<span class="dot">✦</span></span>
+    <span class="ticker-item">Gift Wrapping &amp; Delivery<span class="dot">✦</span></span>
+    <span class="ticker-item">Handcrafted in Niigata<span class="dot">✦</span></span>
+    <span class="ticker-item">18K Gold &amp; Platinum<span class="dot">✦</span></span>
+    <span class="ticker-item">Natural Gemstones<span class="dot">✦</span></span>
+    <span class="ticker-item">Lifetime Warranty<span class="dot">✦</span></span>
+    <span class="ticker-item">Bespoke Order Available<span class="dot">✦</span></span>
+    <span class="ticker-item">Gift Wrapping &amp; Delivery<span class="dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ============================================================
+     COLLECTION
+     ============================================================ -->
+<section class="collection" id="collection">
+  <div class="container">
+    <div class="collection-header reveal">
+      <span class="section-label">Our Collection</span>
+      <h2 class="section-title">光を宿す、<br>ひとつひとつの物語</h2>
+      <span class="gold-line" style="margin: 20px auto 0;"></span>
+    </div>
+
+    <div class="collection-grid">
+
+      <!-- Featured card -->
+      <div class="product-card featured reveal reveal-delay-1">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-ring.jpg" alt="ダイヤモンドリング" onerror="this.style.display='none'">
+            <div class="product-img-placeholder" style="display: none;">💍</div>
+            <!-- 画像がない場合 -->
+            <div class="product-img-placeholder">💍</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Ring</span>
+            <div class="product-name">オーロラ ダイヤモンドリング</div>
+            <div>
+              <span class="product-price">¥187,800</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右列 2枚 -->
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-necklace.jpg" alt="K18ゴールドネックレス" onerror="this.style.display='none'">
+            <div class="product-img-placeholder">📿</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Necklace</span>
+            <div class="product-name">K18 ゴールド フローラルネックレス</div>
+            <div>
+              <span class="product-price">¥98,500</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-earring.jpg" alt="サファイアピアス" onerror="this.style.display='none'">
+            <div class="product-img-placeholder">💎</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Earring</span>
+            <div class="product-name">セイロンサファイア ピアス</div>
+            <div>
+              <span class="product-price">¥134,300</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下段 3枚 -->
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-bracelet.jpg" alt="パールブレスレット" onerror="this.style.display='none'">
+            <div class="product-img-placeholder">🤍</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Bracelet</span>
+            <div class="product-name">アコヤパール ブレスレット</div>
+            <div>
+              <span class="product-price">¥76,800</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-pendant.jpg" alt="エメラルドペンダント" onerror="this.style.display='none'">
+            <div class="product-img-placeholder">💚</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Pendant</span>
+            <div class="product-name">コロンビアエメラルド ペンダント</div>
+            <div>
+              <span class="product-price">¥223,500</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-card-inner">
+          <div class="product-img">
+            <img src="images/product-ruby.jpg" alt="ルビーイヤリング" onerror="this.style.display='none'">
+            <div class="product-img-placeholder">❤️</div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Earring</span>
+            <div class="product-name">ミャンマールビー ドロップイヤリング</div>
+            <div>
+              <span class="product-price">¥156,000</span>
+              <span class="product-price-sub">（税込）</span>
+            </div>
+            <div class="product-action">View Details</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /collection-grid -->
+  </div>
+</section>
+
+<!-- ============================================================
+     BRAND STORY
+     ============================================================ -->
+<section class="brand-story" id="story">
+  <div class="container">
+    <div class="brand-story-grid">
+      <div class="brand-story-img reveal">
+        <img src="images/owner.jpg" alt="代表 桐島 明子" onerror="this.style.display='none'">
+        <div class="brand-story-img-placeholder">✨</div>
+        <div class="story-frame"></div>
+      </div>
+      <div class="brand-story-text reveal reveal-delay-2">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">宝石に宿る光は、<br>時を超える</h2>
+        <span class="gold-line"></span>
+        <p class="brand-story-quote">
+          ひとつの石には、<em>数億年という時間</em>が<br>
+          凝縮されています。<br>
+          それを手に取り、誰かへ贈る。<br>
+          その瞬間が、また新しい物語になる。
+        </p>
+        <p class="brand-story-body">
+          新潟の工房で、一点一点を手作業で仕上げています。量産品では決して生まれない、細部へのこだわり。原石の個性を最大限に引き出す石座設計。職人が30年かけて磨いた技術が、あなたの特別な瞬間を支えます。<br><br>
+          素材はすべて産地証明付き。ダイヤモンドはGIA鑑定書取得品のみ。18Kゴールドとプラチナ950を使用しています。
+        </p>
+        <div class="signature">
+          <strong>桐島 明子</strong>
+          代表 / ジュエリーデザイナー<br>
+          新潟伝統工芸マイスター認定
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUALITY
+     ============================================================ -->
+<section class="quality" id="quality">
+  <div class="container">
+    <div class="quality-header reveal">
+      <span class="section-label">Craftsmanship</span>
+      <h2 class="section-title">数字が語る、品質</h2>
+      <span class="gold-line" style="margin: 20px auto 0;"></span>
+    </div>
+    <div class="quality-grid">
+      <div class="quality-card reveal reveal-delay-1">
+        <span class="quality-icon">💎</span>
+        <span class="quality-num">GIA</span>
+        <span class="quality-unit">全ダイヤモンド 国際鑑定書付き</span>
+        <div class="quality-title">鑑定書付き天然ダイヤモンド</div>
+        <p class="quality-desc">GIA（米国宝石学会）発行の鑑定書が付属。品質・カット・色・透明度をすべて証明します。</p>
+      </div>
+      <div class="quality-card reveal reveal-delay-2">
+        <span class="quality-icon">⚒️</span>
+        <span class="quality-num">31<span style="font-size:1.2rem">年</span></span>
+        <span class="quality-unit">職人の技術の積み重ね</span>
+        <div class="quality-title">熟練職人によるハンドクラフト</div>
+        <p class="quality-desc">新潟の工房で一点一点手作業。量産品と一線を画す仕上がりの細部は、職人歴31年の桐島が直接担当。</p>
+      </div>
+      <div class="quality-card reveal reveal-delay-3">
+        <span class="quality-icon">🛡️</span>
+        <span class="quality-num">永久</span>
+        <span class="quality-unit">保証・無料メンテナンス</span>
+        <div class="quality-title">永久保証・クリーニング無料</div>
+        <p class="quality-desc">ご購入後のサイズ調整、クリーニング、小さな修理は永久に無料。大切なジュエリーを長く美しく保てます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GIFT SCENES
+     ============================================================ -->
+<section class="gift" id="gift">
+  <div class="container">
+    <div class="gift-header reveal">
+      <span class="section-label">Gift Guide</span>
+      <h2 class="section-title">大切な人へ、<br>その日の輝きを</h2>
+      <span class="gold-line" style="margin: 20px auto 0;"></span>
+    </div>
+    <div class="gift-grid">
+      <div class="gift-card reveal reveal-delay-1">
+        <div class="gift-card-img">
+          <img src="images/gift-birthday.jpg" alt="誕生日" onerror="this.style.display='none'">
+          <span>🎂</span>
+        </div>
+        <div class="gift-card-body">
+          <span class="gift-occasion">Birthday</span>
+          <div class="gift-title">誕生日・<br>バースデーギフト</div>
+          <div class="gift-range">¥30,000〜</div>
+        </div>
+      </div>
+      <div class="gift-card reveal reveal-delay-2">
+        <div class="gift-card-img">
+          <img src="images/gift-anniversary.jpg" alt="記念日" onerror="this.style.display='none'">
+          <span>💑</span>
+        </div>
+        <div class="gift-card-body">
+          <span class="gift-occasion">Anniversary</span>
+          <div class="gift-title">結婚記念日・<br>プロポーズ</div>
+          <div class="gift-range">¥80,000〜</div>
+        </div>
+      </div>
+      <div class="gift-card reveal reveal-delay-3">
+        <div class="gift-card-img">
+          <img src="images/gift-christmas.jpg" alt="クリスマス" onerror="this.style.display='none'">
+          <span>🎄</span>
+        </div>
+        <div class="gift-card-body">
+          <span class="gift-occasion">Christmas</span>
+          <div class="gift-title">クリスマス・<br>冬のプレゼント</div>
+          <div class="gift-range">¥50,000〜</div>
+        </div>
+      </div>
+      <div class="gift-card reveal reveal-delay-4">
+        <div class="gift-card-img">
+          <img src="images/gift-bespoke.jpg" alt="オーダーメイド" onerror="this.style.display='none'">
+          <span>✍️</span>
+        </div>
+        <div class="gift-card-body">
+          <span class="gift-occasion">Bespoke</span>
+          <div class="gift-title">世界に一つの<br>オーダーメイド</div>
+          <div class="gift-range">¥120,000〜</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS
+     ============================================================ -->
+<section class="reviews">
+  <div class="container">
+    <div class="reviews-header reveal">
+      <span class="section-label">Reviews</span>
+      <h2 class="section-title">お客様の声</h2>
+    </div>
+    <div class="google-badge reveal">
+      <span class="google-badge-stars">★★★★★</span>
+      <span class="google-badge-score">4.8</span>
+      <span class="google-badge-text">Google / 89件のレビュー</span>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal reveal-delay-1">
+        <span class="review-quote-mark">"</span>
+        <span class="review-stars">★★★★★</span>
+        <p class="review-text">プロポーズ用のリングをオーダーしました。予算の相談から石の選定まで、桐島さんが丁寧に付き合ってくださって。緊張しすぎて最初うまく話せなかったのですが（笑）、彼女が「こんなに美しいものを選んでくれたの」と涙を流してくれました。人生で一番うれしい瞬間でした。</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="images/review1.jpg" alt="" onerror="this.style.display='none'">
+            👨
+          </div>
+          <div class="review-author-info">
+            <div class="review-name">中川 拓哉 様</div>
+            <div class="review-meta">プロポーズリング / 2025年3月</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-2">
+        <span class="review-quote-mark">"</span>
+        <span class="review-stars">★★★★☆</span>
+        <p class="review-text">母への誕生日プレゼントにパールネックレスを購入しました。ギフトラッピングも上品で、本当に喜んでもらえました。ただ、人気商品はすぐ売り切れるので早めの予約をおすすめします。また利用したいです。</p>
+        <div class="review-author">
+          <div class="review-avatar">👩</div>
+          <div class="review-author-info">
+            <div class="review-name">渡辺 佐知子 様</div>
+            <div class="review-meta">パールネックレス / 2025年8月</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal reveal-delay-3">
+        <span class="review-quote-mark">"</span>
+        <span class="review-stars">★★★★★</span>
+        <p class="review-text">結婚10周年の記念に、ふたりでお店へ伺いました。仕事で忙しい夫がわざわざ半日時間を作って「本物を贈りたい」と言ってくれて……正直最初は「え、ジュエリー？」と思ったんですが（笑）、実際に手に取ったらもう離せなくて。GIA鑑定書つきのダイヤモンドが、これほど温かく感じるとは思いませんでした。</p>
+        <div class="review-author">
+          <div class="review-avatar">👩‍🦰</div>
+          <div class="review-author-info">
+            <div class="review-name">小野寺 香織 様</div>
+            <div class="review-meta">記念日ジュエリー / 2025年11月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">よくあるご質問</h2>
+      <span class="gold-line" style="margin: 20px auto 0;"></span>
+    </div>
+    <div class="faq-list reveal reveal-delay-1">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          オーダーメイドにはどのくらい時間がかかりますか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            デザインのご相談から完成まで、通常6〜8週間いただいています。プロポーズや記念日のお日にちが決まっている場合は、お早めにご相談ください。特急対応（3〜4週間）も承りますが、別途費用が発生する場合がございます。
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          購入後のサイズ変更は可能ですか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            はい、永久保証の一環として、サイズ調整は無料で承っています。ただし、デザインの構造上対応できない場合もございますので、お気軽にご相談ください。石留め部分の複雑なデザインは別途お見積りになることがあります。
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          予算が決まっていなくても相談できますか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            もちろんです。「こんな場面で贈りたい」「相手がこういうものが好き」というイメージをお聞きして、最適な予算感とデザインをご提案します。まずはLINEやお電話でお気軽にお問い合わせください。
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          ダイヤモンドの品質はどう確認できますか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            当店のダイヤモンドはすべてGIA（米国宝石学会）の鑑定書が付属します。4C（カラット・カラー・クラリティ・カット）をすべて証明する国際基準の書類です。来店時にルーペでの確認体験もできますので、ぜひご来店ください。
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          遠方からでも購入できますか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            はい、全国配送（送料無料）に対応しています。オンラインビデオ相談も承りますので、遠方のお客様もお気軽にご相談ください。ただしオーダーメイドは一度ご来店いただくことを推奨しております。
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          メンテナンスはどのくらいの頻度でするといいですか？
+          <span class="faq-icon">＋</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            年に一度の定期メンテナンスをおすすめしています。クリーニング・石留め確認・金属磨きをすべて無料で行います。大切なジュエリーを長く美しく保つために、ぜひご活用ください。ご来店の際は事前にご予約をお願いします。
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ACCESS
+     ============================================================ -->
+<section class="access" id="access">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 72px;" class="reveal">
+      <span class="section-label">Access</span>
+      <h2 class="section-title">ご来店のご案内</h2>
+      <span class="gold-line" style="margin: 20px auto 0;"></span>
+    </div>
+    <div class="access-grid">
+      <div class="access-info reveal">
+        <div class="access-address">
+          <strong>ÉCLAT BIJOUX（エクラ ビジュー）</strong>
+          〒951-8063<br>
+          新潟県新潟市中央区古町通7番町1079-2<br>
+          古町通商店街 内
+        </div>
+        <table class="access-table">
+          <tr>
+            <td>Hours</td>
+            <td>火〜日 11:00〜19:00<br><span style="color:var(--text-dim);font-size:0.8rem">月曜定休（祝日の場合は翌日）</span></td>
+          </tr>
+          <tr>
+            <td>Access</td>
+            <td>新潟駅前バスターミナルより<br>古町行き乗車 約15分<br>「古町」停留所 徒歩2分</td>
+          </tr>
+          <tr>
+            <td>Parking</td>
+            <td>近隣駐車場をご利用ください<br><span style="color:var(--text-dim);font-size:0.8rem">（2時間分サービス券をお渡しします）</span></td>
+          </tr>
+          <tr>
+            <td>Tel</td>
+            <td><a href="tel:025-228-7143" style="color:var(--gold);">025-228-7143</a></td>
+          </tr>
+          <tr>
+            <td>Rsv</td>
+            <td>ご予約優先制<br><span style="color:var(--text-dim);font-size:0.8rem">（ご来店前にLINEまたはお電話を）</span></td>
+          </tr>
+        </table>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <!-- CSSマップ -->
+        <div class="access-map">
+          <div class="map-grid"></div>
+          <!-- 道路 -->
+          <div class="map-road-h" style="height:16px; top:38%;"></div>
+          <div class="map-road-h" style="height:10px; top:62%;"></div>
+          <div class="map-road-v" style="width:14px; left:28%;"></div>
+          <div class="map-road-v" style="width:10px; left:62%;"></div>
+          <!-- 道路ラベル -->
+          <div class="map-road-label" style="top:30%; left:5%;">古町通 7番町</div>
+          <div class="map-road-label" style="top:55%; right:8%;">万代通</div>
+          <!-- ピン -->
+          <div class="map-pin-wrap">
+            <span class="map-pin-icon">📍</span>
+            <div class="map-pin-label">ÉCLAT BIJOUX</div>
+          </div>
+          <!-- 周辺スポット -->
+          <div class="map-station" style="bottom:16%; left:22%;">🚌 古町</div>
+          <div class="map-station" style="top:14%; right:10%;">徒歩2分</div>
+          <div class="map-station" style="top:14%; left:10%;">🏛️ 古町商店街</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<section class="final-cta">
+  <div class="container">
+    <span class="final-cta-en reveal">Begin Your Story</span>
+    <h2 class="final-cta-title reveal reveal-delay-1">
+      あなたの特別な一日に、<br>
+      本物の輝きを。
+    </h2>
+    <p class="final-cta-sub reveal reveal-delay-2">ご相談・ご予約はお気軽にどうぞ。まずはLINEで。</p>
+    <div class="final-cta-btns reveal reveal-delay-3">
+      <a href="#" class="btn-primary">LINE で無料相談 ✦</a>
+      <a href="tel:025-228-7143" class="btn-outline">☎ 025-228-7143</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <span class="footer-logo">ÉCLAT BIJOUX</span>
+        <p class="footer-tagline">
+          光の宝飾 · 新潟<br>
+          職人が手作りする、一点物のジュエリー。<br>
+          あなたの特別な瞬間を、永遠に輝かせます。
+        </p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#quality">Quality</a></li>
+          <li><a href="#gift">Gift Guide</a></li>
+          <li><a href="#access">Access</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:025-228-7143">025-228-7143</a></li>
+          <li><a href="#">LINE で相談</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">オンラインショップ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 ÉCLAT BIJOUX · All Rights Reserved</span>
+      <span class="footer-copy" style="color:var(--border)">Niigata, Japan · Handcrafted Jewelry</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     FLOATING CTA
+     ============================================================ -->
+<div class="floating-cta" id="floatingCta">
+  <a href="#" class="btn-line">✦ LINE で無料相談</a>
+  <a href="tel:025-228-7143" class="btn-tel">☎ 電話する</a>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// ---- Scroll Reveal ----
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ---- Nav scrolled ----
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ---- Floating CTA ----
+const floatingCta = document.getElementById('floatingCta');
+window.addEventListener('scroll', () => {
+  floatingCta.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+
+// ---- FAQ Accordion ----
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    // 全部閉じる
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    // クリックしたものを開く（開いていた場合は閉じたまま）
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ---- Product card: placeholder visibility ----
+// 画像が正常にロードされた場合、絵文字プレースホルダーを非表示に
+document.querySelectorAll('.product-img img').forEach(img => {
+  if (img.complete && img.naturalWidth > 0) {
+    const ph = img.nextElementSibling;
+    if (ph) ph.style.display = 'none';
+  }
+  img.addEventListener('load', function () {
+    const ph = this.nextElementSibling;
+    if (ph) ph.style.display = 'none';
+  });
+});
+
+// brand story img
+const storyImg = document.querySelector('.brand-story-img img');
+if (storyImg) {
+  const storyPh = document.querySelector('.brand-story-img-placeholder');
+  const checkImg = () => {
+    if (storyImg.complete && storyImg.naturalWidth > 0) {
+      if (storyPh) storyPh.style.display = 'none';
+    }
+  };
+  storyImg.addEventListener('load', () => { if (storyPh) storyPh.style.display = 'none'; });
+  checkImg();
+}
+</script>
+
+</body>
+</html>
