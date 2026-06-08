@@ -17,21 +17,21 @@
     header {
       background: #fff;
       border-bottom: 1px solid #e8e8e4;
-      padding: 24px 40px;
+      padding: 12px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
     }
 
-    .logo span {
-      color: #c8a96e;
+    .logo-img {
+      height: 88px;
+      width: auto;
     }
 
     .header-contact {
@@ -308,7 +308,9 @@
 <body>
 
   <header>
-    <div class="logo">Studio <span>Coucou</span></div>
+    <a class="logo" href="#">
+      <img class="logo-img" src="logo.png" alt="Studio Coucou">
+    </a>
     <div class="header-contact">ホームページ制作｜新潟</div>
   </header>
 
