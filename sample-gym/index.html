@@ -252,9 +252,18 @@ section { padding: 80px 24px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  color: var(--accent);
   flex-shrink: 0;
 }
+.worry-icon svg { width: 20px; height: 20px; }
+.result-avatar { font-family: 'Cinzel', serif; font-weight: 600; color: var(--primary); }
+.trainer-photo-placeholder { font-family: 'Cinzel', serif; font-weight: 600; color: var(--accent); }
+.feature-img-placeholder svg { width: 30%; height: 30%; }
+.access-icon svg { width: 20px; height: 20px; }
+.cert-badge svg { width: 15px; height: 15px; }
+.result-meta-icon { width: 15px; height: 15px; vertical-align: -2px; margin-right: 4px; }
+.f-line svg, .f-tel svg { width: 16px; height: 16px; vertical-align: -2px; margin-right: 2px; }
+.btn-line svg { width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px; }
 .worry-cta-wrap { text-align: center; margin-top: 40px; }
 .worry-cta-wrap p {
   color: rgba(255,255,255,0.6);
@@ -755,7 +764,31 @@ section { padding: 80px 24px; }
   transform: translate(-50%, -100%);
   text-align: center;
 }
-.map-pin-icon { font-size: 2.2rem; animation: bounce 2s infinite; }
+.map-pin-icon {
+  width: 26px; height: 26px;
+  margin: 0 auto 4px;
+  background: var(--accent);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  position: relative;
+  animation: mapBouncePin 2s infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.map-pin-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 9px; height: 9px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes mapBouncePin {
+  0%, 100% { transform: rotate(-45deg) translate(0, 0); }
+  50% { transform: rotate(-45deg) translate(5px, -5px); }
+}
+.map-station svg { width: 13px; height: 13px; vertical-align: -2px; margin-right: 3px; }
+.access-icon { color: var(--accent); }
 .map-pin-label {
   background: var(--accent);
   color: white;
@@ -984,7 +1017,7 @@ section { padding: 80px 24px; }
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-inner">
-    <div class="hero-badge">🔥 渋谷のパーソナルジム No.1</div>
+    <div class="hero-badge">✦ 渋谷のパーソナルジム No.1</div>
     <h1>
       ダイエットを<br>
       何度やっても<br>
@@ -999,7 +1032,7 @@ section { padding: 80px 24px; }
         ▶ 無料体験セッションを申し込む
       </a>
       <a href="#contact" class="btn-line">
-        💬 LINEで気軽に相談する
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>LINEで気軽に相談する
       </a>
     </div>
     <div class="hero-stats">
@@ -1030,27 +1063,27 @@ section { padding: 80px 24px; }
     <h2 class="section-title" style="color:white;">あなたの「うまくいかない」に<br>心当たりはありますか？</h2>
     <div class="worry-grid">
       <div class="worry-item">
-        <div class="worry-icon">😞</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 16s1.4-1.5 3.5-1.5 3.5 1.5 3.5 1.5"/><line x1="9" y1="9.5" x2="9" y2="10"/><line x1="15" y1="9.5" x2="15" y2="10"/></svg></div>
         <span>何度ダイエットしても続かない</span>
       </div>
       <div class="worry-item">
-        <div class="worry-icon">💪</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12h11"/><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><path d="M5 10.5v3M19 10.5v3"/></svg></div>
         <span>筋トレしても体型が変わらない</span>
       </div>
       <div class="worry-item">
-        <div class="worry-icon">🍽</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a2 2 0 104 0V3M8 11v10"/><path d="M16 3c2 0 3 3 3 6s-1 4-3 4v8"/></svg></div>
         <span>食事制限が辛くてすぐやめてしまう</span>
       </div>
       <div class="worry-item">
-        <div class="worry-icon">⏰</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
         <span>忙しくて継続する時間がとれない</span>
       </div>
       <div class="worry-item">
-        <div class="worry-icon">🤷</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 014.8.8c0 1.7-2.3 2-2.3 3.5"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></div>
         <span>何をすればいいかわからない</span>
       </div>
       <div class="worry-item">
-        <div class="worry-icon">📉</div>
+        <div class="worry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 7 9.5 13.5 13.5 9.5 21 17"/><polyline points="15 17 21 17 21 11"/></svg></div>
         <span>体重が落ちてもリバウンドしてしまう</span>
       </div>
     </div>
@@ -1069,7 +1102,7 @@ section { padding: 80px 24px; }
     <div class="features-grid">
       <div class="feature-card">
         <img class="feature-img" src="images/feature-01.jpg" alt="完全マンツーマン指導" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="feature-img-placeholder" style="display:none">🏋️</div>
+        <div class="feature-img-placeholder" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12h11"/><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><path d="M5 10.5v3M19 10.5v3"/></svg></div>
         <div class="feature-body">
           <p class="feature-num">REASON 01</p>
           <h3>完全マンツーマン指導で<br>確実に変わる</h3>
@@ -1078,7 +1111,7 @@ section { padding: 80px 24px; }
       </div>
       <div class="feature-card">
         <img class="feature-img" src="images/feature-02.jpg" alt="食事指導込み" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="feature-img-placeholder" style="display:none">🥗</div>
+        <div class="feature-img-placeholder" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20a10 10 0 01-20 0z"/><path d="M12 12c0-3 2-5.5 5-5.5M9 12c-1-2 0-4.5 2-5.5"/></svg></div>
         <div class="feature-body">
           <p class="feature-num">REASON 02</p>
           <h3>食事指導込みで<br>リバウンドしない体を作る</h3>
@@ -1087,7 +1120,7 @@ section { padding: 80px 24px; }
       </div>
       <div class="feature-card">
         <img class="feature-img" src="images/feature-03.jpg" alt="渋谷駅徒歩3分" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="feature-img-placeholder" style="display:none">🚉</div>
+        <div class="feature-img-placeholder" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="13" rx="2"/><path d="M8 16l-2 4M16 16l2 4M5 11h14"/><circle cx="8.5" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8" r="1" fill="currentColor" stroke="none"/></svg></div>
         <div class="feature-body">
           <p class="feature-num">REASON 03</p>
           <h3>渋谷駅徒歩3分<br>通いやすさが継続の鍵</h3>
@@ -1153,7 +1186,7 @@ section { padding: 80px 24px; }
         <a href="#contact" class="btn-plan">このプランで申し込む</a>
       </div>
       <div class="plan-card featured">
-        <div class="plan-badge">⭐ いちばん人気</div>
+        <div class="plan-badge">★ いちばん人気</div>
         <p class="plan-name">スタンダード</p>
         <p class="plan-times">月12回（週3回）</p>
         <div class="plan-price-alt" id="stdAlt">3ヶ月一括: ¥142,560</div>
@@ -1199,7 +1232,7 @@ section { padding: 80px 24px; }
     <div class="trainer-wrap">
       <div class="trainer-photo-wrap">
         <img class="trainer-photo" src="images/trainer.jpg" alt="トレーナー 田中 健太" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="trainer-photo-placeholder" style="display:none">👨</div>
+        <div class="trainer-photo-placeholder" style="display:none">T</div>
         <div class="trainer-stats-badge">
           <div class="num">247<span style="font-size:1rem">名</span></div>
           <div class="label">担当会員実績</div>
@@ -1216,10 +1249,10 @@ section { padding: 80px 24px; }
           変化を得意としています。「できないのではなく、方法が合っていないだけ」がモットー。
         </p>
         <div class="cert-list">
-          <span class="cert-badge">🏅 NSCA-CPT</span>
-          <span class="cert-badge">🏅 NESTA-PFT</span>
-          <span class="cert-badge">🏅 栄養コンシェルジュ</span>
-          <span class="cert-badge">🏅 健康運動指導士</span>
+          <span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>NSCA-CPT</span>
+          <span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>NESTA-PFT</span>
+          <span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>栄養コンシェルジュ</span>
+          <span class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>健康運動指導士</span>
         </div>
       </div>
     </div>
@@ -1240,10 +1273,10 @@ section { padding: 80px 24px; }
           気づいたら習慣になってました（笑）」
         </p>
         <div class="result-data">
-          📊 体重 -8.3kg ／ 体脂肪率 -6.1% ／ 3ヶ月間
+          <svg class="result-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="11" width="3" height="6"/><rect x="11" y="7" width="3" height="10"/><rect x="16" y="13" width="3" height="4"/></svg>体重 -8.3kg ／ 体脂肪率 -6.1% ／ 3ヶ月間
         </div>
         <div class="result-user">
-          <div class="result-avatar">👩</div>
+          <div class="result-avatar">Y</div>
           <div class="result-user-info">
             <p class="name">Yuki T.</p>
             <p class="meta">38歳・会社員（女性）</p>
@@ -1259,10 +1292,10 @@ section { padding: 80px 24px; }
           LINEで融通きかせてもらえてます。」
         </p>
         <div class="result-data">
-          📊 体重 -6.7kg ／ 筋肉量 +2.3kg ／ 4ヶ月間
+          <svg class="result-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="11" width="3" height="6"/><rect x="11" y="7" width="3" height="10"/><rect x="16" y="13" width="3" height="4"/></svg>体重 -6.7kg ／ 筋肉量 +2.3kg ／ 4ヶ月間
         </div>
         <div class="result-user">
-          <div class="result-avatar">👨</div>
+          <div class="result-avatar">H</div>
           <div class="result-user-info">
             <p class="name">Hiroshi M.</p>
             <p class="meta">46歳・管理職（男性）</p>
@@ -1278,10 +1311,10 @@ section { padding: 80px 24px; }
           それが効いてるんだと思います。」
         </p>
         <div class="result-data">
-          📊 体重 -4.9kg ／ ウエスト -7cm ／ 2ヶ月間
+          <svg class="result-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="11" width="3" height="6"/><rect x="11" y="7" width="3" height="10"/><rect x="16" y="13" width="3" height="4"/></svg>体重 -4.9kg ／ ウエスト -7cm ／ 2ヶ月間
         </div>
         <div class="result-user">
-          <div class="result-avatar">👩</div>
+          <div class="result-avatar">S</div>
           <div class="result-user-info">
             <p class="name">Saori K.</p>
             <p class="meta">32歳・デザイナー（女性）</p>
@@ -1375,29 +1408,29 @@ section { padding: 80px 24px; }
         <div class="map-road-v" style="width:18px;left:32%"></div>
         <div class="map-road-v" style="width:12px;left:55%"></div>
         <div class="map-pin-wrap">
-          <div class="map-pin-icon">📍</div>
+          <div class="map-pin-icon"></div>
           <div class="map-pin-label">RISE Personal Gym</div>
         </div>
-        <div class="map-station" style="bottom:16%;left:26%">🚉 渋谷駅</div>
+        <div class="map-station" style="bottom:16%;left:26%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="13" rx="2"/><path d="M8 16l-2 4M16 16l2 4M5 11h14"/><circle cx="8.5" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8" r="1" fill="currentColor" stroke="none"/></svg>渋谷駅</div>
         <div class="map-station" style="top:14%;right:10%">徒歩3分</div>
         <div class="map-station" style="top:12%;left:10%">東急東横線</div>
       </div>
       <div class="access-info">
         <h3>RISE Personal Gym 渋谷店</h3>
         <div class="access-item">
-          <div class="access-icon">📍</div>
+          <div class="access-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
           <div>〒150-0002<br>東京都渋谷区渋谷2-X-XX ○○ビル4F<br>渋谷駅より徒歩3分</div>
         </div>
         <div class="access-item">
-          <div class="access-icon">📞</div>
+          <div class="access-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div>
           <div>03-XXXX-XXXX</div>
         </div>
         <div class="access-item">
-          <div class="access-icon">💬</div>
+          <div class="access-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8 0 01-8.5 8 9 9 0 01-3.5-.7L4 20l1.3-3.6A8 8 0 0121 11.5z"/></svg></div>
           <div>LINE公式アカウントでの相談・予約も受付中</div>
         </div>
         <div class="access-item">
-          <div class="access-icon">🕐</div>
+          <div class="access-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
           <div>
             <strong>営業時間</strong>
             <div class="hours-grid">
@@ -1427,7 +1460,7 @@ section { padding: 80px 24px; }
         ▶ 無料体験セッションを予約する
       </a>
       <a href="#" class="btn-line" style="padding:18px 32px;font-size:1rem;">
-        💬 LINEで今すぐ相談する
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>LINEで今すぐ相談する
       </a>
     </div>
     <p class="note">※ 無料体験は完全予約制です。定員に達した場合はご案内できない場合があります。</p>
@@ -1468,8 +1501,8 @@ section { padding: 80px 24px; }
 
 <!-- FLOATING CTA (mobile) -->
 <div class="floating-cta">
-  <a href="#contact" class="f-line">💬 LINE 無料体験を予約する</a>
-  <a href="tel:03-XXXX-XXXX" class="f-tel">📞 電話する</a>
+  <a href="#contact" class="f-line"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>LINE 無料体験を予約する</a>
+  <a href="tel:03-XXXX-XXXX" class="f-tel">☎ 電話する</a>
 </div>
 
 <script>

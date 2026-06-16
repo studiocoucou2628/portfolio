@@ -206,7 +206,8 @@ a { color: inherit; text-decoration: none; }
   transition: border-color 0.2s;
 }
 .pain-item:hover { border-color: var(--green); }
-.pain-icon { font-size: 1.4rem; flex-shrink: 0; }
+.pain-icon { flex-shrink: 0; color: var(--green); display: inline-flex; }
+.pain-icon svg { width: 22px; height: 22px; }
 .pain-cta { text-align: center; }
 .pain-cta p { color: var(--text-light); font-size: 0.92rem; margin-bottom: 20px; }
 .pain-cta strong { color: var(--green); }
@@ -412,7 +413,8 @@ a { color: inherit; text-decoration: none; }
   width: 32px; height: 32px; border-radius: 50%;
   background: var(--green-pale);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.9rem;
+  font-family: 'Cinzel', serif; font-weight: 600;
+  color: var(--green); font-size: 0.95rem;
 }
 
 /* ========== FAQ ========== */
@@ -613,7 +615,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
   <div class="hero-bg"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge">🌿 五反田駅 徒歩3分 ｜ 完全予約制</div>
+      <div class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px"><path d="M11 21c-5 0-8-3-8-8 5 0 8 3 8 8z"/><path d="M21 4c0 7-4 12-10 13M11 21c0-4 2-8 6-10"/></svg>五反田駅 徒歩3分 ｜ 完全予約制</div>
       <h1>
         その肩こり・腰痛、
         <em>もう我慢しなくていい。</em>
@@ -624,7 +626,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
         <strong style="color:#a8d5b5">体のクセを変える施術</strong>で再発を防ぎます。
       </p>
       <button class="btn-line" onclick="scrollToLine()">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.038 2 11.001c0 4.416 3.16 8.107 7.45 8.813v-6.233H6.89V11h2.56V9.07c0-2.522 1.506-3.914 3.808-3.914 1.103 0 2.256.196 2.256.196v2.477h-1.271c-1.252 0-1.641.775-1.641 1.57V11h2.794l-.447 2.581h-2.347v6.233C18.84 19.108 22 15.417 22 11.001 22 6.038 17.52 2 12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
         無料カウンセリングを予約する
       </button>
       <div class="hero-free">施術費・カウンセリング料 完全無料</div>
@@ -640,17 +642,17 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
     <h2 class="section-title">こんな<span>お悩み</span>ありませんか？</h2>
     <p class="section-sub">当てはまる方は、ぜひ一度ご相談ください</p>
     <div class="pain-grid">
-      <div class="pain-item"><span class="pain-icon">💼</span>1日中デスクワークで肩が重い</div>
-      <div class="pain-item"><span class="pain-icon">😖</span>慢性的な腰痛が続いている</div>
-      <div class="pain-item"><span class="pain-icon">🌀</span>頭痛・目の奥の痛みが気になる</div>
-      <div class="pain-item"><span class="pain-icon">🪑</span>猫背・巻き肩を改善したい</div>
-      <div class="pain-item"><span class="pain-icon">😴</span>睡眠の質が下がっている気がする</div>
-      <div class="pain-item"><span class="pain-icon">🏃</span>運動後の疲れが抜けにくい</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/></svg></span>1日中デスクワークで肩が重い</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5s1.4-1.5 3.5-1.5 3.5 1.5 3.5 1.5"/><path d="M8 9.5l1.5 1M16 9.5l-1.5 1"/></svg></span>慢性的な腰痛が続いている</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m0 0a2 2 0 102 2 4 4 0 11-4-4 6 6 0 116 6 8 8 0 11-8-8"/></svg></span>頭痛・目の奥の痛みが気になる</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v7h7M7 11l-1 9M14 11l1 9M14 11a3 3 0 003-3V4"/></svg></span>猫背・巻き肩を改善したい</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span>睡眠の質が下がっている気がする</div>
+      <div class="pain-item"><span class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="5" r="2"/><path d="M11 8l-3 3 3 2 1 5M11 11l4 1 2 4M8 11l-3 1"/></svg></span>運動後の疲れが抜けにくい</div>
     </div>
     <div class="pain-cta">
       <p>上記のお悩みは、体の歪みや筋肉のコリが原因のことがほとんどです。<br><strong>初回カウンセリング・体験施術は無料</strong>で承っています。</p>
       <button class="btn-line" onclick="scrollToLine()">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.038 2 11.001c0 4.416 3.16 8.107 7.45 8.813v-6.233H6.89V11h2.56V9.07c0-2.522 1.506-3.914 3.808-3.914 1.103 0 2.256.196 2.256.196v2.477h-1.271c-1.252 0-1.641.775-1.641 1.57V11h2.794l-.447 2.581h-2.347v6.233C18.84 19.108 22 15.417 22 11.001 22 6.038 17.52 2 12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
         LINEで無料相談してみる
       </button>
     </div>
@@ -748,7 +750,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
       </div>
       <div class="menu-card featured">
         <div class="menu-head">
-          <div class="menu-badge">🔥 人気No.1</div>
+          <div class="menu-badge">✦ 人気No.1</div>
           <div class="menu-name">集中ケアコース</div>
           <div class="menu-price">¥<strong>9,900</strong><small>¥13,200</small></div>
         </div>
@@ -829,7 +831,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
           今では月1回のメンテナンスが習慣になっています。」
         </p>
         <div class="review-author">
-          <div class="review-avatar">😊</div>
+          <div class="review-avatar">T</div>
           <div>T.Kさま<br>40代・IT企業 / 五反田在勤</div>
         </div>
       </div>
@@ -841,7 +843,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
           カウンセリングがしっかりしていて、信頼できる先生です。」
         </p>
         <div class="review-author">
-          <div class="review-avatar">😄</div>
+          <div class="review-avatar">Y</div>
           <div>Y.Mさま<br>30代・主婦 / 品川区在住</div>
         </div>
       </div>
@@ -854,7 +856,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
           セルフケアも教えてくれてコスパも最高です。」
         </p>
         <div class="review-author">
-          <div class="review-avatar">😁</div>
+          <div class="review-avatar">R</div>
           <div>R.Sさま<br>35歳・会社員 / 目黒区在住</div>
         </div>
       </div>
@@ -974,7 +976,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
         </div>
       </div>
       <div class="access-map">
-        📍 Googleマップをここに埋め込み
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;vertical-align:-4px;margin-right:6px"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Googleマップをここに埋め込み
       </div>
     </div>
   </div>
@@ -986,7 +988,7 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
     <h2>まず、無料で体験してみてください。</h2>
     <p>カウンセリング・体験施術 完全無料 ｜ 強引な勧誘・契約一切なし<br>毎月先着10名様限定です。お気軽にLINEでご連絡ください。</p>
     <button class="btn-line" style="font-size:1.1rem; padding: 18px 40px;">
-      <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:#fff;"><path d="M12 2C6.48 2 2 6.038 2 11.001c0 4.416 3.16 8.107 7.45 8.813v-6.233H6.89V11h2.56V9.07c0-2.522 1.506-3.914 3.808-3.914 1.103 0 2.256.196 2.256.196v2.477h-1.271c-1.252 0-1.641.775-1.641 1.57V11h2.794l-.447 2.581h-2.347v6.233C18.84 19.108 22 15.417 22 11.001 22 6.038 17.52 2 12 2z"/></svg>
+      <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:#fff;"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
       LINEで無料カウンセリングを予約する
     </button>
     <div class="final-cta-sub">
@@ -1012,10 +1014,10 @@ footer a { color: rgba(255,255,255,0.4); margin: 0 8px; }
 <!-- ========== Floating CTA ========== -->
 <div class="floating-cta" id="floatingCta">
   <div class="floating-tel">
-    📞 <a href="tel:0312345678">03-1234-5678</a>
+    ☎ <a href="tel:0312345678">03-1234-5678</a>
   </div>
   <button class="btn-line" onclick="scrollToLine()">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.038 2 11.001c0 4.416 3.16 8.107 7.45 8.813v-6.233H6.89V11h2.56V9.07c0-2.522 1.506-3.914 3.808-3.914 1.103 0 2.256.196 2.256.196v2.477h-1.271c-1.252 0-1.641.775-1.641 1.57V11h2.794l-.447 2.581h-2.347v6.233C18.84 19.108 22 15.417 22 11.001 22 6.038 17.52 2 12 2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.33.07.77.22.88.5.1.25.07.64.03.89l-.14.85c-.04.25-.2.99.86.54s5.74-3.38 7.83-5.79C21.4 13.49 22 11.9 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
     LINEで無料予約
   </button>
 </div>

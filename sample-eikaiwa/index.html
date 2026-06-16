@@ -286,7 +286,17 @@
       width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
       margin: 0 auto 16px; border: 3px solid var(--primary-light);
     }
-    .instructor-flag { font-size: 20px; margin-bottom: 8px; }
+    .instructor-flag {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--primary);
+      background: var(--primary-light);
+      border-radius: 20px;
+      padding: 3px 12px;
+      margin-bottom: 8px;
+    }
+    .info-icon svg { width: 20px; height: 20px; }
+    .map-station svg { width: 13px; height: 13px; vertical-align: -2px; margin-right: 3px; }
     .instructor-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
     .instructor-origin { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
     .instructor-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; }
@@ -379,8 +389,27 @@
       display: flex; flex-direction: column; align-items: center; gap: 4px;
     }
     .map-pin-icon {
-      font-size: 40px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
-      animation: bounce 2s infinite;
+      width: 28px; height: 28px;
+      margin: 0 auto 4px;
+      background: var(--primary);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      position: relative;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+      animation: mapBouncePin 2s infinite;
+    }
+    .map-pin-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 10px; height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes mapBouncePin {
+      0%, 100% { transform: rotate(-45deg) translate(0, 0); }
+      50% { transform: rotate(-45deg) translate(4.5px, -4.5px); }
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
@@ -398,7 +427,7 @@
     }
     .access-info h3 { font-size: 22px; font-weight: 800; margin-bottom: 20px; }
     .info-row { display: flex; gap: 12px; margin-bottom: 16px; font-size: 15px; }
-    .info-icon { font-size: 20px; flex-shrink: 0; }
+    .info-icon { color: var(--primary); flex-shrink: 0; display: inline-flex; }
     .info-text strong { display: block; font-weight: 700; margin-bottom: 2px; }
     .info-text span { color: var(--text-muted); }
 
@@ -491,7 +520,7 @@
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="hero-inner">
-    <div class="hero-badge">🎓 ビジネス英語専門スクール</div>
+    <div class="hero-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;vertical-align:-2px;margin-right:5px"><path d="M12 4L2 9l10 5 8-4v6"/><path d="M6 12v4c0 1 2.5 2.5 6 2.5s6-1.5 6-2.5v-4"/></svg>ビジネス英語専門スクール</div>
     <h1>英語で、もっと<span class="accent">「言いたいこと」</span>が<br>伝えられる人へ。</h1>
     <p>会議、プレゼン、海外出張——英語が武器になると、キャリアも人生も変わる。渋谷発、ビジネスパーソンのための英会話スクール。</p>
     <div class="hero-cta">
@@ -650,7 +679,7 @@
         <a href="#trial" class="btn-plan btn-plan-outline">無料体験で試す</a>
       </div>
       <div class="pricing-card featured">
-        <div class="pricing-badge-top">⭐ 一番人気</div>
+        <div class="pricing-badge-top">★ 一番人気</div>
         <div class="pricing-plan">スタンダードプラン</div>
         <div class="pricing-price">
           <span class="currency">¥</span><span class="amount" id="price-standard">14,800</span><span class="period">/月</span>
@@ -697,7 +726,7 @@
     <div class="instructors-grid">
       <div class="instructor-card">
         <img src="images/instructor-01.jpg" alt="Brad Kowalski" class="instructor-img" onerror="this.style.background='#e8f0fe';this.style.minHeight='100px';this.removeAttribute('src')">
-        <div class="instructor-flag">🇺🇸</div>
+        <div class="instructor-flag">U.S.A.</div>
         <div class="instructor-name">Brad Kowalski</div>
         <div class="instructor-origin">シカゴ出身 / 指導歴9年</div>
         <div class="instructor-tags">
@@ -709,7 +738,7 @@
       </div>
       <div class="instructor-card">
         <img src="images/instructor-02.jpg" alt="Rachel O'Brien" class="instructor-img" onerror="this.style.background='#e8f0fe';this.style.minHeight='100px';this.removeAttribute('src')">
-        <div class="instructor-flag">🇬🇧</div>
+        <div class="instructor-flag">U.K.</div>
         <div class="instructor-name">Rachel O'Brien</div>
         <div class="instructor-origin">マンチェスター出身 / 指導歴8年</div>
         <div class="instructor-tags">
@@ -721,7 +750,7 @@
       </div>
       <div class="instructor-card">
         <img src="images/instructor-03.jpg" alt="Kevin Tremblay" class="instructor-img" onerror="this.style.background='#e8f0fe';this.style.minHeight='100px';this.removeAttribute('src')">
-        <div class="instructor-flag">🇨🇦</div>
+        <div class="instructor-flag">CANADA</div>
         <div class="instructor-name">Kevin Tremblay</div>
         <div class="instructor-origin">モントリオール出身 / 指導歴12年</div>
         <div class="instructor-tags">
@@ -848,37 +877,37 @@
         <div class="map-road-v" style="width:22px;left:35%"></div>
         <div class="map-road-v" style="width:12px;left:62%"></div>
         <div class="map-pin-wrap">
-          <div class="map-pin-icon">📍</div>
+          <div class="map-pin-icon"></div>
           <div class="map-pin-label">EigoPlus 渋谷校</div>
         </div>
-        <div class="map-station" style="bottom:18%;left:28%">🚉 渋谷駅</div>
+        <div class="map-station" style="bottom:18%;left:28%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="13" rx="2"/><path d="M8 16l-2 4M16 16l2 4M5 11h14"/><circle cx="8.5" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8" r="1" fill="currentColor" stroke="none"/></svg>渋谷駅</div>
         <div class="map-station" style="top:14%;right:12%">徒歩5分</div>
       </div>
       <div class="access-info">
         <h3>EigoPlus 渋谷校</h3>
         <div class="info-row">
-          <span class="info-icon">📍</span>
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
           <div class="info-text">
             <strong>住所</strong>
             <span>東京都渋谷区渋谷2-X-X 渋谷ビル5F<br>JR渋谷駅 東口より徒歩5分</span>
           </div>
         </div>
         <div class="info-row">
-          <span class="info-icon">🕐</span>
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <div class="info-text">
             <strong>営業時間</strong>
             <span>月〜金 6:00〜23:00<br>土日祝 8:00〜21:00</span>
           </div>
         </div>
         <div class="info-row">
-          <span class="info-icon">📞</span>
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></span>
           <div class="info-text">
             <strong>お問い合わせ</strong>
             <span>03-XXXX-XXXX（受付 10:00〜19:00）</span>
           </div>
         </div>
         <div class="info-row">
-          <span class="info-icon">💻</span>
+          <span class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="11" rx="1.5"/><path d="M2 20h20"/></svg></span>
           <div class="info-text">
             <strong>オンライン対応</strong>
             <span>Zoom / Google Meet 対応<br>スマホ・PCどちらでもOK</span>
