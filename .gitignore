@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# 営業・顧客データ（公開リポジトリに含めない）
+sales/
