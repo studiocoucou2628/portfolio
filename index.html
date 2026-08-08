@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ホームページ制作実績 | Studio Coucou</title>
+  <title>教室のサイト改善 | Studio Coucou</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -54,7 +54,10 @@
     .header-contact {
       font-size: 13px;
       color: #666;
+      text-decoration: none;
     }
+
+    .header-contact:hover { color: #1a1a1a; }
 
     /* ヒーロー */
     .hero {
@@ -90,6 +93,33 @@
       line-height: 1.8;
       max-width: 560px;
       margin: 0 auto;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px;
+      text-align: center;
+    }
+
+    .intro-label {
+      color: #c8a96e;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      margin-bottom: 14px;
+    }
+
+    .intro h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .intro p:last-child {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.9;
     }
 
     /* 実績数 */
@@ -225,6 +255,37 @@
       content: '→';
     }
 
+    .service-card {
+      min-height: 230px;
+    }
+
+    .service-number {
+      color: #c8a96e;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
+    }
+
+    .example {
+      background: #fff;
+      border-top: 1px solid #e8e8e4;
+      border-bottom: 1px solid #e8e8e4;
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    .example-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .example p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
     /* 強み */
     .features {
       background: #1a1a1a;
@@ -341,7 +402,11 @@
 
     /* レスポンシブ */
     @media (max-width: 640px) {
-      header { padding: 20px; }
+      header { padding: 14px 16px; gap: 12px; }
+      .logo { gap: 8px; }
+      .logo-img { height: 48px; }
+      .logo-text { font-size: 20px; }
+      .header-contact { font-size: 12px; white-space: nowrap; }
       .stats { gap: 32px; padding: 36px 20px; }
       .stat-num { font-size: 32px; }
       .grid { grid-template-columns: 1fr; }
@@ -358,116 +423,87 @@
       <img class="logo-img" src="logo.png" alt="Studio Coucou">
       <div class="logo-text">Studio <span>Coucou</span></div>
     </a>
-    <div class="header-contact">ホームページ制作｜新潟</div>
+    <a class="header-contact" href="#contact">ご相談はこちら</a>
   </header>
 
   <section class="hero">
-    <div class="hero-label">PORTFOLIO</div>
-    <h1>新潟の大切なお店が、<br>もっと多くの人に見つけてもらえるように。</h1>
-    <p>最短5営業日・¥64,800〜<br>新潟の個人事業主・小規模店舗向けに、<br>集客につながるホームページを制作します。</p>
+    <div class="hero-label">STUDIO COUCOU</div>
+    <h1>新潟で、子どもたちの学びや成長を支える<br>教室のためのサイト改善</h1>
+    <p>クラス・料金・体験までの案内を、<br>スマホで分かりやすく整えます。</p>
   </section>
 
-  <section class="stats">
-    <div class="stat-item">
-      <div class="stat-num">5</div>
-      <div class="stat-label">制作実績（サンプル）</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">5<span style="font-size:20px">営業日</span></div>
-      <div class="stat-label">最短納期</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">¥64,800</div>
-      <div class="stat-label">スタンダードプラン</div>
-    </div>
+  <section class="intro">
+    <p class="intro-label">FOR LOCAL CLASSES</p>
+    <h2>今ある教室の魅力や情報を活かしながら、<br>初めて検討する保護者にも伝わる形へ。</h2>
+    <p>Studio Coucouは、地域に根ざして活動する教室の情報を整理し、保護者が迷わず体験まで進めるサイトづくりをお手伝いします。</p>
   </section>
 
   <section class="portfolio">
-    <h2 class="section-title">制作サンプル</h2>
-    <p class="section-sub">業種ごとに最適なデザイン・構成でホームページを制作します</p>
+    <h2 class="section-title">できること</h2>
+    <p class="section-sub">教室を選ぶ前の保護者が、知りたいことを見つけやすくします</p>
 
     <div class="grid">
-
-      <a class="card" href="sample-cafe/index.html">
-        <img class="card-thumb" src="sample-cafe/images/hero.jpg" alt="カフェ ホームページ">
+      <div class="card service-card">
         <div class="card-body">
-          <span class="card-tag tag-cafe">カフェ・飲食</span>
-          <div class="card-title">Café Niigata</div>
-          <p class="card-desc">新潟産食材にこだわるカフェの集客ホームページ。温かみのあるデザインと地元感を重視した構成。</p>
-          <span class="card-cta">サイトを見る</span>
+          <p class="service-number">01</p>
+          <div class="card-title">情報を分かりやすく整理する</div>
+          <p class="card-desc">クラス、対象年齢、料金、会場、講師紹介など、保護者が知りたい情報を探しやすい順番に整えます。</p>
         </div>
-      </a>
+      </div>
 
-      <a class="card" href="sample-seitai/index.html">
-        <img class="card-thumb" src="sample-seitai/images/feature-01.jpg" alt="整体院 ホームページ">
+      <div class="card service-card">
         <div class="card-body">
-          <span class="card-tag tag-seitai">整体院・治療院</span>
-          <div class="card-title">整体院 Re:set</div>
-          <p class="card-desc">整体院向けホームページ。お悩み訴求とLINE予約導線を強化したコンバージョン重視の設計。</p>
-          <span class="card-cta">サイトを見る</span>
+          <p class="service-number">02</p>
+          <div class="card-title">スマホで見やすくする</div>
+          <p class="card-desc">保護者が移動中やすきま時間にも確認しやすいよう、文字の読みやすさやページ内の導線をスマートフォン向けに整えます。</p>
         </div>
-      </a>
+      </div>
 
-      <a class="card" href="sample-eikaiwa/index.html">
-        <img class="card-thumb" src="sample-eikaiwa/images/hero.jpg" alt="英会話 ホームページ">
+      <div class="card service-card">
         <div class="card-body">
-          <span class="card-tag tag-eikaiwa">英会話・教育</span>
-          <div class="card-title">EigoPlus（英語プラス）</div>
-          <p class="card-desc">英会話スクールの体験申込ホームページ。料金プラン比較・講師紹介・FAQまで揃えた情報設計。</p>
-          <span class="card-cta">サイトを見る</span>
+          <p class="service-number">03</p>
+          <div class="card-title">体験までの案内をつなげる</div>
+          <p class="card-desc">体験の対象、持ち物、申込み方法、問い合わせ先を分かりやすく案内し、次にすることが伝わる流れをつくります。</p>
         </div>
-      </a>
+      </div>
+    </div>
+  </section>
 
-      <a class="card" href="sample-gym/index.html">
-        <img class="card-thumb" src="sample-gym/images/hero.jpg" alt="ジム ホームページ">
-        <div class="card-body">
-          <span class="card-tag tag-gym">パーソナルジム</span>
-          <div class="card-title">RISE Personal Gym</div>
-          <p class="card-desc">パーソナルジムのホームページ。トレーナー実績・ビフォーアフターを押し出した信頼訴求型デザイン。</p>
-          <span class="card-cta">サイトを見る</span>
-        </div>
-      </a>
-
-      <a class="card" href="sample-jewelry/index.html">
-        <img class="card-thumb" src="sample-jewelry/images/hero.jpg" alt="ジュエリー ホームページ">
-        <div class="card-body">
-          <span class="card-tag tag-jewelry">ジュエリー・高級品</span>
-          <div class="card-title">ÉCLAT BIJOUX</div>
-          <p class="card-desc">新潟の手工芸ジュエリーブランドのラグジュアリーLP。黒×ゴールドの高級演出と商品拡大ライトボックスを実装。</p>
-          <span class="card-cta">サイトを見る</span>
-        </div>
-      </a>
-
+  <section class="example">
+    <div class="example-inner">
+      <h2 class="section-title">改善イメージから、ご相談いただけます</h2>
+      <p class="section-sub">現在の情報を活かしながら、どのように見せ方を整えられるかを一緒に考えます</p>
+      <p>ご相談の際は、公開情報をもとにした非公式の改善イメージを用意できます。実際の掲載内容や公開方法は、教室のご意向と最新情報を確認してから決めます。</p>
     </div>
   </section>
 
   <section class="features">
-    <h2 class="section-title">Studio Coucouの強み</h2>
-    <p class="section-sub">なぜ選ばれるのか</p>
+    <h2 class="section-title">ご相談から公開まで</h2>
+    <p class="section-sub">教室のご意向を伺いながら、無理のない形で進めます</p>
     <div class="features-grid">
       <div class="feature-item">
-        <div class="feature-icon">05</div>
-        <div class="feature-title">最短5営業日納品</div>
-        <div class="feature-text">打ち合わせから公開まで最短5営業日。タイミングを逃さない、スピード重視の制作体制。</div>
+        <div class="feature-icon">01</div>
+        <div class="feature-title">現在の情報を確認</div>
+        <div class="feature-text">今のサイトと、保護者に伝えたいことを伺います。</div>
       </div>
       <div class="feature-item">
-        <div class="feature-icon">SP</div>
-        <div class="feature-title">スマホ最優先設計</div>
-        <div class="feature-text">お客様の多くはスマホで検索します。全サイトをスマホ表示最優先で設計し、Googleにも強い構成に。</div>
+        <div class="feature-icon">02</div>
+        <div class="feature-title">構成と原稿を整理</div>
+        <div class="feature-text">ページ構成と原稿を整え、内容をご確認いただきます。</div>
       </div>
       <div class="feature-item">
-        <div class="feature-icon">NII</div>
-        <div class="feature-title">新潟密着サポート</div>
-        <div class="feature-text">新潟拠点だから、地域のお店の空気感を大切にしたデザインが得意。LINEで納品後もずっとそばに。</div>
+        <div class="feature-icon">03</div>
+        <div class="feature-title">公開方法を相談</div>
+        <div class="feature-text">修正を反映し、公開方法は必要に応じて一緒に確認します。</div>
       </div>
     </div>
   </section>
 
-  <section class="cta-section">
-    <h2 class="section-title">まずは無料相談から</h2>
-    <p>「どんなホームページが必要か分からない」でも大丈夫。<br>お気軽にLINEでご連絡ください。</p>
+  <section class="cta-section" id="contact">
+    <h2 class="section-title">まずはご相談ください</h2>
+    <p>「何から整えればよいか分からない」という段階でも大丈夫です。<br>現在のサイトや、保護者に伝えたいことをお聞かせください。</p>
     <div class="cta-buttons">
-      <a class="cta-btn" href="https://lin.ee/6OTdjnj">LINEで無料相談する</a>
+      <a class="cta-btn" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
       <a class="cta-btn-sub" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">Instagramを見る</a>
     </div>
   </section>
