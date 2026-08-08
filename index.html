@@ -171,8 +171,11 @@
     .contact h2 { margin-bottom: 17px; font-size: clamp(31px, 4vw, 46px); line-height: 1.5; letter-spacing: .04em; }
     .contact p { max-width: 550px; margin-bottom: 0; color: #e4ebe6; font-size: 15px; }
     .contact-action { text-align: right; }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
     .contact-action .button { min-width: 245px; background: var(--white); color: var(--ink); border-color: var(--white); }
     .contact-action .button:hover, .contact-action .button:focus-visible { background: #f0e7d8; border-color: #f0e7d8; }
+    .contact-action .button-secondary { background: transparent; color: var(--white); border-color: #c9d6cf; }
+    .contact-action .button-secondary:hover, .contact-action .button-secondary:focus-visible { background: #39594d; border-color: #e4ebe6; }
     .contact-note { display: block; margin-top: 14px; color: #c9d6cf; font-size: 12px; }
 
     footer { padding: 23px 20px; background: #19352d; color: #c9d6cf; text-align: center; font-size: 12px; }
@@ -195,6 +198,7 @@
       .comparison-arrow { transform: rotate(90deg); line-height: 1; }
       .principles-inner, .contact-inner { grid-template-columns: 1fr; }
       .contact-action { text-align: left; }
+      .contact-buttons { justify-content: flex-start; }
       .contact-action .button { width: 100%; }
     }
 
@@ -214,7 +218,7 @@
       <img src="logo.png" alt="Studio Coucou">
       <span class="brand-name">Studio <em>Coucou</em></span>
     </a>
-    <a class="header-link" href="#contact">相談の入口</a>
+    <a class="header-link" href="#contact">サイト改善を相談する</a>
   </header>
 
   <main id="top">
@@ -224,7 +228,7 @@
         <h1 id="hero-title">「見つけた」から<br><span>「体験する」</span>へ。</h1>
         <p class="hero-copy">教室の魅力や案内が、初めて探す保護者にきちんと届くように。Studio Coucouは、散らばった情報を整え、迷わず次の一歩を選べるサイトをつくります。</p>
         <div class="hero-actions">
-          <a class="button" href="#contact">教室の案内を、少しだけ見せてください</a>
+          <a class="button" href="#contact">サイト・SNSを見せて、改善を相談する</a>
           <a class="text-link" href="#flow">どんな流れを整えるのか</a>
         </div>
       </div>
@@ -301,11 +305,14 @@
       <div class="contact-inner">
         <div>
           <p class="eyebrow">A SMALL FIRST STEP</p>
-          <h2 id="contact-title">教室の案内を、少しだけ見せてください。</h2>
-          <p>いまのサイト、SNS、案内文のどれかひとつで大丈夫です。「何から整えればいいか分からない」という段階から、一緒に考えます。</p>
+          <h2 id="contact-title">いまの案内を見ながら、改善の話をしませんか。</h2>
+          <p>現在のサイト、Instagram、案内文のどれかひとつを見せてください。保護者に伝わりにくいところや、体験までの流れを一緒に整理します。</p>
         </div>
         <div class="contact-action">
-          <a class="button" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
+          <div class="contact-buttons">
+            <a class="button" href="mailto:studiocoucou2628@gmail.com">メールで改善について相談する</a>
+            <a class="button button-secondary" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">InstagramのDMで相談する</a>
+          </div>
           <span class="contact-note">Studio Coucou / studiocoucou2628@gmail.com</span>
         </div>
       </div>

@@ -27,12 +27,13 @@ The source and the implementation capture were opened together for comparison. T
 - Spacing and layout rhythm: a generous generated-paper hero, a four-step path, dark green statement band, comparison, principles, and closing CTA preserve the source’s storytelling cadence without copying its fake assets. At 1054 px, measured desktop content widths remained within the viewport.
 - Colors and visual tokens: forest green, warm paper, off-white, muted gold, and rust are defined as reusable CSS tokens. Contrast remains clear in the dark sections and primary CTA.
 - Image quality and asset fidelity: the existing Studio Coucou logo is used. No generated people, customer photos, fake logos, placeholder imagery, CSS art, or inline SVG substitutes were added.
-- Copy and content: copy now leads with the parent journey and a low-pressure first step, rather than generic service cards or unverified results. The email address is visible and the mail link points to `studiocoucou2628@gmail.com`.
+- Copy and content: copy now leads with the parent journey and a concrete site-improvement consultation, rather than generic service cards or unverified results. The email address is visible, the mail link points to `studiocoucou2628@gmail.com`, and the Instagram profile link provides a second DM consultation route.
 
 ## Interaction and resilience checks
 
-- Header “相談の入口” and hero CTA both move to `#contact`.
+- Header “サイト改善を相談する” and the hero CTA both move to `#contact`.
 - The mail CTA was inspected as a `mailto:` link but was not activated.
+- The Instagram CTA points to `https://www.instagram.com/studiocoucou.jp/` and opens in a new tab; it was not activated during verification.
 - Desktop 1440 px: `scrollWidth` 1440 px, no horizontal overflow.
 - Mobile 390 px: `scrollWidth` 390 px, no horizontal overflow; primary CTA remains within the viewport.
 - Browser console: no warnings or errors.
@@ -41,6 +42,7 @@ The source and the implementation capture were opened together for comparison. T
 
 1. Initial comparison: identified that the reference contains generated people, a fictitious personal signature, and illustrative assets that cannot be represented as Studio Coucou’s real work.
 2. Resolution: retained the selected direction’s narrative, palette, hierarchy, and conversion path while omitting those unverified assets; verified desktop, intermediate-width layout measurements, and mobile rendering.
+3. CTA revision: made the consultation purpose explicit and restored Instagram as a parallel DM route; verified both calls to action at 390 px without horizontal overflow.
 
 ## Final result
 
