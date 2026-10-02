@@ -14,7 +14,7 @@
   <link rel="icon" href="logo-160.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');if(/[?&]still/.test(location.search))document.documentElement.classList.add('still');</script>
   <style>
     :root {
@@ -26,23 +26,21 @@
       --white: #fffdf8;
       --accent: #c86d48;
       --accent-text: #a5502e;
-      --pen: #d0352b;
-      --gold: #b49462;
       --muted: #5d625b;
-      --line: #d9d1c2;
+      --line: #dcd4c6;
       --line-dark: #b9b09f;
       --sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'YuGothic', 'Noto Sans JP', Meiryo, sans-serif;
       --serif: 'Zen Old Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif JP', serif;
-      --hand: 'Klee One', 'Zen Old Mincho', serif;
+      --num: 'Cormorant Garamond', Georgia, serif;
       --gutter: clamp(20px, 5.2vw, 80px);
       --max: 1160px;
       --ease: cubic-bezier(.25, .8, .25, 1);
       --header-h: 62px;
+      --story-bg: #f7f4ed;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; }
-    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
     body {
       margin: 0;
       background: var(--paper);
@@ -64,6 +62,7 @@
     .skip { position: absolute; left: 12px; top: -60px; z-index: 200; padding: 10px 16px; background: var(--ink); color: var(--white); }
     .skip:focus { top: 12px; }
     .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    .tnum { font-family: var(--num); font-variant-numeric: lining-nums tabular-nums; }
 
     /* ボタン */
     .btn {
@@ -74,7 +73,7 @@
       min-height: 56px;
       padding: 0 26px;
       border: 1px solid var(--ink);
-      border-radius: 3px;
+      border-radius: 4px;
       background: var(--ink);
       color: var(--white);
       font-size: 15px;
@@ -89,75 +88,86 @@
     .ig { width: 18px; height: 18px; flex: none; }
 
     /* ヘッダー */
-    .header {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 50;
-      height: var(--header-h);
-      background: rgba(247, 244, 237, .94);
-      border-bottom: 1px solid transparent;
-      transition: border-color .3s, transform .4s var(--ease);
-    }
+    .header { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--header-h); background: rgba(247, 244, 237, .94); border-bottom: 1px solid transparent; transition: border-color .3s; }
     .header.is-solid { border-color: var(--line); }
-    .header.is-hidden { transform: translateY(-100%); }
     .header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
     .brand img { width: 36px; height: 36px; }
-    .brand span { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 22px; font-weight: 500; letter-spacing: .04em; line-height: 1; white-space: nowrap; }
+    .brand span { font-family: var(--num); font-style: italic; font-size: 22px; font-weight: 500; letter-spacing: .04em; line-height: 1; white-space: nowrap; }
     .nav { display: flex; align-items: center; gap: 26px; }
     .nav a:not(.btn) { font-size: 13.5px; text-decoration: none; }
     .nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
     .nav .btn { min-height: 40px; padding: 0 16px; font-size: 13px; }
 
-    /* 赤ペン */
-    .mk { position: relative; }
-    .pen { position: absolute; z-index: 3; pointer-events: none; }
-    .pen svg { display: block; width: 100%; height: 100%; overflow: visible; }
-    .pen path { fill: none; stroke: var(--pen); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-    .pen-note { position: absolute; z-index: 3; color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 4.6cqw; line-height: 1.25; white-space: nowrap; transform: rotate(-4deg); pointer-events: none; }
-    .pen-note.light { background: rgba(255, 253, 248, .92); padding: .05em .3em; border-radius: 2px; }
-    /* 線を引くアニメーション */
-    .js .draw path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s var(--ease); }
-    .js .draw.on path { stroke-dashoffset: 0; }
-    .js .draw-note { opacity: 0; transition: opacity .4s .35s; }
-    .js .draw-note.on { opacity: 1; }
-
     /* 1. ヒーロー */
-    .hero { position: relative; overflow: clip; padding: calc(var(--header-h) + clamp(40px, 7vw, 92px)) 0 clamp(64px, 8vw, 110px); }
-    .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
+    .hero { padding: calc(var(--header-h) + clamp(40px, 7vw, 96px)) 0 clamp(56px, 7vw, 96px); }
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: clamp(32px, 6vw, 90px); align-items: end; }
     .hero-place { margin-bottom: 22px; color: var(--muted); font-size: 13.5px; letter-spacing: .08em; }
-    .hero-place b { color: var(--ink); font-weight: 700; }
-    .hero h1 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.42; letter-spacing: .02em; }
-    .hero h1 .u { position: relative; white-space: nowrap; }
-    .hero h1 .u svg { position: absolute; left: -1%; bottom: -.16em; width: 102%; height: .34em; overflow: visible; }
-    .hero h1 .u path { fill: none; stroke: var(--pen); stroke-width: 2.4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+    .hero-place b { color: var(--ink); }
+    .hero h1 { font-size: clamp(34px, 3.5vw, 52px); line-height: 1.45; letter-spacing: .02em; }
+    .hero h1 em { font-style: normal; color: var(--accent-text); }
     .hero-lead { max-width: 31em; margin-top: 26px; color: var(--ink-soft); font-size: clamp(15px, 1.2vw, 16.5px); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
     .hero-who { display: flex; align-items: center; gap: 10px; margin-top: 22px; color: var(--muted); font-size: 13px; }
     .hero-who img { width: 30px; height: 30px; }
-    .hero-stage { position: relative; display: grid; justify-items: center; }
-    .hero-stage .device { width: min(310px, 100%); }
-    .hero-hand { position: relative; align-self: start; justify-self: start; margin: 0 0 10px 4%; color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 15px; line-height: 1.5; transform: rotate(-3deg); }
-    .hero-hand svg { position: absolute; right: -40px; bottom: -24px; width: 36px; height: 36px; overflow: visible; }
-    .hero-hand path { fill: none; stroke: var(--pen); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .stage-caption { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.7; }
-    .replay { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .teaser { display: block; padding-left: clamp(20px, 3vw, 40px); border-left: 1px solid var(--line-dark); text-decoration: none; }
+    .teaser .clock { display: flex; align-items: baseline; font-size: clamp(76px, 9vw, 132px); font-weight: 300; line-height: .9; letter-spacing: -.02em; color: var(--ink); }
+    .teaser .colon { animation: blink 2s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: .15; } }
+    .teaser p { margin-top: 18px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+    .teaser .go { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; color: var(--ink); font-size: 14px; font-weight: 700; }
+    .teaser .go svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+    .teaser:hover .go svg { transform: translateY(3px); }
 
-    /* 端末の模型 */
+    /* 2. 物語 */
+    .story { position: relative; background: var(--story-bg); transition: background-color 1.2s var(--ease); border-top: 1px solid var(--line); }
+    .story-head { padding: clamp(72px, 9vw, 120px) 0 clamp(20px, 3vw, 40px); }
+    .story-note { margin-top: 14px; color: var(--muted); font-size: 13px; }
+    .story-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "steps stage"; gap: clamp(32px, 6vw, 96px); }
+    .stage { grid-area: stage; position: sticky; top: max(84px, calc(50vh - 300px)); align-self: start; display: grid; justify-items: center; padding-bottom: 40px; }
+    .stage .device { width: min(320px, 100%); }
+    .stage-cap { margin-top: 14px; color: var(--muted); font-size: 12px; text-align: center; }
+    .steps { grid-area: steps; padding-bottom: 18vh; }
+    .scene { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; padding: 40px 0; }
+    .scene:first-child { min-height: 70vh; justify-content: flex-start; padding-top: 12vh; }
+    .scene .time { font-size: clamp(54px, 6vw, 84px); font-weight: 300; line-height: 1; letter-spacing: -.01em; color: var(--ink); transition: color .5s; }
+    .scene .tag { display: inline-block; align-self: flex-start; margin-top: 18px; padding: 2px 10px; border-radius: 3px; background: var(--accent); color: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; }
+    .scene h3 { margin-top: 14px; font-size: clamp(23px, 2.5vw, 32px); line-height: 1.5; }
+    .scene p { max-width: 26em; margin-top: 14px; color: var(--ink-soft); font-size: 15.5px; }
+    .js .scene > * { opacity: .28; transition: opacity .6s var(--ease); }
+    .js .scene.on > * { opacity: 1; }
+    .story-end { padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px); }
+    .story-end p { font-family: var(--serif); font-size: clamp(22px, 2.6vw, 34px); font-weight: 600; line-height: 1.6; }
+    .story-end p em { font-style: normal; border-bottom: 2px solid var(--accent); }
+
+    /* 端末 */
     .device {
       position: relative;
       container-type: inline-size;
-      aspect-ratio: 390 / 790;
+      aspect-ratio: 390 / 800;
       padding: 3%;
-      border-radius: 13% / 6.4%;
+      border-radius: 13% / 6.3%;
       background: #222724;
-      box-shadow: 0 24px 50px -28px rgba(23, 47, 39, .55);
+      box-shadow: 0 30px 60px -32px rgba(23, 47, 39, .6);
     }
-    .device::after { content: ""; position: absolute; top: 5.4cqw; left: 50%; width: 24cqw; height: 6.4cqw; margin-left: -12cqw; border-radius: 99px; background: #0f1210; z-index: 7; }
+    .device::after { content: ""; position: absolute; top: 5.2cqw; left: 50%; width: 24cqw; height: 6.4cqw; margin-left: -12cqw; border-radius: 99px; background: #0f1210; z-index: 9; }
     .screen { position: relative; height: 100%; border-radius: 10cqw; overflow: hidden; background: #fff; }
-    .scr { position: absolute; inset: 0; padding-top: 14cqw; background: #fff; color: #2c2c2c; font-family: var(--sans); font-size: 4.1cqw; line-height: 1.55; }
+    .sbar { position: absolute; z-index: 8; inset: 0 0 auto; height: 13cqw; display: flex; align-items: center; justify-content: space-between; padding: 0 8.5cqw 0 9.5cqw; color: #111; font-family: var(--sans); font-size: 3.7cqw; font-weight: 700; background: #fff; }
+    .sbar .icons { display: flex; align-items: center; gap: 1.4cqw; }
+    .sig { display: flex; align-items: flex-end; gap: .5cqw; height: 2.6cqw; }
+    .sig i { width: .8cqw; background: #111; border-radius: .2cqw; }
+    .sig i:nth-child(1) { height: 35%; } .sig i:nth-child(2) { height: 55%; } .sig i:nth-child(3) { height: 78%; } .sig i:nth-child(4) { height: 100%; }
+    .bat { position: relative; width: 6cqw; height: 2.8cqw; border: .45cqw solid #111; border-radius: .8cqw; }
+    .bat::before { content: ""; position: absolute; inset: .35cqw; right: 1.4cqw; background: #111; border-radius: .2cqw; }
+    .bat::after { content: ""; position: absolute; right: -1cqw; top: .6cqw; width: .5cqw; height: .9cqw; background: #111; border-radius: 0 .3cqw .3cqw 0; }
+    .scr { position: absolute; inset: 0; padding-top: 13cqw; background: #fff; color: #2c2c2c; font-family: var(--sans); font-size: 4.1cqw; line-height: 1.55; overflow: hidden; }
     .scr p, .scr ul { margin: 0; padding: 0; list-style: none; }
-    .m-bar { display: flex; align-items: center; justify-content: space-between; height: 10cqw; padding: 0 4cqw; border-bottom: 1px solid #ececec; font-weight: 700; font-size: .95em; }
+    .stage .scr { opacity: 0; transform: translateX(6%); transition: opacity .55s var(--ease), transform .7s var(--ease); }
+    .stage .scr.on { opacity: 1; transform: none; }
+    .stage .scr.off-left { transform: translateX(-6%); }
+
+    /* 模型の部品 */
+    .m-bar { display: flex; align-items: center; justify-content: space-between; height: 10cqw; padding: 0 4cqw; border-bottom: 1px solid #ececec; font-weight: 700; font-size: .95em; background: #fff; }
     .m-burger { width: 1.1em; height: .8em; border-top: 2px solid #777; border-bottom: 2px solid #777; position: relative; }
     .m-burger::after { content: ""; position: absolute; left: 0; right: 0; top: calc(50% - 1px); border-top: 2px solid #777; }
     .m-pad { padding: 3.2cqw 4cqw; }
@@ -165,7 +175,7 @@
     .m-news li { padding: .4em 0; border-bottom: 1px dashed #ddd; font-size: .92em; }
     .m-news .date { margin-right: .4em; color: #8a8a8a; }
     .m-text { color: #6a6a6a; font-size: .9em; }
-    .m-faint { color: #b0b0b0; font-size: .82em; }
+    .m-faint { color: #aaa; font-size: .82em; }
     .m-piano { height: 34cqw; background:
       linear-gradient(90deg, transparent 0 10.3%, #2b2622 10.3% 18.3%, transparent 18.3% 24.6%, #2b2622 24.6% 32.6%, transparent 32.6% 53.1%, #2b2622 53.1% 61.1%, transparent 61.1% 67.4%, #2b2622 67.4% 75.4%, transparent 75.4% 81.7%, #2b2622 81.7% 89.7%, transparent 89.7%) top / 100% 58% no-repeat,
       repeating-linear-gradient(90deg, #fbf8f1 0 calc(14.2857% - 1.5px), #cdc4b3 calc(14.2857% - 1.5px) 14.2857%);
@@ -176,7 +186,7 @@
     .scr .m-points { margin: 2.6cqw 0 3.4cqw; }
     .m-points li { position: relative; padding: .16em 0 .16em 1.35em; font-weight: 700; font-size: .95em; }
     .m-points li::before { content: ""; position: absolute; left: .15em; top: .6em; width: .7em; height: .38em; border-left: 2px solid #2f7a5c; border-bottom: 2px solid #2f7a5c; transform: rotate(-45deg); }
-    .m-cta { display: block; padding: .7em .5em; border-radius: .5em; background: #2e6a54; color: #fff; text-align: center; font-weight: 700; }
+    .m-cta { position: relative; display: block; padding: .7em .5em; border-radius: .5em; background: #2e6a54; color: #fff; text-align: center; font-weight: 700; }
     .m-cta.ghost { margin-top: .45em; background: #fff; color: #2e6a54; box-shadow: inset 0 0 0 2px #2e6a54; }
     .m-new { display: inline-block; margin-right: .4em; padding: .05em .45em; border-radius: .3em; background: #c86d48; color: #fff; font-size: .78em; font-weight: 700; }
     .m-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .45em; margin-top: .35em; }
@@ -213,36 +223,55 @@
     .m-abc { display: flex; gap: .35em; padding: 3.2cqw 4cqw 0; }
     .m-abc span { flex: 1; display: grid; place-items: center; height: 14cqw; border-radius: .5em; font-family: var(--serif); font-size: 1.6em; font-weight: 700; color: #fff; }
     .m-abc span:nth-child(1) { background: #c86d48; } .m-abc span:nth-child(2) { background: #2e6a54; } .m-abc span:nth-child(3) { background: #b49462; }
+    /* 検索画面 */
+    .m-search { display: flex; align-items: center; gap: 2.4cqw; margin: 3cqw 4cqw 3.5cqw; padding: 2.8cqw 4cqw; border-radius: 99px; background: #f1f3f4; font-size: .95em; }
+    .m-search .lens { flex: none; position: relative; width: 3.4cqw; height: 3.4cqw; border: .55cqw solid #666; border-radius: 50%; }
+    .m-search .lens::after { content: ""; position: absolute; right: -1.6cqw; bottom: -1.3cqw; width: 1.8cqw; height: .55cqw; background: #666; transform: rotate(45deg); }
+    .caret { display: inline-block; width: .5cqw; height: 1.05em; margin-left: .3cqw; vertical-align: -.15em; background: #1a62b8; animation: blink 1s steps(1) infinite; }
+    .m-mapmini { position: relative; height: 34cqw; background:
+      linear-gradient(90deg, transparent 30%, #fff 30% 34%, transparent 34%),
+      linear-gradient(0deg, transparent 55%, #fff 55% 59%, transparent 59%),
+      linear-gradient(-22deg, transparent 64%, #fff 64% 67%, transparent 67%),
+      radial-gradient(circle at 78% 30%, #cfe0c6 0 16%, transparent 17%),
+      #e9ecdf; }
+    .m-mapmini .m-pin { width: 5.6cqw; height: 5.6cqw; margin-left: -2.8cqw; }
+    .m-res li { padding: 2.8cqw 4cqw; border-bottom: 1px solid #eee; }
+    .m-res b { display: block; font-size: .98em; }
+    .m-res small { display: block; color: #777; font-size: .78em; line-height: 1.5; }
+    .m-res small.warn { color: #b0412c; }
+    /* 申込みシート */
+    .sheet { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; padding: 3cqw 5cqw 6cqw; border-radius: 5cqw 5cqw 0 0; background: #fff; box-shadow: 0 -2cqw 6cqw rgba(0, 0, 0, .14); transform: translateY(105%); transition: transform .6s var(--ease); }
+    .sheet.on { transform: none; }
+    .sheet::before { content: ""; display: block; width: 10cqw; height: 1.2cqw; margin: 0 auto 3cqw; border-radius: 99px; background: #ddd; }
+    .sheet b { display: block; font-size: 1.05em; }
+    .sheet .f { margin-top: 2.4cqw; padding: 2.4cqw 3cqw; border: 1px solid #ddd; border-radius: 1.6cqw; color: #999; font-size: .85em; }
+    .sheet .m-cta { margin-top: 3.4cqw; }
+    .tap { position: absolute; z-index: 5; left: 50%; top: 50%; width: 12cqw; height: 12cqw; margin: -6cqw 0 0 -6cqw; border-radius: 50%; background: rgba(255, 255, 255, .45); box-shadow: 0 0 0 .6cqw rgba(255, 255, 255, .8); opacity: 0; pointer-events: none; }
+    .tap.on { animation: tap .9s var(--ease) forwards; }
+    @keyframes tap { 0% { opacity: 0; transform: scale(.4); } 35% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+    .page { transition: transform 1.4s var(--ease); }
+    .scr.scrolled .page { transform: translateY(-38%); }
 
-    /* ヒーロー端末の切り替え */
-    .hero-screen .scr { transition: opacity .6s var(--ease), transform .8s var(--ease); }
-    .hero-screen .after { opacity: 0; transform: translateY(3%); }
-    .hero-screen.is-after .before { opacity: 0; }
-    .hero-screen.is-after .after { opacity: 1; transform: none; }
-    .hero-screen .before .pen, .hero-screen .before .pen-note { transition: opacity .3s; }
+    /* 指摘の枠 */
+    .mk { position: relative; }
+    .hl { position: absolute; z-index: 4; inset: -1.2cqw -1.6cqw; border: .7cqw solid var(--accent); border-radius: 1.8cqw; pointer-events: none; }
+    .hl > span { position: absolute; left: -.7cqw; bottom: calc(100% + .2cqw); padding: .3cqw 1.8cqw; border-radius: 1.2cqw 1.2cqw 1.2cqw 0; background: var(--accent); color: #fff; font-size: 3.2cqw; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+    .hl.below > span { bottom: auto; top: calc(100% + .2cqw); border-radius: 0 1.2cqw 1.2cqw 1.2cqw; }
+    .hl.good { border-color: #2e6a54; }
+    .hl.good > span { background: #2e6a54; }
+    .stage .hl { opacity: 0; transform: scale(1.06); transition: opacity .4s var(--ease) .5s, transform .5s var(--ease) .5s; }
+    .stage .hl.on { opacity: 1; transform: none; }
 
     /* セクション共通 */
     .section { padding: clamp(84px, 11vw, 150px) 0; }
     .sec-head { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: clamp(16px, 4vw, 56px); margin-bottom: clamp(40px, 5vw, 64px); }
     .label { writing-mode: vertical-rl; padding-left: 14px; border-left: 1px solid var(--line-dark); color: var(--accent-text); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .3em; white-space: nowrap; }
-    .sec-title { font-size: clamp(27px, 3.6vw, 44px); line-height: 1.5; }
+    .sec-title { font-size: clamp(27px, 3.4vw, 42px); line-height: 1.5; }
     .sec-lead { max-width: 35em; margin-top: 18px; color: var(--muted); font-size: 15px; }
     .indent { margin-left: calc(56px + clamp(16px, 4vw, 56px)); }
 
-    /* 2. セルフチェック */
-    .check { background: var(--white); border-block: 1px solid var(--line); }
-    .check-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-    .check-item { display: grid; grid-template-columns: 40px minmax(0, 1fr) minmax(0, 1fr); gap: 8px clamp(16px, 3vw, 40px); align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); }
-    .box { position: relative; width: 24px; height: 24px; border: 1.5px solid var(--ink); border-radius: 2px; align-self: start; margin-top: 6px; }
-    .box svg { position: absolute; left: -3px; top: -9px; width: 34px; height: 32px; overflow: visible; }
-    .box path { fill: none; stroke: var(--pen); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-    .check-item h3 { font-size: clamp(19px, 2vw, 24px); line-height: 1.55; }
-    .check-item p { color: var(--muted); font-size: 14.5px; }
-    .check-foot { margin-top: 26px; font-size: 15px; }
-    .check-foot .hand { color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 1.12em; }
-
     /* 3. 作例 */
-    .samples { background: var(--paper); }
+    .samples { background: var(--white); border-block: 1px solid var(--line); }
     .lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "tabs phone" "copy phone" ". phone"; column-gap: clamp(32px, 6vw, 96px); }
     .lab-tabs { grid-area: tabs; }
     .lab-copy { grid-area: copy; }
@@ -251,26 +280,24 @@
     .tabs { display: flex; margin: 22px 0 30px; border-bottom: 1px solid var(--line-dark); }
     .tab { position: relative; padding: 12px 18px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
     .tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; background: var(--ink); transform: scaleX(0); transition: transform .3s var(--ease); }
-    .tab:hover { color: var(--ink); }
-    .tab[aria-selected="true"] { color: var(--ink); }
+    .tab:hover, .tab[aria-selected="true"] { color: var(--ink); }
     .tab[aria-selected="true"]::after { transform: none; }
     .case h3 { font-size: clamp(21px, 2.3vw, 28px); line-height: 1.5; }
     .case-meta { margin-top: 6px; color: var(--muted); font-size: 13px; }
-    .redpen { margin: 22px 0 0; padding: 0; list-style: none; }
-    .redpen li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
-    .redpen li:last-child { border-bottom: 1px solid var(--line); }
-    .redpen b { color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 14px; }
-    .redpen .fix b { color: #2e6a54; }
+    .diff { margin: 22px 0 0; padding: 0; list-style: none; }
+    .diff li { display: grid; grid-template-columns: 4.6em 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
+    .diff li:last-child { border-bottom: 1px solid var(--line); }
+    .diff b { font-size: 13px; color: var(--accent-text); }
+    .diff .fix b { color: #2e6a54; }
     .fiction { margin-top: 20px; color: var(--muted); font-size: 12.5px; }
     .compare-labels { display: flex; justify-content: space-between; width: min(320px, 100%); margin-bottom: 10px; font-size: 13px; font-weight: 700; color: var(--muted); }
     .compare-labels span:last-child { color: #2e6a54; }
     .compare { --pos: 50%; width: min(320px, 100%); touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
     .compare .layer { position: absolute; inset: 0; isolation: isolate; }
-    .compare .after { z-index: 1; }
-    .compare .after { clip-path: inset(0 0 0 var(--pos)); }
+    .compare .after { z-index: 1; clip-path: inset(0 0 0 var(--pos)); }
     .handle { position: absolute; z-index: 6; top: 0; bottom: 0; left: var(--pos); width: 0; pointer-events: none; }
     .handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--ink); }
-    .knob { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: center; gap: 1.5cqw; width: 18cqw; height: 9cqw; transform: translate(-50%, -50%); border-radius: 2px; background: var(--ink); color: #fff; font-size: 3.4cqw; font-weight: 700; letter-spacing: .05em; }
+    .knob { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: center; gap: 1.5cqw; width: 16cqw; height: 9cqw; transform: translate(-50%, -50%); border-radius: 1.4cqw; background: var(--ink); }
     .knob::before, .knob::after { content: ""; border: 1.4cqw solid transparent; }
     .knob::before { border-right-color: #fff; border-left-width: 0; }
     .knob::after { border-left-color: #fff; border-right-width: 0; }
@@ -281,21 +308,21 @@
     .case-screens.is-active { display: contents; }
 
     /* 4. 商品 */
-    .offer { background: var(--white); border-block: 1px solid var(--line); }
-    .plan { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); border: 1px solid var(--ink); }
-    .plan-main { padding: clamp(26px, 4vw, 52px); }
-    .plan-side { padding: clamp(26px, 4vw, 52px); border-left: 1px solid var(--ink); background: var(--paper); display: flex; flex-direction: column; }
+    .offer { background: var(--paper); }
+    .plan { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); border: 1px solid var(--ink); background: var(--white); }
+    .plan-main, .plan-side { padding: clamp(26px, 4vw, 52px); }
+    .plan-side { border-left: 1px solid var(--ink); background: var(--paper-2); display: flex; flex-direction: column; }
     .plan h3 { font-size: clamp(26px, 3vw, 36px); line-height: 1.4; }
     .plan-sub { margin-top: 6px; color: var(--muted); font-size: 14px; }
-    .incl { margin: 26px 0 0; padding: 0; list-style: none; }
-    .incl li { display: grid; grid-template-columns: 2.2em 1fr; padding: 14px 0; border-top: 1px dashed var(--line-dark); }
-    .incl li > span { font-family: var(--serif); font-weight: 700; color: var(--accent-text); }
+    .incl { margin: 26px 0 0; padding: 0; list-style: none; counter-reset: incl; }
+    .incl li { counter-increment: incl; display: grid; grid-template-columns: 2.4em 1fr; padding: 14px 0; border-top: 1px solid var(--line); }
+    .incl li::before { content: counter(incl, decimal-leading-zero); font-family: var(--num); font-size: 19px; color: var(--accent-text); line-height: 1.4; font-variant-numeric: lining-nums; }
     .incl b { font-size: 15.5px; }
     .incl small { display: block; margin-top: 2px; color: var(--muted); font-size: 13.5px; line-height: 1.75; }
     .price-label { font-size: 14px; font-weight: 700; }
     .price-label span { margin-left: 8px; color: var(--accent-text); }
-    .price { margin-top: 6px; font-family: var(--serif); font-size: clamp(48px, 5vw, 64px); font-weight: 700; line-height: 1.15; letter-spacing: .01em; }
-    .price small { display: block; margin-top: 2px; font-size: 15px; font-weight: 600; }
+    .price { margin-top: 4px; font-family: var(--num); font-size: clamp(64px, 6vw, 84px); font-weight: 400; line-height: 1.05; font-variant-numeric: lining-nums; }
+    .price small { display: block; font-family: var(--sans); font-size: 15px; font-weight: 700; }
     .terms { margin: 22px 0 28px; padding: 0; font-size: 13.5px; color: var(--muted); }
     .terms dt { margin-top: 14px; color: var(--ink); font-weight: 700; }
     .terms dt:first-child { margin-top: 0; }
@@ -303,11 +330,12 @@
     .plan-side .btn { margin-top: auto; }
 
     /* 5. 流れ */
+    .flow { background: var(--paper); padding-top: 0; }
     .flow-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
     .flow-list li { padding: 22px clamp(14px, 2vw, 26px) 6px 0; }
     .flow-list li + li { padding-left: clamp(14px, 2vw, 26px); border-left: 1px solid var(--line); }
-    .flow-no { font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; color: var(--accent-text); }
-    .flow-list h3 { margin-top: 16px; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.55; }
+    .flow-no { font-family: var(--num); font-size: 40px; font-weight: 300; line-height: 1; color: var(--accent-text); font-variant-numeric: lining-nums; }
+    .flow-list h3 { margin-top: 14px; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.55; }
     .flow-list p { margin-top: 8px; color: var(--muted); font-size: 14.5px; }
 
     /* 6. 運営者 */
@@ -325,7 +353,7 @@
     .faq details { border-bottom: 1px solid var(--line); }
     .faq summary { display: grid; grid-template-columns: 2.2em 1fr 28px; align-items: start; padding: 22px 0; list-style: none; cursor: pointer; font-size: clamp(15.5px, 1.35vw, 17px); font-weight: 700; line-height: 1.7; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq .q { font-family: var(--serif); font-size: 1.1em; color: var(--accent-text); }
+    .faq .q { font-family: var(--num); font-size: 1.3em; line-height: 1.3; color: var(--accent-text); }
     .faq .pm { position: relative; justify-self: end; width: 14px; height: 14px; margin-top: .45em; }
     .faq .pm::before, .faq .pm::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 1.5px; background: var(--ink); transition: transform .3s var(--ease); }
     .faq .pm::after { transform: rotate(90deg); }
@@ -345,24 +373,18 @@
     .contact .btn-sub { background: transparent; color: var(--paper); border-color: rgba(247, 244, 237, .55); }
     .contact .btn-sub:hover, .contact .btn-sub:focus-visible { background: var(--ink-soft); }
     .contact-ids { margin-top: 20px; color: #b8c8c0; font-size: 13px; }
-    .footer { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; padding: 0 var(--gutter) calc(20px + env(safe-area-inset-bottom)); background: var(--ink-deep); color: #b8c8c0; font-size: 12px; }
-    .footer-in { width: 100%; max-width: calc(var(--max) - 2 * var(--gutter)); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-top: 1px solid rgba(247, 244, 237, .18); padding-top: 18px; }
+    .footer { padding: 0 var(--gutter) calc(20px + env(safe-area-inset-bottom)); background: var(--ink-deep); color: #b8c8c0; font-size: 12px; }
+    .footer-in { max-width: calc(var(--max) - 2 * var(--gutter)); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-top: 1px solid rgba(247, 244, 237, .18); padding-top: 18px; }
     .footer a { text-decoration: none; }
 
-    /* スマホの固定ボタン */
     .dock { display: none; }
 
-    /* 出現（控えめに） */
-    .js .rise { opacity: 0; transform: translateY(14px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-    .js .rise.in { opacity: 1; transform: none; }
-
-    @media (max-width: 1040px) {
-      .nav a:not(.btn) { display: none; }
-    }
+    @media (max-width: 1040px) { .nav a:not(.btn) { display: none; } }
     @media (max-width: 960px) {
       .hero .wrap { grid-template-columns: 1fr; }
       .hero h1 { font-size: clamp(26px, 6.6vw, 50px); }
-      .hero-stage { margin-top: 18px; }
+      .teaser { margin-top: 18px; padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--line-dark); }
+      .teaser .clock { font-size: clamp(64px, 18vw, 96px); }
       .lab { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "tabs" "phone" "copy"; }
       .lab-copy { margin-top: 32px; }
       .plan { grid-template-columns: 1fr; }
@@ -377,42 +399,36 @@
       .brand img { width: 30px; height: 30px; }
       .brand span { font-size: 19px; }
       .hero-actions .btn { width: 100%; }
-      .hero-stage .device { width: 66%; }
+      .story-grid { display: block; }
+      .stage { position: sticky; top: var(--header-h); z-index: 3; padding: 10px 0 12px; background: var(--story-bg); transition: background-color 1.2s var(--ease); border-bottom: 1px solid var(--line); }
+      .stage .device { width: min(158px, 42vw); }
+      .stage-cap { display: none; }
+      .scene { min-height: 46vh; justify-content: flex-start; padding: 18px 0 0; }
+      .scene:first-child { min-height: 46vh; padding-top: 18px; }
+      .scene .time { font-size: 40px; }
+      .scene h3 { font-size: 22px; margin-top: 10px; }
+      .scene p { font-size: 15px; margin-top: 10px; }
+      .steps { padding-bottom: 10vh; }
       .sec-head { grid-template-columns: 1fr; gap: 14px; }
       .sec-title { font-size: clamp(22px, 6.3vw, 30px); }
       .label { writing-mode: horizontal-tb; padding: 0 0 0 10px; border-left: 3px solid var(--accent); font-size: 13.5px; letter-spacing: .14em; justify-self: start; }
       .contact .label { border-color: #e9b39a; }
       .indent { margin-left: 0; }
-      .check-item { grid-template-columns: 34px 1fr; padding: 22px 0; }
-      .check-item p { grid-column: 2; font-size: 14px; }
       .tab { padding: 10px 12px; font-size: 14px; }
       .compare, .compare-labels { width: min(290px, 80vw); }
       .flow-list { grid-template-columns: 1fr; border-top: 0; }
-      .flow-list li, .flow-list li + li { display: grid; grid-template-columns: 44px 1fr; gap: 0 12px; padding: 20px 0; border-left: 0; border-top: 1px solid var(--line); }
+      .flow-list li, .flow-list li + li { display: grid; grid-template-columns: 48px 1fr; gap: 0 12px; padding: 20px 0; border-left: 0; border-top: 1px solid var(--line); }
       .flow-list li:first-child { border-top: 1px solid var(--ink); }
       .flow-list h3 { margin-top: 0; }
       .flow-list p { grid-column: 2; }
-      .flow-no { font-size: 26px; }
+      .flow-no { font-size: 32px; }
       .plan-side .btn, .contact-actions .btn { width: 100%; }
-      .answer { padding-left: 2.2em; font-size: 14.5px; }
+      .answer { font-size: 14.5px; }
       .footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
       .footer-in { flex-direction: column; align-items: flex-start; }
-      .dock {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 60;
-        display: flex;
-        padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
-        gap: 8px;
-        background: var(--paper);
-        border-top: 1px solid var(--line-dark);
-        transform: translateY(105%);
-        transition: transform .4s var(--ease);
-      }
+      .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; gap: 8px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: var(--paper); border-top: 1px solid var(--line-dark); transform: translateY(105%); transition: transform .4s var(--ease); }
       .dock.is-on { transform: none; }
-      .dock a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 3px; font-size: 14.5px; font-weight: 700; text-decoration: none; }
+      .dock a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 4px; font-size: 14.5px; font-weight: 700; text-decoration: none; }
       .dock .d-ig { flex: 1; background: var(--ink); color: var(--white); }
       .dock .d-mail { padding: 0 14px; border: 1px solid var(--ink); color: var(--ink); }
       .dock svg { width: 18px; height: 18px; }
@@ -435,9 +451,9 @@
         <span>Studio Coucou</span>
       </a>
       <nav class="nav" aria-label="ページ内">
+        <a href="#story">ある夕方</a>
         <a href="#samples">作例</a>
         <a href="#offer">内容と料金</a>
-        <a href="#flow">流れ</a>
         <a href="#about">運営者</a>
         <a href="#faq">質問</a>
         <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">DMで相談</a>
@@ -451,8 +467,8 @@
       <div class="wrap">
         <div>
           <p class="hero-place"><b>新潟市</b>の、子ども向けの習い事教室へ</p>
-          <h1 id="hero-title"><span class="nb">新潟の子ども向け教室の</span><span class="nb">ホームページを、</span><br><span class="nb"><span class="u">スマホで迷わない<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 13 C 70 6, 150 9, 210 8 S 280 5, 297 10"/></svg></span>形に。</span></h1>
-          <p class="hero-lead">保護者が教室を探すのは、たいていスマホのすきま時間です。Googleマップとホームページの「最初に見える場所」を整えて、体験や問い合わせまで迷わずたどり着ける入口をつくります。</p>
+          <h1 id="hero-title"><span class="nb">新潟の子ども向け教室の</span><span class="nb">ホームページを、</span><br><span class="nb"><em>スマホで迷わない</em>形に。</span></h1>
+          <p class="hero-lead">Googleマップとホームページの「最初に見える場所」を整えて、体験や問い合わせまで迷わずたどり着ける入口をつくります。</p>
           <div class="hero-actions" id="hero-actions">
             <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">
               <svg class="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -462,84 +478,155 @@
           </div>
           <p class="hero-who"><img src="logo-160.png" alt="" width="30" height="30">新潟市在住のヤマガタが、個人で運営しています。</p>
         </div>
-
-        <div class="hero-stage">
-          <p class="hero-hand" aria-hidden="true">今のページに赤ペンを入れて、<br>こう整えます<svg viewBox="0 0 40 40"><path d="M6 4 C 22 8, 30 18, 30 34 M30 34 L 24 27 M30 34 L 36 28"/></svg></p>
-          <div class="device" role="img" aria-label="架空の教室のホームページに赤ペンで問題点を書き込み、要点と体験ボタンが最初に見える画面に整える様子">
-            <div class="screen hero-screen" id="hero-screen">
-              <div class="scr before" aria-hidden="true">
-                <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                <div class="m-piano mk"><span class="pen draw" data-step="3" style="right:30%;bottom:10%;width:26%;height:46%"><svg viewBox="0 0 60 30" preserveAspectRatio="none"><path pathLength="1" d="M58 26 C 40 30, 20 22, 6 6 M6 6 L 7 15 M6 6 L 15 7"/></svg></span><span class="pen-note light draw-note" data-step="3" style="right:4%;bottom:8%">最初は写真だけ</span></div>
-                <div class="m-pad">
-                  <p class="m-label">お知らせ</p>
-                  <div class="mk"><span class="pen draw" data-step="1" style="left:-2.5%;top:-4%;width:35%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light draw-note" data-step="1" style="left:34%;top:-24%">2年前のまま</span><ul class="m-news">
-                    <li><span class="date">2024.03.15</span>発表会のお知らせ</li>
-                    <li><span class="date">2024.01.10</span>新年のごあいさつ</li>
-                    <li><span class="date">2023.12.01</span>冬休みについて</li>
-                  </ul></div>
-                  <p class="m-text" style="margin-top:.6em">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
-                  <p class="m-faint mk" style="margin-top:.4em">体験は「メニュー」→「教室案内」→ ページ下部から<span class="pen draw" data-step="2" style="left:0;bottom:-.45em;width:100%;height:.55em"><svg viewBox="0 0 100 10" preserveAspectRatio="none"><path pathLength="1" d="M1 5 Q 6 1 11 5 T 21 5 T 31 5 T 41 5 T 51 5 T 61 5 T 71 5 T 81 5 T 91 5 T 99 5"/></svg></span><span class="pen-note light draw-note" data-step="2" style="right:2%;top:120%">体験はどこ？</span></p>
-                  <p class="m-label" style="margin-top:1em">講師紹介</p>
-                  <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後…（長い経歴が続く）</p>
-                  <div class="m-ph" style="margin-top:.8em"></div>
-                  <p class="m-text" style="margin-top:.6em">レッスンでは、一人ひとりの個性を大切にしながら…</p>
-                </div>
-              </div>
-              <div class="scr after" aria-hidden="true">
-                <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                <div class="m-catch-wrap">
-                  <p class="m-catch">はじめてのピアノを、<br>ひとりひとりのペースで。</p>
-                  <ul class="m-points"><li>4歳〜小学生・個人レッスン</li><li>月3回／平日夕方・土曜</li><li>駐車場あり</li></ul>
-                  <span class="m-cta mk">体験レッスン・問い合わせ<span class="pen draw" data-step="4" style="left:-4%;top:-30%;width:108%;height:160%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light draw-note" data-step="4" style="right:0;top:118%">最初の画面に！</span></span>
-                </div>
-                <div class="m-pad">
-                  <p class="m-label">お知らせ</p>
-                  <p style="font-size:.92em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
-                  <p class="m-label" style="margin-top:.8em">コース</p>
-                  <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
-                  <p class="m-label" style="margin-top:.8em">アクセス</p>
-                  <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
-                  <p class="m-label" style="margin-top:.8em">講師より</p>
-                  <p class="m-text">はじめてでも大丈夫。まずは体験で、教室の雰囲気を見に来てください。</p>
-                </div>
-                <div class="m-piano" style="height:24cqw"></div>
-              </div>
-            </div>
-          </div>
-          <p class="stage-caption">架空の教室による制作サンプルです（実在の教室とは関係ありません）<button class="replay" type="button" id="replay">もう一度見る</button></p>
-        </div>
+        <a class="teaser" href="#story">
+          <span class="clock tnum" aria-hidden="true">18<span class="colon">:</span>40</span>
+          <p>保護者が教室を探すのは、たいていスマホのすきま時間です。送迎の待ち時間や、寝かしつけのあと。</p>
+          <span class="go">ある夕方の5分間を見る<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5"/></svg></span>
+        </a>
       </div>
     </section>
 
-    <!-- 2. セルフチェック -->
-    <section class="section check" aria-labelledby="check-title">
+    <!-- 2. ある夕方（つまずき3つ） -->
+    <section class="story" id="story" aria-labelledby="story-title">
       <div class="wrap">
-        <div class="sec-head">
-          <p class="label">一　つまずくところ</p>
-          <div>
-            <h2 class="sec-title" id="check-title"><span class="nb">いちど、自分の教室を</span><span class="nb">スマホで見てみてください。</span></h2>
-            <p class="sec-lead">保護者がスマホで教室を調べるとき、つまずきやすいのは次のようなところです。</p>
+        <div class="story-head">
+          <div class="sec-head" style="margin-bottom:0">
+            <p class="label">一　ある夕方</p>
+            <div>
+              <h2 class="sec-title" id="story-title"><span class="nb">たとえば、</span><span class="nb">こんな夕方の5分間。</span></h2>
+              <p class="story-note">説明のための想定の場面です。画面に出てくる教室は、すべて架空です。</p>
+            </div>
           </div>
         </div>
-        <div class="indent">
-          <ul class="check-list" id="check-list">
-            <li class="check-item">
-              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
-              <h3><span class="nb">体験の申込み方法が、</span><span class="nb">埋もれている</span></h3>
-              <p>何度もスクロールしたり、メニューを開いたりしないと「体験はこちら」にたどり着けない。</p>
-            </li>
-            <li class="check-item">
-              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
-              <h3><span class="nb">お知らせが、</span><span class="nb">古いままになっている</span></h3>
-              <p>去年の発表会や募集の案内が先頭に残っていて、今も活動しているのか伝わりにくい。</p>
-            </li>
-            <li class="check-item">
-              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
-              <h3><span class="nb">スマホだと、</span><span class="nb">文字が小さく読みにくい</span></h3>
-              <p>パソコン向けの画面が縮んで表示され、拡大しないと料金や時間が読めない。</p>
-            </li>
-          </ul>
-          <p class="check-foot">ひとつでも当てはまれば、<span class="hand">入口を整える余地があります。</span></p>
+
+        <div class="story-grid indent">
+          <div class="stage" aria-hidden="true">
+            <div class="device">
+              <div class="screen" id="story-screen">
+                <div class="sbar"><span class="tnum" id="sbar-time" style="font-family:var(--sans)">18:40</span><span class="icons"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+
+                <!-- 1: 検索 -->
+                <div class="scr on" data-screen="1">
+                  <div class="m-search"><span class="lens"></span><span id="typed">新潟市 ピアノ 体験</span><span class="caret"></span></div>
+                  <div class="m-mapmini"><span class="m-pin" style="left:28%;top:20%"></span><span class="m-pin" style="left:62%;top:44%"></span><span class="m-pin" style="left:44%;top:66%"></span></div>
+                  <ul class="m-res">
+                    <li><b>ことのはピアノ教室</b><small>ピアノ教室・ウェブサイト</small></li>
+                    <li><b>えいごのアトリエ ポム</b><small>英会話教室・ウェブサイト</small></li>
+                    <li><b>キッズダンス ルミナ</b><small class="warn">営業時間の情報なし</small></li>
+                    <li><b>こどもアトリエ そらいろ</b><small>絵画教室・ウェブサイト</small></li>
+                    <li><b>キッズ体操クラブ はねる</b><small class="warn">ウェブサイトの情報なし</small></li>
+                    <li><b>リトミック教室 ぽっけ</b><small>音楽教室・ウェブサイト</small></li>
+                  </ul>
+                </div>
+
+                <!-- 2-3: 教室A（整える前） -->
+                <div class="scr" data-screen="2">
+                  <div class="page">
+                    <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
+                    <div class="m-piano"></div>
+                    <div class="m-pad">
+                      <p class="m-label">お知らせ</p>
+                      <div class="mk"><ul class="m-news"><li><span class="date">2024.03.15</span>発表会のお知らせ</li><li><span class="date">2024.01.10</span>新年のごあいさつ</li><li><span class="date">2023.12.01</span>冬休みについて</li></ul><span class="hl" data-hl="2"><span>つまずき 1</span></span></div>
+                      <p class="m-text" style="margin-top:.6em">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
+                      <p class="m-label" style="margin-top:1em">講師紹介</p>
+                      <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後…（長い経歴が続く）</p>
+                      <div class="m-ph" style="margin-top:.8em"></div>
+                      <p class="m-text" style="margin-top:.6em">レッスンでは、一人ひとりの個性を大切にしながら…</p>
+                      <div class="mk" style="margin-top:.8em"><p class="m-faint">体験は「メニュー」→「教室案内」→ ページ下部から</p><span class="hl below" data-hl="3"><span>つまずき 2</span></span></div>
+                      <p class="m-label" style="margin-top:1.6em">アクセス</p>
+                      <p class="m-text">教室の所在地・駐車場については教室案内ページをご覧ください。</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4: 教室B（パソコン向けのまま） -->
+                <div class="scr" data-screen="4">
+                  <div class="m-pc">
+                    <div class="m-pc-nav"><span>HOME</span><span>教室案内</span><span>コース</span><span>料金</span><span>アクセス</span><span>お問合せ</span></div>
+                    <div class="m-pc-cols">
+                      <div class="m-pc-side">新着情報<br>2024.02 春の生徒募集<br>2023.11 ハロウィン会<br><br>リンク<br>ブログ<br>Instagram</div>
+                      <div class="mk">
+                        <div class="m-pc-img"></div>
+                        <p>えいごのアトリエ ポムへようこそ。幼児から小学生まで、英語を楽しく学べる教室です。少人数のクラスで、歌やゲームを取り入れながら…</p>
+                        <p>コース：キッズ（3〜6歳）月4回／ジュニア（小1〜小6）月4回／料金は料金ページをご覧ください。</p>
+                        <p>体験レッスンをご希望の方はお問合せページのフォームよりお申込みください。</p>
+                        <span class="hl below" data-hl="4" style="inset:-2cqw -2cqw -2cqw -2cqw"><span>つまずき 3</span></span>
+                      </div>
+                    </div>
+                    <div class="m-pc-cols" style="grid-template-columns:1fr 1fr 1fr"><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div></div>
+                    <p>講師紹介：英語圏での滞在経験を生かし、子どもたちが自然に英語に親しめるよう…（続きを読む）</p>
+                    <div class="m-pc-side" style="margin-top:.6em">アクセス｜教室の所在地・駐車場について・お問い合わせはこちら</div>
+                    <div class="m-pc-cols" style="grid-template-columns:1fr 1fr;margin-top:.8em"><div><div class="m-pc-img" style="height:7em"></div><p>ハロウィン会の様子。みんなで仮装して英語の歌を歌いました。</p></div><div><div class="m-pc-img" style="height:7em"></div><p>クリスマス会のお知らせ。12月の第3土曜日に開催予定です。</p></div></div>
+                    <p style="margin-top:.6em">よくある質問｜Q.何歳から通えますか？ A.3歳から通えます。Q.振替はできますか？ A.月1回まで可能です。Q.駐車場はありますか？…</p>
+                    <div class="m-pc-nav" style="margin-top:.8em;justify-content:center">© えいごのアトリエ ポム All Rights Reserved.</div>
+                  </div>
+                </div>
+
+                <!-- 5: 教室A（整えた後） -->
+                <div class="scr" data-screen="5">
+                  <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
+                  <div class="m-catch-wrap">
+                    <p class="m-catch">はじめてのピアノを、<br>ひとりひとりのペースで。</p>
+                    <ul class="m-points"><li>4歳〜小学生・個人レッスン</li><li>月3回／平日夕方・土曜</li><li>駐車場あり</li></ul>
+                    <div class="mk"><span class="m-cta">体験レッスン・問い合わせ<span class="tap" id="tap"></span></span><span class="hl good below" data-hl="5"><span>最初の画面に</span></span></div>
+                  </div>
+                  <div class="m-pad" style="padding-top:6cqw">
+                    <p class="m-label">お知らせ</p>
+                    <p style="font-size:.92em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
+                    <p class="m-label" style="margin-top:.8em">コース</p>
+                    <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
+                    <p class="m-label" style="margin-top:.8em">アクセス</p>
+                    <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
+                    <p class="m-label" style="margin-top:.8em">講師より</p>
+                    <p class="m-text">はじめてでも大丈夫。まずは体験で、教室の雰囲気を見に来てください。</p>
+                  </div>
+                  <div class="m-piano" style="height:24cqw"></div>
+                  <div class="sheet" id="sheet">
+                    <b>体験レッスンのお申込み</b>
+                    <div class="f">お子さまの年齢</div>
+                    <div class="f">ご希望の曜日</div>
+                    <span class="m-cta">この内容で送る</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="stage-cap">画面はすべて架空の教室です</p>
+          </div>
+
+          <div class="steps" id="steps">
+            <article class="scene on" data-scene="1" data-time="18:40">
+              <p class="time tnum">18:40</p>
+              <h3><span class="nb">送迎の待ち時間に、</span><span class="nb">検索する。</span></h3>
+              <p>スイミングのお迎えまで、あと10分。車の中で「新潟市 ピアノ 体験」と調べてみる。</p>
+            </article>
+            <article class="scene" data-scene="2" data-time="18:41">
+              <p class="time tnum">18:41</p>
+              <span class="tag">つまずき 1</span>
+              <h3><span class="nb">お知らせが、</span><span class="nb">古いまま。</span></h3>
+              <p>いちばん上の日付が2年前。今も教室をやっているのか、少し不安になる。</p>
+            </article>
+            <article class="scene" data-scene="3" data-time="18:42">
+              <p class="time tnum">18:42</p>
+              <span class="tag">つまずき 2</span>
+              <h3><span class="nb">体験の申込み方法が、</span><span class="nb">見つからない。</span></h3>
+              <p>下までスクロールして、ようやく小さな案内。メニューを開いて、また探す。お迎えの時間が近づいてくる。</p>
+            </article>
+            <article class="scene" data-scene="4" data-time="18:43">
+              <p class="time tnum">18:43</p>
+              <span class="tag">つまずき 3</span>
+              <h3><span class="nb">スマホだと、</span><span class="nb">文字が小さい。</span></h3>
+              <p>別の教室を開くと、パソコン向けの画面が縮んで表示される。料金も時間も、拡大しないと読めない。</p>
+            </article>
+            <article class="scene" data-scene="5" data-time="18:44">
+              <p class="time tnum">18:44</p>
+              <h3><span class="nb">もし最初の画面が、</span><span class="nb">こうだったら。</span></h3>
+              <p>対象、回数、通いやすさ。そして「体験レッスン・問い合わせ」のボタン。お迎えの前に、申込みまで済ませられる。</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="story-end indent">
+          <p><span class="nb">Studio Coucouがするのは、</span><span class="nb"><em>この最初の画面</em>を</span><span class="nb">整えることです。</span></p>
         </div>
       </div>
     </section>
@@ -550,7 +637,7 @@
         <div class="sec-head">
           <p class="label">二　作例</p>
           <div>
-            <h2 class="sec-title" id="samples-title"><span class="nb">赤ペンを入れて、</span><span class="nb">整えるとこうなります。</span></h2>
+            <h2 class="sec-title" id="samples-title"><span class="nb">整える前と後を、</span><span class="nb">見比べる。</span></h2>
             <p class="sec-lead">真ん中のつまみを左右に動かすと、整える前と後を見比べられます。</p>
           </div>
         </div>
@@ -568,25 +655,25 @@
             <div class="case" id="case-piano" role="tabpanel" aria-labelledby="tab-piano">
               <h3><span class="nb">ホームページの</span><span class="nb">最初の画面</span></h3>
               <p class="case-meta">（架空）ことのはピアノ教室</p>
-              <ul class="redpen">
-                <li><b>赤ペン</b><span>先頭が古いお知らせのまま。体験の申込みはメニューの奥。</span></li>
-                <li class="fix"><b>直す</b><span>対象・回数・通いやすさを3行にまとめ、体験ボタンを最初の画面に置く。</span></li>
+              <ul class="diff">
+                <li><b>整える前</b><span>先頭が古いお知らせのまま。体験の申込みはメニューの奥。</span></li>
+                <li class="fix"><b>整えた後</b><span>対象・回数・通いやすさを3行にまとめ、体験ボタンを最初の画面に置く。</span></li>
               </ul>
             </div>
             <div class="case" id="case-dance" role="tabpanel" aria-labelledby="tab-dance" hidden>
               <h3><span class="nb">Googleマップ</span><span class="nb">（Googleビジネスプロフィール）</span></h3>
               <p class="case-meta">（架空）キッズダンス ルミナ／ホームページが無い・弱い教室にも</p>
-              <ul class="redpen">
-                <li><b>赤ペン</b><span>何曜日にやっているか分からない。問い合わせ先が見つからない。</span></li>
-                <li class="fix"><b>直す</b><span>説明文・レッスン時間・写真を入れ、予約・問い合わせへのリンクを設定する。</span></li>
+              <ul class="diff">
+                <li><b>整える前</b><span>何曜日にやっているか分からない。問い合わせ先が見つからない。</span></li>
+                <li class="fix"><b>整えた後</b><span>説明文・レッスン時間・写真を入れ、予約・問い合わせへのリンクを設定する。</span></li>
               </ul>
             </div>
             <div class="case" id="case-english" role="tabpanel" aria-labelledby="tab-english" hidden>
               <h3><span class="nb">スマホでの</span><span class="nb">読みやすさ</span></h3>
               <p class="case-meta">（架空）えいごのアトリエ ポム</p>
-              <ul class="redpen">
-                <li><b>赤ペン</b><span>パソコン用の画面がそのまま縮小。料金・時間・体験の場所が読めない。</span></li>
-                <li class="fix"><b>直す</b><span>スマホで読める文字の大きさにして、知りたい順（対象→回数→体験）に並べる。</span></li>
+              <ul class="diff">
+                <li><b>整える前</b><span>パソコン用の画面がそのまま縮小。料金・時間・体験の場所が読めない。</span></li>
+                <li class="fix"><b>整えた後</b><span>スマホで読める文字の大きさにして、知りたい順（対象→回数→体験）に並べる。</span></li>
               </ul>
             </div>
             <p class="fiction">教室名・内容・写真はすべて架空です。実際の作業では、教室の公式情報と、先生に確認した内容だけを使います。</p>
@@ -596,25 +683,21 @@
             <div class="compare-labels" aria-hidden="true"><span>整える前</span><span>整えた後</span></div>
             <div class="device compare" id="compare">
               <div class="screen">
+                <div class="sbar"><span>18:44</span><span class="icons"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
                 <!-- ピアノ -->
                 <div class="case-screens is-active" data-screens="piano">
                   <div class="layer before" role="img" aria-label="整える前：写真と古いお知らせが先頭にあり、体験の案内はメニューの奥">
                     <div class="scr" aria-hidden="true">
                       <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                      <div class="m-piano mk"><span class="pen" style="left:30%;bottom:22%;width:16%;height:40%"><svg viewBox="0 0 60 30" preserveAspectRatio="none"><path pathLength="1" d="M58 26 C 40 30, 20 22, 6 6 M6 6 L 7 15 M6 6 L 15 7"/></svg></span><span class="pen-note light" style="left:4%;bottom:8%">最初は写真だけ</span></div>
+                      <div class="m-piano"></div>
                       <div class="m-pad">
                         <p class="m-label">お知らせ</p>
-                        <div class="mk"><span class="pen" style="left:-2.5%;top:-4%;width:35%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:4%;top:-26%">2年前のまま</span><ul class="m-news">
-                          <li><span class="date">2024.03.15</span>発表会のお知らせ</li>
-                          <li><span class="date">2024.01.10</span>新年のごあいさつ</li>
-                          <li><span class="date">2023.12.01</span>冬休みについて</li>
-                        </ul></div>
+                        <div class="mk"><ul class="m-news"><li><span class="date">2024.03.15</span>発表会のお知らせ</li><li><span class="date">2024.01.10</span>新年のごあいさつ</li><li><span class="date">2023.12.01</span>冬休みについて</li></ul><span class="hl"><span>古いまま</span></span></div>
                         <p class="m-text" style="margin-top:.6em">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
-                        <p class="m-faint mk" style="margin-top:.4em">体験は「メニュー」→「教室案内」→ ページ下部から<span class="pen" style="left:0;bottom:-.45em;width:100%;height:.55em"><svg viewBox="0 0 100 10" preserveAspectRatio="none"><path pathLength="1" d="M1 5 Q 6 1 11 5 T 21 5 T 31 5 T 41 5 T 51 5 T 61 5 T 71 5 T 81 5 T 91 5 T 99 5"/></svg></span><span class="pen-note light" style="left:0;top:120%">体験はどこ？</span></p>
-                        <p class="m-label" style="margin-top:1em">講師紹介</p>
+                        <div class="mk" style="margin-top:1.4em"><p class="m-faint">体験は「メニュー」→「教室案内」→ ページ下部から</p><span class="hl below"><span>見つけにくい</span></span></div>
+                        <p class="m-label" style="margin-top:2.4em">講師紹介</p>
                         <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後…（長い経歴が続く）</p>
-                  <div class="m-ph" style="margin-top:.8em"></div>
-                  <p class="m-text" style="margin-top:.6em">レッスンでは、一人ひとりの個性を大切にしながら…</p>
+                        <div class="m-ph" style="margin-top:.8em"></div>
                       </div>
                     </div>
                   </div>
@@ -631,10 +714,8 @@
                         <p style="font-size:.92em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
                         <p class="m-label" style="margin-top:.8em">コース</p>
                         <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
-                  <p class="m-label" style="margin-top:.8em">アクセス</p>
-                  <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
-                  <p class="m-label" style="margin-top:.8em">講師より</p>
-                  <p class="m-text">はじめてでも大丈夫。まずは体験で、教室の雰囲気を見に来てください。</p>
+                        <p class="m-label" style="margin-top:.8em">アクセス</p>
+                        <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
                       </div>
                       <div class="m-piano" style="height:24cqw"></div>
                     </div>
@@ -647,11 +728,9 @@
                       <div class="m-map"><span class="m-pin"></span></div>
                       <div class="m-place"><b>キッズダンス ルミナ</b><span class="m-label">ダンス教室</span></div>
                       <div class="m-chips"><span class="m-chip">経路</span><span class="m-chip off">ウェブサイト</span><span class="m-chip off">予約</span></div>
-                      <div class="mk"><div class="m-row"><i></i><span class="m-faint" style="font-size:1em">営業時間を追加</span></div>
-                      <div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">説明はありません</span></div><span class="pen" style="left:1%;top:-6%;width:46%;height:112%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:22%;top:-62%">何曜日？</span></div>
+                      <div class="mk" style="margin-top:4cqw"><div class="m-row"><i></i><span class="m-faint" style="font-size:1em">営業時間を追加</span></div><div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">説明はありません</span></div><span class="hl" style="inset:0 48% 0 1.6cqw"><span>何曜日？</span></span></div>
                       <div class="m-thumbs"><span class="p1"></span><span class="empty"></span><span class="empty"></span></div>
-                      <div class="mk"><div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">ウェブサイトを追加</span></div>
-                      <div class="m-row"><i></i><span class="m-faint" style="font-size:1em">予約リンクを追加</span></div><span class="pen-note light" style="left:4%;top:96%">連絡先は？</span></div>
+                      <div class="mk" style="margin-top:5cqw"><div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">ウェブサイトを追加</span></div><div class="m-row"><i></i><span class="m-faint" style="font-size:1em">予約リンクを追加</span></div><span class="hl" style="inset:0 48% 0 1.6cqw"><span>連絡先は？</span></span></div>
                     </div>
                   </div>
                   <div class="layer after" role="img" aria-label="整えた後のGoogleマップ：説明文、レッスン時間、写真、予約・問い合わせのリンクが入っている">
@@ -659,11 +738,11 @@
                       <div class="m-map"><span class="m-pin"></span></div>
                       <div class="m-place"><b>キッズダンス ルミナ</b><span class="m-label">ダンス教室</span></div>
                       <div class="m-chips"><span class="m-chip">経路</span><span class="m-chip">ウェブサイト</span><span class="m-chip">予約</span></div>
-                      <div class="m-row"><i></i><span>火・木 16:00〜19:00／土 10:00〜</span></div>
-                      <div class="m-row"><i class="info"></i><span>3歳〜小学生のキッズダンス。体験は随時受付。</span></div>
+                      <div style="margin-top:4cqw"><div class="m-row"><i></i><span>火・木 16:00〜19:00／土 10:00〜</span></div>
+                      <div class="m-row"><i class="info"></i><span>3歳〜小学生のキッズダンス。体験は随時受付。</span></div></div>
                       <div class="m-thumbs"><span class="p1"></span><span class="p2"></span><span class="p3"></span></div>
-                      <div class="m-row"><i class="info"></i><span style="color:#1a62b8">lumina-dance.example</span></div>
-                      <div class="m-row"><i></i><span style="color:#1a62b8">体験レッスンを予約する</span></div>
+                      <div style="margin-top:5cqw"><div class="m-row"><i class="info"></i><span style="color:#1a62b8">lumina-dance.example</span></div>
+                      <div class="m-row"><i></i><span style="color:#1a62b8">体験レッスンを予約する</span></div></div>
                     </div>
                   </div>
                 </div>
@@ -673,7 +752,7 @@
                     <div class="scr" aria-hidden="true">
                       <div class="m-pc">
                         <div class="m-pc-nav"><span>HOME</span><span>教室案内</span><span>コース</span><span>料金</span><span>アクセス</span><span>お問合せ</span></div>
-                        <div class="m-pc-cols mk"><span class="pen" style="left:28%;top:-4%;width:76%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:6%;top:104%;font-size:4.6cqw">小さくて読めない</span>
+                        <div class="m-pc-cols">
                           <div class="m-pc-side">新着情報<br>2024.02 春の生徒募集<br>2023.11 ハロウィン会<br><br>リンク<br>ブログ<br>Instagram</div>
                           <div>
                             <div class="m-pc-img"></div>
@@ -682,7 +761,7 @@
                             <p>体験レッスンをご希望の方はお問合せページのフォームよりお申込みください。</p>
                           </div>
                         </div>
-                        <div class="m-pc-cols" style="grid-template-columns:1fr 1fr 1fr"><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div></div>
+                        <div class="mk" style="margin-top:8cqw"><div class="m-pc-cols" style="grid-template-columns:1fr 1fr 1fr;margin:0"><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div><div class="m-pc-img" style="height:5em"></div></div><span class="hl" style="inset:-1cqw 52% -1cqw -1cqw"><span>小さくて読めない</span></span></div>
                         <p>講師紹介：英語圏での滞在経験を生かし、子どもたちが自然に英語に親しめるよう…（続きを読む）</p>
                         <div class="m-pc-side" style="margin-top:.6em">アクセス｜教室の所在地・駐車場について・お問い合わせはこちら</div>
                       </div>
@@ -729,10 +808,10 @@
               <h3>スマホの入口整備</h3>
               <p class="plan-sub">Googleマップとホームページの「最初に見える場所」</p>
               <ul class="incl">
-                <li><span>一</span><div><b>Googleマップ（Googleビジネスプロフィール）を整える</b><small>説明文・営業時間・写真・予約／問い合わせのリンク</small></div></li>
-                <li><span>二</span><div><b>ホームページの、スマホで最初に見える場所を整える</b><small>要点3つと「体験・問い合わせ」ボタンを置きます。今お使いの編集画面でできる範囲で行います。</small></div></li>
-                <li><span>三</span><div><b><span class="nb">作業前と作業後の</span><span class="nb">比較画像をお渡し</span></b></div></li>
-                <li><span>四</span><div><b>修正1回まで</b></div></li>
+                <li><div><b>Googleマップ（Googleビジネスプロフィール）を整える</b><small>説明文・営業時間・写真・予約／問い合わせのリンク</small></div></li>
+                <li><div><b>ホームページの、スマホで最初に見える場所を整える</b><small>要点3つと「体験・問い合わせ」ボタンを置きます。今お使いの編集画面でできる範囲で行います。</small></div></li>
+                <li><div><b><span class="nb">作業前と作業後の</span><span class="nb">比較画像をお渡し</span></b></div></li>
+                <li><div><b>修正1回まで</b></div></li>
               </ul>
             </div>
             <div class="plan-side">
@@ -763,10 +842,10 @@
         </div>
         <div class="indent">
           <ol class="flow-list">
-            <li><span class="flow-no">一</span><h3>DMでご相談</h3><p>教室のホームページやInstagram、Googleマップの名前を教えてください。気になっていることを伺います。</p></li>
-            <li><span class="flow-no">二</span><h3><span class="nb">改善イメージを</span><span class="nb">画像でお送り</span></h3><p>どこをどう変えるかを、画像1枚にまとめてお送りします。内容と金額に納得いただけたら、お申込みです。</p></li>
-            <li><span class="flow-no">三</span><h3>作業</h3><p>編集権限をお借りして、Googleマップとホームページを整えます。掲載する内容は、事前に先生に確認します。</p></li>
-            <li><span class="flow-no">四</span><h3>確認して完成</h3><p>作業前後の比較画像と一緒にご報告します。気になる点は1回まで修正します。</p></li>
+            <li><span class="flow-no">1</span><h3>DMでご相談</h3><p>教室のホームページやInstagram、Googleマップの名前を教えてください。気になっていることを伺います。</p></li>
+            <li><span class="flow-no">2</span><h3><span class="nb">改善イメージを</span><span class="nb">画像でお送り</span></h3><p>どこをどう変えるかを、画像1枚にまとめてお送りします。内容と金額に納得いただけたら、お申込みです。</p></li>
+            <li><span class="flow-no">3</span><h3>作業</h3><p>編集権限をお借りして、Googleマップとホームページを整えます。掲載する内容は、事前に先生に確認します。</p></li>
+            <li><span class="flow-no">4</span><h3>確認して完成</h3><p>作業前後の比較画像と一緒にご報告します。気になる点は1回まで修正します。</p></li>
           </ol>
         </div>
       </div>
@@ -800,31 +879,31 @@
         </div>
         <div class="faq-list indent">
           <details>
-            <summary><span class="q">問</span><span>Wix・Ameba Ownd・Jimdo・Googleサイトで作ったホームページでも頼めますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>Wix・Ameba Ownd・Jimdo・Googleサイトで作ったホームページでも頼めますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>はい、ご相談いただけます。今お使いの編集画面でできる範囲で整えます。作業のときは、ログインや編集の権限をお借りします。</p><p>サービスの仕様上できないことがある場合は、作業の前にお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>ホームページが無くても大丈夫ですか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>ホームページが無くても大丈夫ですか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>Googleマップ（Googleビジネスプロフィール）や、Instagramのプロフィールを入口にしている教室もあると思います。今ある入口に合わせてどこまでできるか、ご相談のときにお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>作業のあとも、自分で更新を続けられますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>作業のあとも、自分で更新を続けられますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>今お使いの編集画面の中で整えるので、作業後もこれまでと同じ方法で更新できます。どこを変えたかは、比較画像と一緒にお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>ログイン情報を渡すのが不安です。</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>ログイン情報を渡すのが不安です。</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>Googleビジネスプロフィールなど、管理者や編集者を追加できるサービスでは、パスワードをお預かりせずに招待していただく方法をご案内します。作業が終わったら、権限を外していただいてかまいません。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>支払いの方法とタイミングは？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>支払いの方法とタイミングは？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>ご相談のときにご案内します。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>相談したら、必ず申し込まないといけませんか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>相談したら、必ず申し込まないといけませんか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>いいえ。改善イメージをご覧になってから、頼むかどうかを決めてください。お断りいただいても、その後こちらから何度も連絡することはありません。</p></div>
           </details>
           <details>
-            <summary><span class="q">問</span><span>生徒が増えることは保証されますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">Q</span><span>生徒が増えることは保証されますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>お約束はできません。このお仕事は、保護者がスマホで迷わずに体験・問い合わせへ進める入口を整えるところまでです。</p></div>
           </details>
         </div>
@@ -871,72 +950,88 @@
   <script>
   (() => {
     const root = document.documentElement;
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('still');
+    const still = root.classList.contains('still');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || still;
     const $ = (s, el = document) => el.querySelector(s);
     const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const q = (k) => (location.search.match(new RegExp('[?&]' + k + '=(\\w+)')) || [])[1];
 
-    /* 画面に入ったら */
-    const seen = (el, fn, opts) => {
-      if (reduce) { fn(); return; }
-      new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { fn(); obs.disconnect(); } }, opts || { rootMargin: '0px 0px -15% 0px' }).observe(el);
-    };
-
-    /* セルフチェック：赤ペンでチェックを入れる */
-    const checks = $$('#check-list .draw');
-    seen($('#check-list'), () => checks.forEach((c, i) => setTimeout(() => c.classList.add('on'), reduce ? 0 : 400 + i * 450)));
-
-    /* 運営者：ロゴの犬が顔を出す */
-    seen($('#peek'), () => $('#peek').classList.add('in'));
-
-    /* ヘッダー */
+    /* ヘッダーとスマホの固定ボタン */
     const header = $('#header');
-    let lastY = scrollY;
     const heroActions = $('#hero-actions');
     const contact = $('#contact');
     const dock = $('#dock');
+    const storyEl = $('#story');
     const onScroll = () => {
-      const y = scrollY;
-      header.classList.toggle('is-solid', y > 10);
-      if (y > 480 && y > lastY + 4) header.classList.add('is-hidden');
-      else if (y < lastY - 4 || y <= 480) header.classList.remove('is-hidden');
-      lastY = y;
+      header.classList.toggle('is-solid', scrollY > 10);
       const heroOut = heroActions.getBoundingClientRect().bottom < 0;
       const contactIn = contact.getBoundingClientRect().top < innerHeight * .85;
-      dock.classList.toggle('is-on', heroOut && !contactIn);
+      const sr = storyEl.getBoundingClientRect();
+      const inStory = sr.top < innerHeight * .4 && sr.bottom > innerHeight * .6;
+      dock.classList.toggle('is-on', heroOut && !contactIn && !inStory);
     };
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    /* ヒーロー：赤ペンを入れて、整える */
-    const screen = $('#hero-screen');
-    const marks = (step) => $$(`[data-step="${step}"]`, screen);
-    let timers = [];
-    const at = (ms, fn) => timers.push(setTimeout(fn, ms));
-    const reset = () => {
+    /* 運営者：ロゴの犬が顔を出す */
+    const peek = $('#peek');
+    if (reduce) peek.classList.add('in');
+    else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { peek.classList.add('in'); o.disconnect(); } }, { rootMargin: '0px 0px -15% 0px' }).observe(peek);
+
+    /* ある夕方：場面に合わせて画面を切り替える */
+    const story = $('#story');
+    const scenes = $$('.scene');
+    const screens = $$('#story-screen .scr');
+    const sbarTime = $('#sbar-time');
+    const typed = $('#typed');
+    const query = typed.textContent;
+    const bg = ['#f7f4ed', '#f6f1e8', '#f5eee2', '#f3eadb', '#f1e5d3'];
+    const screenFor = { 1: '1', 2: '2', 3: '2', 4: '4', 5: '5' };
+    let current = 0, timers = [];
+    const later = (ms, fn) => timers.push(setTimeout(fn, reduce ? 0 : ms));
+
+    const typeQuery = () => {
+      if (reduce) { typed.textContent = query; return; }
+      typed.textContent = '';
+      [...query].forEach((ch, i) => later(250 + i * 110, () => { typed.textContent += ch; }));
+    };
+
+    const show = (n) => {
+      if (n === current) return;
+      const prev = current;
+      current = n;
       timers.forEach(clearTimeout); timers = [];
-      screen.classList.remove('is-after');
-      $$('[data-step]', screen).forEach((m) => m.classList.remove('on'));
+      scenes.forEach((s) => s.classList.toggle('on', +s.dataset.scene === n));
+      story.style.setProperty('--story-bg', bg[n - 1]);
+      sbarTime.textContent = scenes[n - 1].dataset.time;
+      const target = screenFor[n];
+      screens.forEach((s) => {
+        const on = s.dataset.screen === target;
+        s.classList.toggle('off-left', !on && +s.dataset.screen < +target);
+        s.classList.toggle('on', on);
+      });
+      $$('#story-screen .hl').forEach((h) => h.classList.toggle('on', +h.dataset.hl === n));
+      $('[data-screen="2"]').classList.toggle('scrolled', n === 3);
+      $('#sheet').classList.remove('on');
+      $('#tap').classList.remove('on');
+      if (n === 1) typeQuery();
+      if (n === 5) {
+        later(1500, () => { const t = $('#tap'); t.classList.remove('on'); void t.offsetWidth; t.classList.add('on'); });
+        later(2100, () => $('#sheet').classList.add('on'));
+        if (still) $('#sheet').classList.remove('on');
+      }
     };
-    const play = () => {
-      reset();
-      at(500, () => marks(1).forEach((m) => m.classList.add('on')));
-      at(1500, () => marks(2).forEach((m) => m.classList.add('on')));
-      at(2500, () => marks(3).forEach((m) => m.classList.add('on')));
-      at(4600, () => screen.classList.add('is-after'));
-      at(5600, () => marks(4).forEach((m) => m.classList.add('on')));
-      at(10500, play);
-    };
-    const showFinal = () => { reset(); screen.classList.add('is-after'); marks(4).forEach((m) => m.classList.add('on')); };
-    if (/[?&]marks/.test(location.search)) { reset(); [1, 2, 3].forEach((n) => marks(n).forEach((m) => m.classList.add('on'))); }
-    else if (reduce) showFinal();
-    else {
-      let running = false;
-      new IntersectionObserver(([e]) => {
-        if (e.isIntersecting && !running) { running = true; play(); }
-        else if (!e.isIntersecting && running) { running = false; reset(); }
-      }, { threshold: .3 }).observe(screen);
+
+    const mobile = matchMedia('(max-width: 720px)').matches;
+    const start = +(q('scene') || 1);
+    current = 0;
+    show(start);
+    if (!still) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) show(+e.target.dataset.scene); });
+      }, { rootMargin: mobile ? '-62% 0px -36% 0px' : '-45% 0px -45% 0px' });
+      scenes.forEach((s) => io.observe(s));
     }
-    $('#replay').addEventListener('click', () => (reduce ? showFinal() : play()));
 
     /* 作例：比較スライダー */
     const compare = $('#compare');
@@ -974,8 +1069,7 @@
       };
       requestAnimationFrame(tick);
     };
-    seen(compare, () => setTimeout(hint, 400), { threshold: .6 });
-    const qtab = (location.search.match(/[?&]tab=(\w+)/) || [])[1];
+    if (!reduce) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(hint, 400); o.disconnect(); } }, { threshold: .6 }).observe(compare);
 
     /* 作例：タブ */
     const tabs = $$('.tab');
@@ -990,7 +1084,7 @@
       setPos(50);
       if (focus) tab.focus();
     };
-    if (qtab && $('#tab-' + qtab)) select($('#tab-' + qtab));
+    if (q('tab') && $('#tab-' + q('tab'))) select($('#tab-' + q('tab')));
     tabs.forEach((t, i) => {
       t.addEventListener('click', () => select(t));
       t.addEventListener('keydown', (e) => {
