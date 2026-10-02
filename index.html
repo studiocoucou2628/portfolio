@@ -14,33 +14,34 @@
   <link rel="icon" href="logo-160.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');if(/[?&]still/.test(location.search))document.documentElement.classList.add('still');</script>
   <style>
     :root {
       --ink: #1f3e34;
-      --ink-deep: #142a22;
+      --ink-deep: #172f27;
       --ink-soft: #3d5c50;
       --paper: #f7f4ed;
-      --paper-2: #efe8da;
+      --paper-2: #f0ebe0;
       --white: #fffdf8;
       --accent: #c86d48;
       --accent-text: #a5502e;
+      --pen: #d0352b;
       --gold: #b49462;
       --muted: #5d625b;
-      --line: rgba(31, 62, 52, .16);
-      --line-strong: rgba(31, 62, 52, .32);
+      --line: #d9d1c2;
+      --line-dark: #b9b09f;
       --sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'YuGothic', 'Noto Sans JP', Meiryo, sans-serif;
       --serif: 'Zen Old Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif JP', serif;
-      --latin: 'Cormorant Garamond', 'Zen Old Mincho', Georgia, serif;
-      --gutter: clamp(20px, 5.2vw, 88px);
-      --max: 1240px;
-      --ease: cubic-bezier(.22, 1, .36, 1);
-      --header-h: 64px;
+      --hand: 'Klee One', 'Zen Old Mincho', serif;
+      --gutter: clamp(20px, 5.2vw, 80px);
+      --max: 1160px;
+      --ease: cubic-bezier(.25, .8, .25, 1);
+      --header-h: 62px;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; }
     @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
     body {
       margin: 0;
@@ -48,27 +49,15 @@
       color: var(--ink);
       font-family: var(--sans);
       font-size: 16px;
-      line-height: 1.85;
-      letter-spacing: .02em;
+      line-height: 1.9;
       overflow-x: clip;
       -webkit-font-smoothing: antialiased;
-    }
-    /* 紙のざらつき */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      pointer-events: none;
-      opacity: .32;
-      mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     a { color: inherit; }
     img { max-width: 100%; display: block; }
     h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: .04em; }
-    ::selection { background: var(--accent); color: var(--white); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: .03em; }
+    ::selection { background: #f3d6c8; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     .nb { display: inline-block; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -76,479 +65,363 @@
     .skip:focus { top: 12px; }
     .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
-    /* ---------- ボタン ---------- */
+    /* ボタン */
     .btn {
-      --bg: var(--ink);
-      --fg: var(--white);
-      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      min-height: 58px;
-      padding: 0 30px;
-      border: 1px solid var(--bg);
-      border-radius: 999px;
-      background: var(--bg);
-      color: var(--fg);
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 26px;
+      border: 1px solid var(--ink);
+      border-radius: 3px;
+      background: var(--ink);
+      color: var(--white);
       font-size: 15px;
       font-weight: 700;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
       text-decoration: none;
-      overflow: hidden;
-      isolation: isolate;
-      transition: transform .5s var(--ease), color .4s var(--ease), border-color .4s;
+      transition: background .25s, border-color .25s, color .25s;
     }
-    .btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      background: var(--accent);
-      transform: translateY(101%);
-      transition: transform .55s var(--ease);
-    }
-    .btn:hover::before, .btn:focus-visible::before { transform: none; }
-    .btn:hover, .btn:focus-visible { color: var(--white); border-color: var(--accent); }
-    .btn .arrow { width: 18px; height: 18px; transition: transform .5s var(--ease); }
-    .btn:hover .arrow { transform: translateX(4px); }
-    .btn-line { --bg: transparent; --fg: var(--ink); border-color: var(--line-strong); }
-    .ig { width: 19px; height: 19px; flex: none; }
+    .btn:hover, .btn:focus-visible { background: var(--ink-soft); border-color: var(--ink-soft); }
+    .btn-sub { background: transparent; color: var(--ink); }
+    .btn-sub:hover, .btn-sub:focus-visible { background: var(--paper-2); border-color: var(--ink); }
+    .ig { width: 18px; height: 18px; flex: none; }
 
-    /* ---------- ヘッダー ---------- */
+    /* ヘッダー */
     .header {
       position: fixed;
       inset: 0 0 auto;
       z-index: 50;
       height: var(--header-h);
-      transition: transform .5s var(--ease), background .4s, box-shadow .4s;
+      background: rgba(247, 244, 237, .94);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, transform .4s var(--ease);
     }
-    .header.is-solid { background: rgba(247, 244, 237, .86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
+    .header.is-solid { border-color: var(--line); }
     .header.is-hidden { transform: translateY(-100%); }
-    .header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-    .brand img { width: 38px; height: 38px; }
-    .brand span { font-family: var(--latin); font-size: 23px; font-weight: 500; letter-spacing: .1em; line-height: 1; white-space: nowrap; }
-    .brand em { color: var(--gold); }
-    .nav { display: flex; align-items: center; gap: 30px; }
-    .nav a:not(.nav-cta) { position: relative; font-size: 13px; font-weight: 500; letter-spacing: .08em; text-decoration: none; }
-    .nav a:not(.nav-cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
-    .nav a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
-    .nav-cta { min-height: 42px; padding: 0 20px; font-size: 13px; }
+    .header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
+    .brand img { width: 36px; height: 36px; }
+    .brand span { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 22px; font-weight: 500; letter-spacing: .04em; line-height: 1; white-space: nowrap; }
+    .nav { display: flex; align-items: center; gap: 26px; }
+    .nav a:not(.btn) { font-size: 13.5px; text-decoration: none; }
+    .nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+    .nav .btn { min-height: 40px; padding: 0 16px; font-size: 13px; }
 
-    /* ---------- 1. ヒーロー ---------- */
-    .hero { position: relative; overflow: clip; padding: calc(var(--header-h) + clamp(36px, 7vw, 96px)) 0 clamp(56px, 8vw, 104px); }
-    .hero .wrap:first-child { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-    .kicker { display: flex; align-items: center; gap: 14px; margin-bottom: clamp(22px, 3vw, 36px); color: var(--accent-text); font-family: var(--latin); font-size: 15px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
-    .kicker::before { content: ""; width: 36px; height: 1px; background: currentColor; }
-    .hero h1 { font-size: clamp(34px, 3.8vw, 64px); line-height: 1.32; letter-spacing: .03em; }
-    .hero h1 .hl { position: relative; color: var(--accent); white-space: nowrap; }
-    .hero h1 .hl svg { position: absolute; left: -2%; bottom: -.12em; width: 104%; height: .32em; overflow: visible; }
-    .hero h1 .hl path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; }
-    .is-loaded .hero h1 .hl path { animation: draw 1.4s 1.1s var(--ease) forwards; }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-    .hero-lead { max-width: 33em; margin-top: clamp(22px, 3vw, 34px); color: var(--ink-soft); font-size: clamp(15px, 1.25vw, 17px); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(28px, 3.4vw, 42px); }
-    .hero-note { margin-top: 16px; color: var(--muted); font-size: 13px; }
+    /* 赤ペン */
+    .mk { position: relative; }
+    .pen { position: absolute; z-index: 3; pointer-events: none; }
+    .pen svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .pen path { fill: none; stroke: var(--pen); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .pen-note { position: absolute; z-index: 3; color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 4.6cqw; line-height: 1.25; white-space: nowrap; transform: rotate(-4deg); pointer-events: none; }
+    .pen-note.light { background: rgba(255, 253, 248, .92); padding: .05em .3em; border-radius: 2px; }
+    /* 線を引くアニメーション */
+    .js .draw path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s var(--ease); }
+    .js .draw.on path { stroke-dashoffset: 0; }
+    .js .draw-note { opacity: 0; transition: opacity .4s .35s; }
+    .js .draw-note.on { opacity: 1; }
 
-    /* 行ごとの立ち上がり */
-    .ln { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
-    .ln > span { display: inline-block; }
-    .js .ln > span { transform: translateY(110%); transition: transform 1.1s var(--ease); transition-delay: calc(var(--d, 0) * 110ms + 150ms); }
-    .js .is-loaded .hero .ln > span, .js .in .ln > span { transform: none; }
-    .js .fade { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: calc(var(--d, 0) * 110ms + 200ms); }
-    .js .is-loaded .hero .fade, .js .in .fade, .js .fade.in { opacity: 1; transform: none; }
-
-    /* ヒーローの端末 */
+    /* 1. ヒーロー */
+    .hero { position: relative; overflow: clip; padding: calc(var(--header-h) + clamp(40px, 7vw, 92px)) 0 clamp(64px, 8vw, 110px); }
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(32px, 6vw, 90px); align-items: center; }
+    .hero-place { margin-bottom: 22px; color: var(--muted); font-size: 13.5px; letter-spacing: .08em; }
+    .hero-place b { color: var(--ink); font-weight: 700; }
+    .hero h1 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.42; letter-spacing: .02em; }
+    .hero h1 .u { position: relative; white-space: nowrap; }
+    .hero h1 .u svg { position: absolute; left: -1%; bottom: -.16em; width: 102%; height: .34em; overflow: visible; }
+    .hero h1 .u path { fill: none; stroke: var(--pen); stroke-width: 2.4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+    .hero-lead { max-width: 31em; margin-top: 26px; color: var(--ink-soft); font-size: clamp(15px, 1.2vw, 16.5px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+    .hero-who { display: flex; align-items: center; gap: 10px; margin-top: 22px; color: var(--muted); font-size: 13px; }
+    .hero-who img { width: 30px; height: 30px; }
     .hero-stage { position: relative; display: grid; justify-items: center; }
-    .hero-stage::before { content: ""; position: absolute; left: 50%; top: 46%; width: 150%; max-width: 560px; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle at 35% 30%, #f6e2d6, #ecd2c2 60%, rgba(236, 210, 194, 0) 71%); z-index: 0; }
-    .hero-stage > * { position: relative; z-index: 1; }
-    .hero-stage > .tag, .hero-stage > .orbit { position: absolute; }
-    .hero-stage .device { width: min(330px, 100%); }
-    .orbit { position: absolute; z-index: 3; right: -16%; bottom: 10%; width: clamp(96px, 10vw, 136px); aspect-ratio: 1; color: var(--ink); }
-    .orbit svg { width: 100%; height: 100%; animation: spin 26s linear infinite; }
-    .orbit text { font-family: var(--latin); font-size: 11.5px; letter-spacing: 3.2px; fill: currentColor; }
-    .orbit img { position: absolute; inset: 26%; width: 48%; height: 48%; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .tag {
-      position: absolute;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: var(--white);
-      box-shadow: 0 10px 30px rgba(20, 42, 34, .12), 0 0 0 1px var(--line);
-      font-size: 12.5px;
-      font-weight: 700;
-      white-space: nowrap;
-      transition: opacity .6s var(--ease), transform .8s var(--ease);
-      transition-delay: calc(var(--d, 0) * 120ms);
-    }
-    .tag i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-    .tag.bad { color: #b0412c; }
-    .tag.good { color: #2c6a52; opacity: 0; transform: translateY(10px) scale(.96); }
-    .is-tidy-stage .tag.bad { opacity: 0; transform: translateY(-10px) scale(.96); }
-    .is-tidy-stage .tag.good { opacity: 1; transform: none; }
-    .t1 { left: -14%; top: 30%; } .t2 { right: -12%; top: 50%; } .t3 { left: -8%; bottom: 22%; }
-    .stage-caption { margin-top: 22px; line-height: 1.7; text-align: center; color: var(--muted); font-size: 12px; }
-    .stage-caption b { color: var(--accent-text); }
-    .replay { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; padding: 2px 10px; border: 1px solid var(--line-strong); border-radius: 999px; background: none; color: var(--ink); font: inherit; font-size: 11px; cursor: pointer; }
+    .hero-stage .device { width: min(310px, 100%); }
+    .hero-hand { position: relative; align-self: start; justify-self: start; margin: 0 0 10px 4%; color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 15px; line-height: 1.5; transform: rotate(-3deg); }
+    .hero-hand svg { position: absolute; right: -40px; bottom: -24px; width: 36px; height: 36px; overflow: visible; }
+    .hero-hand path { fill: none; stroke: var(--pen); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stage-caption { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.7; }
+    .replay { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 
-    /* ---------- 端末の模型（共通） ---------- */
+    /* 端末の模型 */
     .device {
       position: relative;
       container-type: inline-size;
       aspect-ratio: 390 / 790;
-      padding: 3.2%;
-      border-radius: 14% / 6.9%;
-      background: linear-gradient(145deg, #2c332f, #151a17);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 40px 80px -30px rgba(20, 42, 34, .55), 0 18px 36px -18px rgba(20, 42, 34, .35);
+      padding: 3%;
+      border-radius: 13% / 6.4%;
+      background: #222724;
+      box-shadow: 0 24px 50px -28px rgba(23, 47, 39, .55);
     }
-    .device::after { content: ""; position: absolute; top: 5.6cqw; left: 50%; width: 26cqw; height: 6.6cqw; margin-left: -13cqw; border-radius: 99px; background: #0d100e; z-index: 7; }
-    .screen { position: relative; height: 100%; border-radius: 11cqw; overflow: hidden; background: #fff; }
-    .scr {
-      position: absolute;
-      inset: 0;
-      padding-top: 15cqw;
-      background: #fff;
-      color: #2c2c2c;
-      font-family: var(--sans);
-      font-size: 4.1cqw;
-      line-height: 1.55;
-      letter-spacing: 0;
-    }
+    .device::after { content: ""; position: absolute; top: 5.4cqw; left: 50%; width: 24cqw; height: 6.4cqw; margin-left: -12cqw; border-radius: 99px; background: #0f1210; z-index: 7; }
+    .screen { position: relative; height: 100%; border-radius: 10cqw; overflow: hidden; background: #fff; }
+    .scr { position: absolute; inset: 0; padding-top: 14cqw; background: #fff; color: #2c2c2c; font-family: var(--sans); font-size: 4.1cqw; line-height: 1.55; }
     .scr p, .scr ul { margin: 0; padding: 0; list-style: none; }
-    .m-bar { display: flex; align-items: center; justify-content: space-between; padding: .55em 1em; border-bottom: 1px solid #ececec; font-weight: 700; font-size: .95em; background: #fff; }
+    .m-bar { display: flex; align-items: center; justify-content: space-between; height: 10cqw; padding: 0 4cqw; border-bottom: 1px solid #ececec; font-weight: 700; font-size: .95em; }
     .m-burger { width: 1.1em; height: .8em; border-top: 2px solid #777; border-bottom: 2px solid #777; position: relative; }
     .m-burger::after { content: ""; position: absolute; left: 0; right: 0; top: calc(50% - 1px); border-top: 2px solid #777; }
-    .m-pad { padding: .8em 1em; }
-    .m-label { font-size: .78em; color: #8a8a8a; letter-spacing: .04em; }
-    .m-news li { padding: .42em 0; border-bottom: 1px dashed #ddd; font-size: .92em; }
-    .m-news .date { margin-right: .4em; color: #b2412f; font-weight: 700; }
+    .m-pad { padding: 3.2cqw 4cqw; }
+    .m-label { font-size: .78em; color: #8a8a8a; }
+    .m-news li { padding: .4em 0; border-bottom: 1px dashed #ddd; font-size: .92em; }
+    .m-news .date { margin-right: .4em; color: #8a8a8a; }
     .m-text { color: #6a6a6a; font-size: .9em; }
     .m-faint { color: #b0b0b0; font-size: .82em; }
     .m-piano { height: 34cqw; background:
       linear-gradient(90deg, transparent 0 10.3%, #2b2622 10.3% 18.3%, transparent 18.3% 24.6%, #2b2622 24.6% 32.6%, transparent 32.6% 53.1%, #2b2622 53.1% 61.1%, transparent 61.1% 67.4%, #2b2622 67.4% 75.4%, transparent 75.4% 81.7%, #2b2622 81.7% 89.7%, transparent 89.7%) top / 100% 58% no-repeat,
       repeating-linear-gradient(90deg, #fbf8f1 0 calc(14.2857% - 1.5px), #cdc4b3 calc(14.2857% - 1.5px) 14.2857%);
       border-bottom: 1px solid #ddd; }
-    .m-catch-wrap { padding: 1.1em 1em 1em; background: #f5efe3; }
-    .m-catch { font-family: var(--serif); font-weight: 700; font-size: 1.32em; line-height: 1.4; color: #24372f; }
-    .scr .m-points { margin: .7em 0 .9em; }
-    .m-points li { position: relative; padding: .18em 0 .18em 1.35em; font-weight: 700; font-size: .95em; }
-    .m-points li::before { content: ""; position: absolute; left: .15em; top: .62em; width: .7em; height: .38em; border-left: 2px solid #2f7a5c; border-bottom: 2px solid #2f7a5c; transform: rotate(-45deg); }
-    .m-cta { display: block; padding: .72em .5em; border-radius: .6em; background: #2e6a54; color: #fff; text-align: center; font-weight: 700; box-shadow: 0 .3em .8em rgba(46, 106, 84, .3); }
+    .m-ph { height: 28cqw; border-radius: .4em; background: linear-gradient(135deg, #e3ddd0, #cbc3b3); }
+    .m-catch-wrap { padding: 4.5cqw 4cqw 4cqw; background: #f5efe3; }
+    .m-catch { font-family: var(--serif); font-weight: 700; font-size: 1.3em; line-height: 1.4; color: #24372f; }
+    .scr .m-points { margin: 2.6cqw 0 3.4cqw; }
+    .m-points li { position: relative; padding: .16em 0 .16em 1.35em; font-weight: 700; font-size: .95em; }
+    .m-points li::before { content: ""; position: absolute; left: .15em; top: .6em; width: .7em; height: .38em; border-left: 2px solid #2f7a5c; border-bottom: 2px solid #2f7a5c; transform: rotate(-45deg); }
+    .m-cta { display: block; padding: .7em .5em; border-radius: .5em; background: #2e6a54; color: #fff; text-align: center; font-weight: 700; }
     .m-cta.ghost { margin-top: .45em; background: #fff; color: #2e6a54; box-shadow: inset 0 0 0 2px #2e6a54; }
     .m-new { display: inline-block; margin-right: .4em; padding: .05em .45em; border-radius: .3em; background: #c86d48; color: #fff; font-size: .78em; font-weight: 700; }
-    .m-ph { height: 30cqw; border-radius: .4em; background: linear-gradient(135deg, #e3ddd0, #cbc3b3); }
     .m-cards { display: grid; grid-template-columns: 1fr 1fr; gap: .45em; margin-top: .35em; }
-    .m-cards span { padding: .55em .65em; border: 1px solid #e6dfd1; border-radius: .55em; font-size: .82em; color: #666; line-height: 1.45; }
+    .m-cards span { padding: .5em .6em; border: 1px solid #e6dfd1; border-radius: .5em; font-size: .82em; color: #666; line-height: 1.45; }
     .m-cards b { display: block; color: #24372f; font-size: 1.1em; }
-    /* 地図 */
     .m-map { height: 40cqw; position: relative; background:
       linear-gradient(90deg, transparent 46%, #fff 46% 52%, transparent 52%),
       linear-gradient(0deg, transparent 38%, #fff 38% 43%, transparent 43%),
       linear-gradient(28deg, transparent 70%, #fff 70% 73%, transparent 73%),
       radial-gradient(circle at 80% 20%, #cfe0c6 0 18%, transparent 19%),
       #e9ecdf; }
-    .m-pin { position: absolute; left: 49%; top: 22%; width: 7cqw; height: 7cqw; margin-left: -3.5cqw; border-radius: 50% 50% 50% 0; background: #d0473b; transform: rotate(-45deg); box-shadow: 0 2px 4px rgba(0,0,0,.25); }
+    .m-pin { position: absolute; left: 49%; top: 22%; width: 7cqw; height: 7cqw; margin-left: -3.5cqw; border-radius: 50% 50% 50% 0; background: #d0473b; transform: rotate(-45deg); }
     .m-pin::after { content: ""; position: absolute; inset: 30%; border-radius: 50%; background: #fff; }
-    .m-place { padding: .8em 1em .3em; }
+    .m-place { padding: 3.2cqw 4cqw 1cqw; }
     .m-place b { display: block; font-size: 1.12em; }
-    .m-chips { display: flex; gap: .35em; flex-wrap: wrap; padding: .35em 1em .7em; }
+    .m-chips { display: flex; gap: .35em; flex-wrap: wrap; padding: 1.4cqw 4cqw 2.8cqw; }
     .m-chip { padding: .2em .75em; border: 1px solid #cdd7e3; border-radius: 99px; color: #1a62b8; font-size: .82em; font-weight: 700; }
     .m-chip.off { color: #c4c4c4; border-color: #e6e6e6; }
-    .m-row { display: flex; gap: .6em; padding: .5em 1em; border-top: 1px solid #eee; font-size: .9em; }
+    .m-row { display: flex; gap: .6em; padding: 2cqw 4cqw; border-top: 1px solid #eee; font-size: .9em; }
     .m-row i { flex: none; width: 1.1em; height: 1.1em; margin-top: .2em; border-radius: 50%; border: 2px solid #9a9a9a; }
     .m-row i.info { border-radius: .2em; }
-    .m-thumbs { display: flex; gap: .3em; padding: .6em 1em; }
+    .m-thumbs { display: flex; gap: .3em; padding: 2.4cqw 4cqw; }
     .m-thumbs span { flex: 1; height: 17cqw; border-radius: .45em; }
     .m-thumbs .p1 { background: radial-gradient(circle at 30% 70%, #f3b48f 0 22%, transparent 23%), radial-gradient(circle at 75% 30%, #8fc1b0 0 18%, transparent 19%), #f2ead9; }
     .m-thumbs .p2 { background: radial-gradient(circle at 60% 60%, #c86d48 0 26%, transparent 27%), #efe1cc; }
     .m-thumbs .p3 { background: radial-gradient(circle at 40% 40%, #2e6a54 0 20%, transparent 21%), radial-gradient(circle at 75% 75%, #e8c37b 0 16%, transparent 17%), #e7eadf; }
     .m-thumbs .empty { background: #f1f1f1; }
-    /* PC縮小表示 */
-    .m-pc { padding: .6em; font-size: .5em; line-height: 1.35; color: #555; }
+    .m-pc { padding: 2.4cqw; font-size: .5em; line-height: 1.35; color: #555; }
     .m-pc-nav { display: flex; gap: .6em; padding: .4em .5em; background: #6f7f99; color: #fff; white-space: nowrap; overflow: hidden; }
     .m-pc-cols { display: grid; grid-template-columns: 1fr 2.2fr; gap: .6em; margin-top: .6em; }
     .m-pc-side { padding: .5em; background: #eef1f6; }
-    .scr .m-pc-main p { margin-bottom: .45em; }
+    .scr .m-pc p { margin-bottom: .45em; }
     .m-pc-img { height: 6em; margin-bottom: .5em; background: linear-gradient(135deg, #d5dbe5, #c3ccdb); }
-    .m-zoom { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); padding: .35em .9em; border: 2px solid #c86d48; border-radius: 99px; background: #fff; color: #b2412f; font-size: .85em; font-weight: 700; white-space: nowrap; }
-    .m-abc { display: flex; gap: .35em; padding: .8em 1em 0; }
-    .m-abc span { flex: 1; display: grid; place-items: center; height: 15cqw; border-radius: .5em; font-family: var(--latin); font-size: 1.8em; font-weight: 600; color: #fff; }
+    .m-abc { display: flex; gap: .35em; padding: 3.2cqw 4cqw 0; }
+    .m-abc span { flex: 1; display: grid; place-items: center; height: 14cqw; border-radius: .5em; font-family: var(--serif); font-size: 1.6em; font-weight: 700; color: #fff; }
     .m-abc span:nth-child(1) { background: #c86d48; } .m-abc span:nth-child(2) { background: #2e6a54; } .m-abc span:nth-child(3) { background: #b49462; }
 
-    /* ヒーロー端末のアニメーション */
-    .hero-screen .messy > *, .hero-screen .tidy > * { transition: opacity .7s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
-    .hero-screen .tidy { background: transparent; pointer-events: none; }
-    .hero-screen .tidy > * { opacity: 0; transform: translateY(14%); }
-    .hero-screen.is-tidy .messy > * { opacity: 0; transform: translate(var(--x, 0), -30%) rotate(var(--r, -4deg)); }
-    .hero-screen.is-tidy .tidy > * { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 110ms + 380ms); }
-    .hero-screen .messy .m-bar { --r: 0deg; }
-    .tap { position: absolute; z-index: 4; left: 72%; top: 47%; width: 12cqw; height: 12cqw; margin: -6cqw 0 0 -6cqw; border-radius: 50%; background: rgba(200, 109, 72, .35); box-shadow: 0 0 0 2px rgba(200,109,72,.6); opacity: 0; transform: scale(.4); pointer-events: none; }
-    .hero-screen.is-tap .tap { animation: tap 1s var(--ease) forwards; }
-    @keyframes tap { 0% { opacity: 0; transform: scale(.4); } 30% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.8); } }
-    .hero-screen.is-tap .tidy .m-cta { animation: press .6s var(--ease); }
-    @keyframes press { 40% { transform: scale(.95); } }
+    /* ヒーロー端末の切り替え */
+    .hero-screen .scr { transition: opacity .6s var(--ease), transform .8s var(--ease); }
+    .hero-screen .after { opacity: 0; transform: translateY(3%); }
+    .hero-screen.is-after .before { opacity: 0; }
+    .hero-screen.is-after .after { opacity: 1; transform: none; }
+    .hero-screen .before .pen, .hero-screen .before .pen-note { transition: opacity .3s; }
 
-    /* ---------- マーキー ---------- */
-    .marquee { border-block: 1px solid var(--line); overflow: hidden; background: var(--white); }
-    .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-    .marquee span { display: inline-flex; align-items: center; gap: clamp(22px, 3vw, 44px); padding: 18px clamp(11px, 1.5vw, 22px); font-family: var(--latin); font-size: clamp(22px, 3vw, 38px); font-style: italic; white-space: nowrap; color: var(--ink); }
-    .marquee span::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
-    .marquee span.jp { font-family: var(--serif); font-style: normal; font-size: clamp(17px, 2vw, 25px); }
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    /* セクション共通 */
+    .section { padding: clamp(84px, 11vw, 150px) 0; }
+    .sec-head { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: clamp(16px, 4vw, 56px); margin-bottom: clamp(40px, 5vw, 64px); }
+    .label { writing-mode: vertical-rl; padding-left: 14px; border-left: 1px solid var(--line-dark); color: var(--accent-text); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .3em; white-space: nowrap; }
+    .sec-title { font-size: clamp(27px, 3.6vw, 44px); line-height: 1.5; }
+    .sec-lead { max-width: 35em; margin-top: 18px; color: var(--muted); font-size: 15px; }
+    .indent { margin-left: calc(56px + clamp(16px, 4vw, 56px)); }
 
-    /* ---------- セクション共通 ---------- */
-    .section { position: relative; padding: clamp(92px, 12vw, 176px) 0; }
-    .sec-head { display: grid; grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr); gap: clamp(16px, 4vw, 64px); margin-bottom: clamp(44px, 6vw, 84px); }
-    .sec-no { display: flex; align-items: baseline; gap: 12px; padding-top: .7em; border-top: 1px solid var(--line-strong); color: var(--accent-text); font-family: var(--latin); font-size: 15px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; align-self: start; }
-    .sec-no b { font-size: 34px; font-weight: 400; font-style: italic; letter-spacing: 0; line-height: 1; }
-    .sec-title { font-size: clamp(30px, 4.7vw, 62px); line-height: 1.4; }
-    .sec-lead { max-width: 36em; margin-top: 22px; color: var(--muted); font-size: 15px; }
+    /* 2. セルフチェック */
+    .check { background: var(--white); border-block: 1px solid var(--line); }
+    .check-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .check-item { display: grid; grid-template-columns: 40px minmax(0, 1fr) minmax(0, 1fr); gap: 8px clamp(16px, 3vw, 40px); align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); }
+    .box { position: relative; width: 24px; height: 24px; border: 1.5px solid var(--ink); border-radius: 2px; align-self: start; margin-top: 6px; }
+    .box svg { position: absolute; left: -3px; top: -9px; width: 34px; height: 32px; overflow: visible; }
+    .box path { fill: none; stroke: var(--pen); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    .check-item h3 { font-size: clamp(19px, 2vw, 24px); line-height: 1.55; }
+    .check-item p { color: var(--muted); font-size: 14.5px; }
+    .check-foot { margin-top: 26px; font-size: 15px; }
+    .check-foot .hand { color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 1.12em; }
 
-    /* ---------- 2. 悩み ---------- */
-    .worries { background: var(--paper); }
-    .worry-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line-strong); }
-    .worry {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(150px, .32fr) minmax(0, 1fr) minmax(0, .8fr);
-      gap: clamp(16px, 4vw, 64px);
-      align-items: baseline;
-      padding: clamp(28px, 3.6vw, 48px) 0;
-      border-bottom: 1px solid var(--line-strong);
-    }
-    .worry::before { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease); }
-    .worry.in::before { transform: scaleX(1); transition-delay: calc(var(--d, 0) * 150ms + 300ms); }
-    .worry-no { font-family: var(--latin); font-size: clamp(54px, 7vw, 104px); font-style: italic; font-weight: 400; line-height: .8; color: var(--accent); }
-    .worry h3 { font-size: clamp(21px, 2.4vw, 32px); line-height: 1.5; }
-    .worry p { color: var(--muted); font-size: 15px; }
-
-    /* ---------- 3. 作例 ---------- */
-    .samples { background: var(--ink); color: var(--paper); overflow: hidden; }
-    .samples .sec-no { color: #e9b39a; border-color: rgba(247, 244, 237, .3); }
-    .samples .sec-lead { color: #c9d6cf; }
-    .lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto auto 1fr; grid-template-areas: ". phone" "tabs phone" "copy phone" ". phone"; column-gap: clamp(32px, 6vw, 100px); align-items: start; }
+    /* 3. 作例 */
+    .samples { background: var(--paper); }
+    .lab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "tabs phone" "copy phone" ". phone"; column-gap: clamp(32px, 6vw, 96px); }
     .lab-tabs { grid-area: tabs; }
     .lab-copy { grid-area: copy; }
-    .lab .compare-wrap { grid-area: phone; align-self: center; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(233, 179, 154, .6); border-radius: 999px; color: #f0c4ae; font-size: 12.5px; font-weight: 700; letter-spacing: .05em; }
-    .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 30px; }
-    .tab { padding: 10px 18px; border: 1px solid rgba(247, 244, 237, .3); border-radius: 999px; background: none; color: var(--paper); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s; }
-    .tab:hover { border-color: var(--paper); }
-    .tab[aria-selected="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-    .case.is-active { animation: rise .8s var(--ease); }
-    @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
-    .case h3 { font-size: clamp(22px, 2.6vw, 34px); line-height: 1.5; }
-    .case-meta { margin-top: 8px; color: #b9c9c1; font-size: 13px; }
-    .diff { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 28px; background: rgba(247, 244, 237, .18); border: 1px solid rgba(247, 244, 237, .18); }
-    .diff div { padding: 18px 20px; background: var(--ink); }
-    .diff b { display: block; margin-bottom: 8px; font-family: var(--latin); font-size: 15px; font-weight: 500; letter-spacing: .18em; color: #9fb4aa; }
-    .diff .after b { color: #f0c4ae; }
-    .diff ul { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.75; }
-    .diff li { position: relative; padding-left: 1.1em; }
-    .diff li + li { margin-top: 6px; }
-    .diff li::before { content: "–"; position: absolute; left: 0; color: #9fb4aa; }
-    .diff .after li::before { content: "＋"; color: #f0c4ae; font-size: .8em; top: .15em; }
-    .fiction { margin-top: 24px; color: #9fb4aa; font-size: 12.5px; }
-
-    .compare-wrap { position: relative; display: grid; justify-items: center; }
-    .compare-labels { display: flex; justify-content: space-between; width: min(340px, 100%); margin-bottom: 14px; font-family: var(--latin); font-size: 15px; letter-spacing: .22em; color: #9fb4aa; }
-    .compare-labels span:last-child { color: #f0c4ae; }
-    .compare { --pos: 50%; width: min(340px, 100%); touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
-    .compare .layer { position: absolute; inset: 0; }
+    .compare-wrap { grid-area: phone; display: grid; justify-items: center; align-self: start; }
+    .notice { display: inline-block; padding: 4px 10px; border: 1px solid var(--accent-text); color: var(--accent-text); font-size: 12.5px; font-weight: 700; letter-spacing: .04em; }
+    .tabs { display: flex; margin: 22px 0 30px; border-bottom: 1px solid var(--line-dark); }
+    .tab { position: relative; padding: 12px 18px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+    .tab::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; background: var(--ink); transform: scaleX(0); transition: transform .3s var(--ease); }
+    .tab:hover { color: var(--ink); }
+    .tab[aria-selected="true"] { color: var(--ink); }
+    .tab[aria-selected="true"]::after { transform: none; }
+    .case h3 { font-size: clamp(21px, 2.3vw, 28px); line-height: 1.5; }
+    .case-meta { margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .redpen { margin: 22px 0 0; padding: 0; list-style: none; }
+    .redpen li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
+    .redpen li:last-child { border-bottom: 1px solid var(--line); }
+    .redpen b { color: var(--pen); font-family: var(--hand); font-weight: 600; font-size: 14px; }
+    .redpen .fix b { color: #2e6a54; }
+    .fiction { margin-top: 20px; color: var(--muted); font-size: 12.5px; }
+    .compare-labels { display: flex; justify-content: space-between; width: min(320px, 100%); margin-bottom: 10px; font-size: 13px; font-weight: 700; color: var(--muted); }
+    .compare-labels span:last-child { color: #2e6a54; }
+    .compare { --pos: 50%; width: min(320px, 100%); touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+    .compare .layer { position: absolute; inset: 0; isolation: isolate; }
+    .compare .after { z-index: 1; }
     .compare .after { clip-path: inset(0 0 0 var(--pos)); }
     .handle { position: absolute; z-index: 6; top: 0; bottom: 0; left: var(--pos); width: 0; pointer-events: none; }
-    .handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--accent); }
-    .knob { position: absolute; top: 50%; left: 0; display: grid; place-items: center; width: 14cqw; height: 14cqw; transform: translate(-50%, -50%); border-radius: 50%; background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, .3); transition: transform .4s var(--ease); }
-    .compare.is-drag .knob { transform: translate(-50%, -50%) scale(1.12); }
-    .knob svg { width: 55%; height: 55%; }
+    .handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--ink); }
+    .knob { position: absolute; top: 50%; left: 0; display: flex; align-items: center; justify-content: center; gap: 1.5cqw; width: 18cqw; height: 9cqw; transform: translate(-50%, -50%); border-radius: 2px; background: var(--ink); color: #fff; font-size: 3.4cqw; font-weight: 700; letter-spacing: .05em; }
+    .knob::before, .knob::after { content: ""; border: 1.4cqw solid transparent; }
+    .knob::before { border-right-color: #fff; border-left-width: 0; }
+    .knob::after { border-left-color: #fff; border-right-width: 0; }
     .compare input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; pointer-events: none; }
     .compare:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 6px; }
-    .compare-hint { margin-top: 18px; color: #9fb4aa; font-size: 12.5px; text-align: center; }
+    .compare-hint { margin-top: 14px; color: var(--muted); font-size: 12.5px; }
     .case-screens { display: none; }
     .case-screens.is-active { display: contents; }
 
-    /* ---------- 4. 商品 ---------- */
-    .offer { background: var(--paper-2); }
-    .ticket { position: relative; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .9fr); filter: drop-shadow(0 30px 50px rgba(20, 42, 34, .14)); }
-    .ticket-main, .ticket-stub { background: var(--white); padding: clamp(28px, 4.4vw, 64px); }
-    .ticket-main { border-radius: 22px 0 0 22px; }
-    .ticket-stub { position: relative; border-radius: 0 22px 22px 0; border-left: 2px dashed var(--line-strong); display: flex; flex-direction: column; }
-    .ticket-stub::before, .ticket-stub::after { content: ""; position: absolute; left: -15px; width: 28px; height: 28px; border-radius: 50%; background: var(--paper-2); }
-    .ticket-stub::before { top: -14px; } .ticket-stub::after { bottom: -14px; }
-    .ticket-kicker { color: var(--accent-text); font-family: var(--latin); font-size: 14px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
-    .ticket h3 { margin-top: 10px; font-size: clamp(28px, 3.4vw, 44px); line-height: 1.35; }
-    .ticket-sub { margin-top: 8px; color: var(--muted); font-size: 14px; }
-    .incl { margin: 30px 0 0; padding: 0; list-style: none; counter-reset: incl; }
-    .incl li { counter-increment: incl; display: grid; grid-template-columns: 44px 1fr; gap: 6px; padding: 16px 0; border-top: 1px solid var(--line); }
-    .incl li::before { content: counter(incl, decimal-leading-zero); font-family: var(--latin); font-size: 19px; font-style: italic; color: var(--accent-text); line-height: 1.5; }
-    .incl b { font-size: 15.5px; font-weight: 700; }
+    /* 4. 商品 */
+    .offer { background: var(--white); border-block: 1px solid var(--line); }
+    .plan { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); border: 1px solid var(--ink); }
+    .plan-main { padding: clamp(26px, 4vw, 52px); }
+    .plan-side { padding: clamp(26px, 4vw, 52px); border-left: 1px solid var(--ink); background: var(--paper); display: flex; flex-direction: column; }
+    .plan h3 { font-size: clamp(26px, 3vw, 36px); line-height: 1.4; }
+    .plan-sub { margin-top: 6px; color: var(--muted); font-size: 14px; }
+    .incl { margin: 26px 0 0; padding: 0; list-style: none; }
+    .incl li { display: grid; grid-template-columns: 2.2em 1fr; padding: 14px 0; border-top: 1px dashed var(--line-dark); }
+    .incl li > span { font-family: var(--serif); font-weight: 700; color: var(--accent-text); }
+    .incl b { font-size: 15.5px; }
     .incl small { display: block; margin-top: 2px; color: var(--muted); font-size: 13.5px; line-height: 1.75; }
-    .price-tag { display: flex; align-items: center; gap: 10px; color: var(--accent-text); font-size: 13px; font-weight: 700; letter-spacing: .08em; }
-    .price-tag span { padding: 3px 10px; border-radius: 99px; background: var(--accent); color: #fff; font-size: 12px; }
-    .price { margin-top: 12px; font-variant-numeric: lining-nums; font-family: var(--latin); font-size: clamp(60px, 5.6vw, 88px); font-weight: 500; line-height: 1; letter-spacing: -.01em; }
-    .price small { display: inline-block; white-space: nowrap; margin-left: 6px; font-family: var(--sans); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
-    .terms { margin: 26px 0 30px; font-size: 13.5px; color: var(--muted); }
+    .price-label { font-size: 14px; font-weight: 700; }
+    .price-label span { margin-left: 8px; color: var(--accent-text); }
+    .price { margin-top: 6px; font-family: var(--serif); font-size: clamp(48px, 5vw, 64px); font-weight: 700; line-height: 1.15; letter-spacing: .01em; }
+    .price small { display: block; margin-top: 2px; font-size: 15px; font-weight: 600; }
+    .terms { margin: 22px 0 28px; padding: 0; font-size: 13.5px; color: var(--muted); }
     .terms dt { margin-top: 14px; color: var(--ink); font-weight: 700; }
     .terms dt:first-child { margin-top: 0; }
     .terms dd { margin: 2px 0 0; }
-    .ticket-stub .btn { margin-top: auto; }
+    .plan-side .btn { margin-top: auto; }
 
-    /* ---------- 5. 流れ ---------- */
-    .flow { background: var(--paper); }
-    .steps { --sg: clamp(20px, 3vw, 40px); position: relative; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sg); }
-    .steps::before { content: ""; position: absolute; left: 33px; right: calc((100% - 3 * var(--sg)) / 4 - 33px); top: 33px; height: 1px; background: var(--line-strong); }
-    .steps::after { content: ""; position: absolute; left: 33px; right: calc((100% - 3 * var(--sg)) / 4 - 33px); top: 33px; height: 1px; background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left; }
-    .step { position: relative; }
-    .step-dot { position: relative; z-index: 1; display: grid; place-items: center; width: 66px; height: 66px; border-radius: 50%; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line-strong); font-family: var(--latin); font-size: 24px; font-style: italic; color: var(--accent-text); transition: background .6s var(--ease), color .6s var(--ease), box-shadow .6s; }
-    .step.on .step-dot { background: var(--accent); color: var(--white); box-shadow: none; }
-    .step h3 { margin-top: 26px; font-size: clamp(19px, 1.8vw, 23px); line-height: 1.5; }
-    .step p { margin-top: 10px; color: var(--muted); font-size: 14.5px; }
+    /* 5. 流れ */
+    .flow-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+    .flow-list li { padding: 22px clamp(14px, 2vw, 26px) 6px 0; }
+    .flow-list li + li { padding-left: clamp(14px, 2vw, 26px); border-left: 1px solid var(--line); }
+    .flow-no { font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; color: var(--accent-text); }
+    .flow-list h3 { margin-top: 16px; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.55; }
+    .flow-list p { margin-top: 8px; color: var(--muted); font-size: 14.5px; }
 
-    /* ---------- 6. 運営者 ---------- */
-    .about { background: var(--white); }
-    .about-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 7vw, 120px); align-items: start; }
-    .hello { position: relative; font-family: var(--latin); font-size: clamp(54px, 5.6vw, 96px); font-style: italic; font-weight: 400; line-height: .92; letter-spacing: -.01em; color: var(--ink); }
-    .hello span { display: block; color: var(--accent); white-space: nowrap; }
-    .hello small { display: block; margin-top: 18px; font-family: var(--sans); font-style: normal; font-size: 13px; letter-spacing: .14em; color: var(--muted); }
-    .peek { position: relative; width: 120px; height: 84px; margin-top: 36px; overflow: hidden; border-bottom: 2px solid var(--ink); }
-    .peek img { position: absolute; left: 4px; bottom: -64px; width: 112px; height: 112px; transition: transform 1.2s var(--ease); }
-    .peek.in img { transform: translateY(-38px); transition-delay: .5s; }
-    .about-name { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.5; font-family: var(--serif); font-weight: 600; }
-    .about-name small { display: block; margin-bottom: 8px; font-family: var(--latin); font-size: 14px; font-weight: 500; letter-spacing: .22em; color: var(--accent-text); }
-    .about-body { margin-top: 24px; font-size: clamp(15.5px, 1.3vw, 17px); line-height: 2.15; }
+    /* 6. 運営者 */
+    .about { background: var(--paper-2); border-block: 1px solid var(--line); }
+    .about-body { max-width: 40em; }
+    .about-name { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 26px); font-weight: 600; line-height: 1.5; }
+    .about-text { margin-top: 20px; font-size: clamp(15.5px, 1.3vw, 17px); line-height: 2.1; }
+    .peek { position: relative; width: 112px; height: 76px; margin-top: 36px; overflow: hidden; border-bottom: 1.5px solid var(--ink); }
+    .peek img { position: absolute; left: 0; bottom: -60px; width: 108px; height: 108px; transition: transform 1s var(--ease) .3s; }
+    .js .peek img { transform: translateY(30px); }
+    .peek.in img, .still .peek img { transform: translateY(-34px) !important; }
 
-    /* ---------- 7. FAQ ---------- */
-    .faq { background: var(--paper); }
-    .faq-list { border-top: 1px solid var(--line-strong); }
-    .faq details { border-bottom: 1px solid var(--line-strong); }
-    .faq summary { position: relative; display: grid; grid-template-columns: 52px 1fr 40px; align-items: start; padding: 26px 0; list-style: none; cursor: pointer; font-size: clamp(16px, 1.4vw, 18px); font-weight: 700; line-height: 1.7; }
+    /* 7. 質問 */
+    .faq-list { border-top: 1px solid var(--ink); }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary { display: grid; grid-template-columns: 2.2em 1fr 28px; align-items: start; padding: 22px 0; list-style: none; cursor: pointer; font-size: clamp(15.5px, 1.35vw, 17px); font-weight: 700; line-height: 1.7; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary .q { font-family: var(--latin); font-size: 26px; font-style: italic; font-weight: 400; line-height: 1.1; color: var(--accent); }
-    .faq summary .pm { position: relative; justify-self: end; width: 30px; height: 30px; margin-top: 1px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line-strong); transition: background .4s var(--ease), transform .6s var(--ease); }
-    .faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; margin: -.75px 0 0 -5.5px; background: var(--ink); transition: transform .5s var(--ease); }
-    .faq summary .pm::after { transform: rotate(90deg); }
-    .faq details[open] summary .pm { background: var(--ink); transform: rotate(180deg); }
-    .faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: var(--white); }
-    .faq details[open] summary .pm::after { transform: rotate(0); }
-    .faq summary:hover .pm { box-shadow: inset 0 0 0 1px var(--ink); }
-    .answer { padding: 0 52px 28px; color: var(--muted); font-size: 15px; }
-    .answer p + p { margin-top: 10px; }
-    @supports (interpolate-size: allow-keywords) {
-      .faq { interpolate-size: allow-keywords; }
-      .faq details::details-content { height: 0; overflow: clip; transition: height .6s var(--ease), content-visibility .6s allow-discrete; }
-      .faq details[open]::details-content { height: auto; }
-    }
+    .faq .q { font-family: var(--serif); font-size: 1.1em; color: var(--accent-text); }
+    .faq .pm { position: relative; justify-self: end; width: 14px; height: 14px; margin-top: .45em; }
+    .faq .pm::before, .faq .pm::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 1.5px; background: var(--ink); transition: transform .3s var(--ease); }
+    .faq .pm::after { transform: rotate(90deg); }
+    .faq details[open] .pm::after { transform: rotate(0); }
+    .faq summary:hover > span:nth-child(2) { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+    .answer { padding: 0 0 24px 2.2em; color: var(--muted); font-size: 15px; }
+    .answer p + p { margin-top: 8px; }
 
-    /* ---------- お問い合わせ ---------- */
-    .contact { position: relative; padding: clamp(92px, 12vw, 160px) 0 0; background: var(--ink-deep); color: var(--paper); overflow: hidden; }
-    .contact .kicker { color: #e9b39a; }
-    .contact h2 { font-size: clamp(32px, 5vw, 68px); line-height: 1.38; }
-    .contact-lead { max-width: 34em; margin-top: 22px; color: #c9d6cf; font-size: 15.5px; }
-    .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
-    .contact .btn { --bg: var(--paper); --fg: var(--ink); }
-    .contact .btn-line { --bg: transparent; --fg: var(--paper); border-color: rgba(247, 244, 237, .4); }
-    .contact-ids { margin-top: 22px; color: #9fb4aa; font-size: 13px; }
-    .wordmark { position: relative; margin-top: clamp(64px, 9vw, 120px); font-family: var(--latin); font-size: clamp(92px, 25vw, 400px); font-style: italic; font-weight: 400; line-height: .78; letter-spacing: -.035em; color: var(--paper); white-space: nowrap; text-align: center; transform: translateY(.1em); user-select: none; }
-    .wordmark span { color: var(--accent); }
-    .footer { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 22px var(--gutter) calc(22px + env(safe-area-inset-bottom)); background: var(--ink-deep); border-top: 1px solid rgba(247, 244, 237, .14); color: #9fb4aa; font-size: 12px; }
+    /* お問い合わせ */
+    .contact { padding: clamp(84px, 11vw, 140px) 0 clamp(64px, 8vw, 96px); background: var(--ink); color: var(--paper); }
+    .contact .label { color: #e9b39a; border-color: rgba(247, 244, 237, .35); }
+    .contact h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.5; }
+    .contact-lead { max-width: 34em; margin-top: 18px; color: #d3ddd8; font-size: 15.5px; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+    .contact .btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .contact .btn:hover, .contact .btn:focus-visible { background: #e9e2d3; border-color: #e9e2d3; }
+    .contact .btn-sub { background: transparent; color: var(--paper); border-color: rgba(247, 244, 237, .55); }
+    .contact .btn-sub:hover, .contact .btn-sub:focus-visible { background: var(--ink-soft); }
+    .contact-ids { margin-top: 20px; color: #b8c8c0; font-size: 13px; }
+    .footer { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; padding: 0 var(--gutter) calc(20px + env(safe-area-inset-bottom)); background: var(--ink-deep); color: #b8c8c0; font-size: 12px; }
+    .footer-in { width: 100%; max-width: calc(var(--max) - 2 * var(--gutter)); margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-top: 1px solid rgba(247, 244, 237, .18); padding-top: 18px; }
     .footer a { text-decoration: none; }
 
-    /* ---------- スマホ用の固定ボタン ---------- */
+    /* スマホの固定ボタン */
     .dock { display: none; }
 
-    /* ---------- レスポンシブ ---------- */
-    @media (max-width: 1080px) {
-      .nav a:not(.nav-cta) { display: none; }
+    /* 出現（控えめに） */
+    .js .rise { opacity: 0; transform: translateY(14px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .js .rise.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1040px) {
+      .nav a:not(.btn) { display: none; }
     }
     @media (max-width: 960px) {
-      .hero .wrap:first-child { grid-template-columns: 1fr; }
-      .hero h1 { font-size: clamp(26px, 7.4vw, 60px); }
-      .hero-stage { margin-top: 24px; }
+      .hero .wrap { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(26px, 6.6vw, 50px); }
+      .hero-stage { margin-top: 18px; }
       .lab { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "tabs" "phone" "copy"; }
-      .lab-copy { margin-top: 36px; }
-      .ticket { grid-template-columns: 1fr; }
-      .ticket-main { border-radius: 22px 22px 0 0; }
-      .ticket-stub { border-radius: 0 0 22px 22px; border-left: 0; border-top: 2px dashed var(--line-strong); }
-      .ticket-stub::before, .ticket-stub::after { top: -15px; bottom: auto; }
-      .ticket-stub::before { left: -14px; } .ticket-stub::after { left: auto; right: -14px; }
-      .steps { grid-template-columns: 1fr; gap: 0; }
-      .steps::before, .steps::after { left: 33px; right: auto; top: 33px; bottom: 60px; width: 1px; height: auto; }
-      .steps::after { transform: scaleY(var(--p, 0)); transform-origin: top; }
-      .step { display: grid; grid-template-columns: 66px 1fr; gap: 0 22px; padding-bottom: 36px; }
-      .step:last-child { padding-bottom: 0; }
-      .step h3 { margin-top: 16px; }
-      .step p { grid-column: 2; margin-top: 6px; }
-      .about-grid { grid-template-columns: 1fr; }
+      .lab-copy { margin-top: 32px; }
+      .plan { grid-template-columns: 1fr; }
+      .plan-side { border-left: 0; border-top: 1px solid var(--ink); }
+      .flow-list { grid-template-columns: 1fr 1fr; }
+      .flow-list li:nth-child(3) { padding-left: 0; border-left: 0; }
+      .flow-list li:nth-child(n+3) { border-top: 1px solid var(--line); }
     }
     @media (max-width: 720px) {
-      :root { --header-h: 58px; }
+      :root { --header-h: 56px; }
       body { font-size: 15px; }
-      .brand img { width: 32px; height: 32px; }
-      .brand span { font-size: 20px; }
-      .nav-cta { min-height: 38px; padding: 0 14px; font-size: 12px; }
-      .hero h1 { font-size: clamp(26px, 7.4vw, 44px); }
+      .brand img { width: 30px; height: 30px; }
+      .brand span { font-size: 19px; }
       .hero-actions .btn { width: 100%; }
-      .hero-stage .device { width: 64%; }
-      .orbit { right: -1%; bottom: 13%; width: 78px; }
-      .tag { padding: 6px 11px; font-size: 11px; }
-      .t1 { left: -2%; top: 18%; } .t2 { right: -3%; top: 47%; } .t3 { left: 0; bottom: 14%; }
-      .sec-head { grid-template-columns: 1fr; gap: 22px; }
-      .sec-no { padding-top: 10px; }
-      .sec-no b { font-size: 28px; }
-      .worry { grid-template-columns: 64px 1fr; gap: 6px 14px; }
-      .worry-no { font-size: 52px; grid-row: span 2; }
-      .worry p { grid-column: 2; font-size: 14px; }
-      .tabs { margin: 22px 0 24px; }
-      .tab { padding: 8px 14px; font-size: 13px; }
-      .compare, .compare-labels { width: min(300px, 82vw); }
-      .diff { grid-template-columns: 1fr; }
-      .incl li { grid-template-columns: 36px 1fr; }
-      .ticket-main, .ticket-stub { padding: 28px 22px; }
-      .ticket-stub .btn, .contact-actions .btn { width: 100%; }
-      .faq summary { grid-template-columns: 38px 1fr 34px; padding: 22px 0; }
-      .faq summary .q { font-size: 22px; }
-      .answer { padding: 0 0 24px 38px; font-size: 14.5px; }
-      .footer { justify-content: center; text-align: center; padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+      .hero-stage .device { width: 66%; }
+      .sec-head { grid-template-columns: 1fr; gap: 14px; }
+      .sec-title { font-size: clamp(22px, 6.3vw, 30px); }
+      .label { writing-mode: horizontal-tb; padding: 0 0 0 10px; border-left: 3px solid var(--accent); font-size: 13.5px; letter-spacing: .14em; justify-self: start; }
+      .contact .label { border-color: #e9b39a; }
+      .indent { margin-left: 0; }
+      .check-item { grid-template-columns: 34px 1fr; padding: 22px 0; }
+      .check-item p { grid-column: 2; font-size: 14px; }
+      .tab { padding: 10px 12px; font-size: 14px; }
+      .compare, .compare-labels { width: min(290px, 80vw); }
+      .flow-list { grid-template-columns: 1fr; border-top: 0; }
+      .flow-list li, .flow-list li + li { display: grid; grid-template-columns: 44px 1fr; gap: 0 12px; padding: 20px 0; border-left: 0; border-top: 1px solid var(--line); }
+      .flow-list li:first-child { border-top: 1px solid var(--ink); }
+      .flow-list h3 { margin-top: 0; }
+      .flow-list p { grid-column: 2; }
+      .flow-no { font-size: 26px; }
+      .plan-side .btn, .contact-actions .btn { width: 100%; }
+      .answer { padding-left: 2.2em; font-size: 14.5px; }
+      .footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+      .footer-in { flex-direction: column; align-items: flex-start; }
       .dock {
         position: fixed;
-        left: 12px;
-        right: 12px;
-        bottom: calc(12px + env(safe-area-inset-bottom));
+        left: 0;
+        right: 0;
+        bottom: 0;
         z-index: 60;
         display: flex;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
         gap: 8px;
-        padding: 8px;
-        border-radius: 999px;
-        background: rgba(20, 42, 34, .92);
-        -webkit-backdrop-filter: blur(12px);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 16px 40px rgba(20, 42, 34, .3);
-        transform: translateY(140%);
-        transition: transform .6s var(--ease);
+        background: var(--paper);
+        border-top: 1px solid var(--line-dark);
+        transform: translateY(105%);
+        transition: transform .4s var(--ease);
       }
       .dock.is-on { transform: none; }
-      .dock a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; }
-      .dock .d-ig { flex: 1; background: var(--paper); color: var(--ink); }
-      .dock .d-mail { width: 48px; color: var(--paper); box-shadow: inset 0 0 0 1px rgba(247, 244, 237, .35); }
+      .dock a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 3px; font-size: 14.5px; font-weight: 700; text-decoration: none; }
+      .dock .d-ig { flex: 1; background: var(--ink); color: var(--white); }
+      .dock .d-mail { padding: 0 14px; border: 1px solid var(--ink); color: var(--ink); }
       .dock svg { width: 18px; height: 18px; }
     }
-    @media (max-width: 370px) {
-      .brand span { display: none; }
-    }
+    @media (max-width: 360px) { .brand span { display: none; } }
 
-    .still *, .still *::before, .still *::after { transition: none !important; animation-delay: 0s !important; animation-duration: 0s !important; }
-    .still .marquee-track, .still .orbit svg { animation: none !important; }
-
+    .still *, .still *::before, .still *::after { transition: none !important; animation: none !important; }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
-      .marquee-track, .orbit svg { animation: none !important; }
+      *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0s !important; animation: none !important; }
     }
   </style>
 </head>
@@ -558,16 +431,16 @@
   <header class="header" id="header">
     <div class="wrap">
       <a class="brand" href="#top" aria-label="Studio Coucou トップへ">
-        <img src="logo-160.png" alt="" width="38" height="38">
-        <span>Studio <em>Coucou</em></span>
+        <img src="logo-160.png" alt="" width="36" height="36">
+        <span>Studio Coucou</span>
       </a>
       <nav class="nav" aria-label="ページ内">
         <a href="#samples">作例</a>
         <a href="#offer">内容と料金</a>
         <a href="#flow">流れ</a>
         <a href="#about">運営者</a>
-        <a href="#faq">よくある質問</a>
-        <a class="btn nav-cta" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">DMで相談</a>
+        <a href="#faq">質問</a>
+        <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">DMで相談</a>
       </nav>
     </div>
   </header>
@@ -576,174 +449,151 @@
     <!-- 1. ヒーロー -->
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="wrap">
-        <div class="hero-copy">
-          <p class="kicker fade" style="--d:0">Studio Coucou — Niigata</p>
-          <h1 id="hero-title">
-            <span class="ln"><span style="--d:1">新潟の子ども向け教室の</span></span><br>
-            <span class="ln"><span style="--d:2">ホームページを、</span></span><br>
-            <span class="ln"><span style="--d:3"><span class="hl">スマホで迷わない<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 14 C 60 4, 140 4, 200 10 S 280 16, 298 6"/></svg></span>形に。</span></span>
-          </h1>
-          <p class="hero-lead fade" style="--d:5">保護者が教室を探すのは、たいていスマホのすきま時間です。Googleマップとホームページの「最初に見える場所」を整えて、体験や問い合わせまで迷わずたどり着ける入口をつくります。</p>
-          <div class="hero-actions fade" style="--d:6" id="hero-actions">
+        <div>
+          <p class="hero-place"><b>新潟市</b>の、子ども向けの習い事教室へ</p>
+          <h1 id="hero-title"><span class="nb">新潟の子ども向け教室の</span><span class="nb">ホームページを、</span><br><span class="nb"><span class="u">スマホで迷わない<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 13 C 70 6, 150 9, 210 8 S 280 5, 297 10"/></svg></span>形に。</span></h1>
+          <p class="hero-lead">保護者が教室を探すのは、たいていスマホのすきま時間です。Googleマップとホームページの「最初に見える場所」を整えて、体験や問い合わせまで迷わずたどり着ける入口をつくります。</p>
+          <div class="hero-actions" id="hero-actions">
             <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">
               <svg class="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
               InstagramのDMで相談する
             </a>
-            <a class="btn btn-line" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
+            <a class="btn btn-sub" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
           </div>
-          <p class="hero-note fade" style="--d:7">今のホームページやInstagramのURLを送っていただくだけで大丈夫です。</p>
+          <p class="hero-who"><img src="logo-160.png" alt="" width="30" height="30">新潟市在住のヤマガタが、個人で運営しています。</p>
         </div>
 
-        <div class="hero-stage fade" style="--d:4" id="hero-stage">
-          <div class="device" role="img" aria-label="架空の教室のホームページが、古いお知らせが並ぶ画面から、要点3つと体験ボタンが最初に見える画面へ整っていく様子">
+        <div class="hero-stage">
+          <p class="hero-hand" aria-hidden="true">今のページに赤ペンを入れて、<br>こう整えます<svg viewBox="0 0 40 40"><path d="M6 4 C 22 8, 30 18, 30 34 M30 34 L 24 27 M30 34 L 36 28"/></svg></p>
+          <div class="device" role="img" aria-label="架空の教室のホームページに赤ペンで問題点を書き込み、要点と体験ボタンが最初に見える画面に整える様子">
             <div class="screen hero-screen" id="hero-screen">
-              <div class="scr messy" aria-hidden="true">
-                <div class="m-bar" style="--i:0"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                <div class="m-piano" style="--i:1;--r:-6deg;--x:-8%"></div>
-                <div class="m-pad" style="--i:2;--r:5deg;--x:6%">
+              <div class="scr before" aria-hidden="true">
+                <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
+                <div class="m-piano mk"><span class="pen draw" data-step="3" style="right:30%;bottom:10%;width:26%;height:46%"><svg viewBox="0 0 60 30" preserveAspectRatio="none"><path pathLength="1" d="M58 26 C 40 30, 20 22, 6 6 M6 6 L 7 15 M6 6 L 15 7"/></svg></span><span class="pen-note light draw-note" data-step="3" style="right:4%;bottom:8%">最初は写真だけ</span></div>
+                <div class="m-pad">
                   <p class="m-label">お知らせ</p>
-                  <ul class="m-news">
+                  <div class="mk"><span class="pen draw" data-step="1" style="left:-2.5%;top:-4%;width:35%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light draw-note" data-step="1" style="left:34%;top:-24%">2年前のまま</span><ul class="m-news">
                     <li><span class="date">2024.03.15</span>発表会のお知らせ</li>
                     <li><span class="date">2024.01.10</span>新年のごあいさつ</li>
                     <li><span class="date">2023.12.01</span>冬休みについて</li>
-                  </ul>
-                </div>
-                <div class="m-pad" style="--i:3;--r:-3deg;--x:-4%">
-                  <p class="m-text">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
-                  <p class="m-faint" style="margin-top:.5em">体験は「メニュー」→「教室案内」→ ページ下部から</p>
+                  </ul></div>
+                  <p class="m-text" style="margin-top:.6em">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
+                  <p class="m-faint mk" style="margin-top:.4em">体験は「メニュー」→「教室案内」→ ページ下部から<span class="pen draw" data-step="2" style="left:0;bottom:-.45em;width:100%;height:.55em"><svg viewBox="0 0 100 10" preserveAspectRatio="none"><path pathLength="1" d="M1 5 Q 6 1 11 5 T 21 5 T 31 5 T 41 5 T 51 5 T 61 5 T 71 5 T 81 5 T 91 5 T 99 5"/></svg></span><span class="pen-note light draw-note" data-step="2" style="right:2%;top:120%">体験はどこ？</span></p>
                   <p class="m-label" style="margin-top:1em">講師紹介</p>
-                  <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後、ヤマ…（長い経歴が続く）</p>
+                  <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後…（長い経歴が続く）</p>
                   <div class="m-ph" style="margin-top:.8em"></div>
+                  <p class="m-text" style="margin-top:.6em">レッスンでは、一人ひとりの個性を大切にしながら…</p>
                 </div>
               </div>
-              <div class="scr tidy" aria-hidden="true">
-                <div class="m-bar" style="--i:0"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                <div class="m-catch-wrap" style="--i:1">
+              <div class="scr after" aria-hidden="true">
+                <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
+                <div class="m-catch-wrap">
                   <p class="m-catch">はじめてのピアノを、<br>ひとりひとりのペースで。</p>
-                  <ul class="m-points">
-                    <li>4歳〜小学生・個人レッスン</li>
-                    <li>月3回／平日夕方・土曜</li>
-                    <li>駐車場あり</li>
-                  </ul>
-                  <span class="m-cta">体験レッスン・問い合わせ</span>
+                  <ul class="m-points"><li>4歳〜小学生・個人レッスン</li><li>月3回／平日夕方・土曜</li><li>駐車場あり</li></ul>
+                  <span class="m-cta mk">体験レッスン・問い合わせ<span class="pen draw" data-step="4" style="left:-4%;top:-30%;width:108%;height:160%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light draw-note" data-step="4" style="right:0;top:118%">最初の画面に！</span></span>
                 </div>
-                <div class="m-piano" style="--i:3;height:26cqw"></div>
-                <div class="m-pad" style="--i:4;background:#fff">
+                <div class="m-pad">
                   <p class="m-label">お知らせ</p>
-                  <p style="font-size:.92em;margin-top:.2em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
-                  <p class="m-label" style="margin-top:.9em">コース</p>
+                  <p style="font-size:.92em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
+                  <p class="m-label" style="margin-top:.8em">コース</p>
                   <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
-                  <p class="m-label" style="margin-top:.9em">アクセス</p>
+                  <p class="m-label" style="margin-top:.8em">アクセス</p>
                   <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
+                  <p class="m-label" style="margin-top:.8em">講師より</p>
+                  <p class="m-text">はじめてでも大丈夫。まずは体験で、教室の雰囲気を見に来てください。</p>
                 </div>
+                <div class="m-piano" style="height:24cqw"></div>
               </div>
-              <span class="tap" aria-hidden="true"></span>
             </div>
           </div>
-          <span class="tag bad t1" style="--d:0" aria-hidden="true"><i></i>お知らせが2年前</span>
-          <span class="tag bad t2" style="--d:1" aria-hidden="true"><i></i>体験はどこ？</span>
-          <span class="tag bad t3" style="--d:2" aria-hidden="true"><i></i>最初の画面が写真だけ</span>
-          <span class="tag good t1" style="--d:0" aria-hidden="true"><i></i>要点を3行に</span>
-          <span class="tag good t2" style="--d:1" aria-hidden="true"><i></i>体験ボタンを最初に</span>
-          <span class="tag good t3" style="--d:2" aria-hidden="true"><i></i>最新のお知らせだけ</span>
-          <div class="orbit" aria-hidden="true">
-            <svg viewBox="0 0 120 120"><defs><path id="circle" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs><text><textPath href="#circle">STUDIO COUCOU · NIIGATA · SMARTPHONE · </textPath></text></svg>
-            <img src="logo-160.png" alt="" width="60" height="60">
-          </div>
-          <p class="stage-caption"><b>架空の教室による制作サンプル</b><br>実在の教室とは関係ありません<button class="replay" type="button" id="replay" aria-label="整っていく様子をもう一度再生">↻ もう一度</button></p>
+          <p class="stage-caption">架空の教室による制作サンプルです（実在の教室とは関係ありません）<button class="replay" type="button" id="replay">もう一度見る</button></p>
         </div>
       </div>
     </section>
 
-    <!-- マーキー -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Piano</span><span class="jp">新潟の子ども向け教室へ</span><span>English</span><span>Dance</span><span class="jp">スマホの入口を整える</span><span>Art</span><span>Gymnastics</span><span>Music</span>
-        <span>Piano</span><span class="jp">新潟の子ども向け教室へ</span><span>English</span><span>Dance</span><span class="jp">スマホの入口を整える</span><span>Art</span><span>Gymnastics</span><span>Music</span>
-      </div>
-    </div>
-
-    <!-- 2. 悩み -->
-    <section class="section worries" aria-labelledby="worries-title">
+    <!-- 2. セルフチェック -->
+    <section class="section check" aria-labelledby="check-title">
       <div class="wrap">
-        <div class="sec-head" data-in>
-          <p class="sec-no"><b>01</b>Worries</p>
+        <div class="sec-head">
+          <p class="label">一　つまずくところ</p>
           <div>
-            <h2 class="sec-title" id="worries-title"><span class="ln"><span style="--d:0">こんなこと、</span></span><span class="ln"><span style="--d:1">ありませんか。</span></span></h2>
-            <p class="sec-lead fade" style="--d:2">教室の中身は良いのに、スマホで見たときの入口で損をしていることがあります。</p>
+            <h2 class="sec-title" id="check-title"><span class="nb">いちど、自分の教室を</span><span class="nb">スマホで見てみてください。</span></h2>
+            <p class="sec-lead">保護者がスマホで教室を調べるとき、つまずきやすいのは次のようなところです。</p>
           </div>
         </div>
-        <ol class="worry-list">
-          <li class="worry" data-in style="--d:0">
-            <span class="worry-no">1</span>
-            <h3><span class="nb">体験の申込み方法が、</span><span class="nb">埋もれている</span></h3>
-            <p>何度もスクロールしたり、メニューを開いたりしないと「体験はこちら」にたどり着けない。</p>
-          </li>
-          <li class="worry" data-in style="--d:1">
-            <span class="worry-no">2</span>
-            <h3><span class="nb">お知らせが、</span><span class="nb">古いままになっている</span></h3>
-            <p>去年の発表会や募集の案内が先頭に残っていて、今も活動しているのか伝わりにくい。</p>
-          </li>
-          <li class="worry" data-in style="--d:2">
-            <span class="worry-no">3</span>
-            <h3><span class="nb">スマホだと、</span><span class="nb">文字が小さく読みにくい</span></h3>
-            <p>パソコン向けの画面が縮んで表示され、拡大しないと料金や時間が読めない。</p>
-          </li>
-        </ol>
+        <div class="indent">
+          <ul class="check-list" id="check-list">
+            <li class="check-item">
+              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
+              <h3><span class="nb">体験の申込み方法が、</span><span class="nb">埋もれている</span></h3>
+              <p>何度もスクロールしたり、メニューを開いたりしないと「体験はこちら」にたどり着けない。</p>
+            </li>
+            <li class="check-item">
+              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
+              <h3><span class="nb">お知らせが、</span><span class="nb">古いままになっている</span></h3>
+              <p>去年の発表会や募集の案内が先頭に残っていて、今も活動しているのか伝わりにくい。</p>
+            </li>
+            <li class="check-item">
+              <span class="box" aria-hidden="true"><svg viewBox="0 0 34 32" class="draw"><path pathLength="1" d="M5 17 L13 26 L31 3"/></svg></span>
+              <h3><span class="nb">スマホだと、</span><span class="nb">文字が小さく読みにくい</span></h3>
+              <p>パソコン向けの画面が縮んで表示され、拡大しないと料金や時間が読めない。</p>
+            </li>
+          </ul>
+          <p class="check-foot">ひとつでも当てはまれば、<span class="hand">入口を整える余地があります。</span></p>
+        </div>
       </div>
     </section>
 
     <!-- 3. 作例 -->
     <section class="section samples" id="samples" aria-labelledby="samples-title">
       <div class="wrap">
-        <div class="sec-head" data-in>
-          <p class="sec-no"><b>02</b>Before / After</p>
+        <div class="sec-head">
+          <p class="label">二　作例</p>
           <div>
-            <h2 class="sec-title" id="samples-title"><span class="ln"><span style="--d:0">整えると、</span></span><span class="ln"><span style="--d:1">こう変わります。</span></span></h2>
-            <p class="sec-lead fade" style="--d:2">つまみを左右に動かすと、整える前と後を見比べられます。</p>
+            <h2 class="sec-title" id="samples-title"><span class="nb">赤ペンを入れて、</span><span class="nb">整えるとこうなります。</span></h2>
+            <p class="sec-lead">真ん中のつまみを左右に動かすと、整える前と後を見比べられます。</p>
           </div>
         </div>
 
-        <div class="lab">
-          <div class="lab-tabs fade" data-in>
-            <span class="badge">架空の教室による制作サンプル</span>
+        <div class="lab indent">
+          <div class="lab-tabs">
+            <span class="notice">架空の教室による制作サンプル</span>
             <div class="tabs" role="tablist" aria-label="作例を選ぶ">
               <button class="tab" role="tab" type="button" id="tab-piano" aria-selected="true" aria-controls="case-piano" data-case="piano">ピアノ教室</button>
               <button class="tab" role="tab" type="button" id="tab-dance" aria-selected="false" aria-controls="case-dance" data-case="dance" tabindex="-1">ダンス教室</button>
               <button class="tab" role="tab" type="button" id="tab-english" aria-selected="false" aria-controls="case-english" data-case="english" tabindex="-1">英語教室</button>
             </div>
           </div>
-          <div class="lab-copy fade" data-in>
-
-            <div class="case is-active" id="case-piano" role="tabpanel" aria-labelledby="tab-piano">
+          <div class="lab-copy">
+            <div class="case" id="case-piano" role="tabpanel" aria-labelledby="tab-piano">
               <h3><span class="nb">ホームページの</span><span class="nb">最初の画面</span></h3>
               <p class="case-meta">（架空）ことのはピアノ教室</p>
-              <div class="diff">
-                <div class="before"><b>BEFORE</b><ul><li>先頭が古いお知らせのまま</li><li><span class="nb">体験の申込みは、</span><span class="nb">メニューの奥</span></li></ul></div>
-                <div class="after"><b>AFTER</b><ul><li><span class="nb">対象・回数・通いやすさを</span><span class="nb">3行で</span></li><li>体験ボタンを最初の画面に</li></ul></div>
-              </div>
+              <ul class="redpen">
+                <li><b>赤ペン</b><span>先頭が古いお知らせのまま。体験の申込みはメニューの奥。</span></li>
+                <li class="fix"><b>直す</b><span>対象・回数・通いやすさを3行にまとめ、体験ボタンを最初の画面に置く。</span></li>
+              </ul>
             </div>
             <div class="case" id="case-dance" role="tabpanel" aria-labelledby="tab-dance" hidden>
               <h3><span class="nb">Googleマップ</span><span class="nb">（Googleビジネスプロフィール）</span></h3>
               <p class="case-meta">（架空）キッズダンス ルミナ／ホームページが無い・弱い教室にも</p>
-              <div class="diff">
-                <div class="before"><b>BEFORE</b><ul><li>何曜日にやっているか分からない</li><li>問い合わせ先が見つからない</li></ul></div>
-                <div class="after"><b>AFTER</b><ul><li>説明文・レッスン時間・写真を追加</li><li>予約・問い合わせへのリンクを設定</li></ul></div>
-              </div>
+              <ul class="redpen">
+                <li><b>赤ペン</b><span>何曜日にやっているか分からない。問い合わせ先が見つからない。</span></li>
+                <li class="fix"><b>直す</b><span>説明文・レッスン時間・写真を入れ、予約・問い合わせへのリンクを設定する。</span></li>
+              </ul>
             </div>
             <div class="case" id="case-english" role="tabpanel" aria-labelledby="tab-english" hidden>
               <h3><span class="nb">スマホでの</span><span class="nb">読みやすさ</span></h3>
               <p class="case-meta">（架空）えいごのアトリエ ポム</p>
-              <div class="diff">
-                <div class="before"><b>BEFORE</b><ul><li>パソコン用の画面がそのまま縮小</li><li>料金・時間・体験の場所が分からない</li></ul></div>
-                <div class="after"><b>AFTER</b><ul><li>スマホで読める文字の大きさに</li><li>知りたい順（対象→回数→体験）に</li></ul></div>
-              </div>
+              <ul class="redpen">
+                <li><b>赤ペン</b><span>パソコン用の画面がそのまま縮小。料金・時間・体験の場所が読めない。</span></li>
+                <li class="fix"><b>直す</b><span>スマホで読める文字の大きさにして、知りたい順（対象→回数→体験）に並べる。</span></li>
+              </ul>
             </div>
-            <p class="fiction">※ 教室名・内容・写真はすべて架空です。実際の作業では、教室の公式情報と、先生に確認した内容だけを使います。</p>
+            <p class="fiction">教室名・内容・写真はすべて架空です。実際の作業では、教室の公式情報と、先生に確認した内容だけを使います。</p>
           </div>
 
-          <div class="compare-wrap fade" data-in style="--d:1">
-            <div class="compare-labels" aria-hidden="true"><span>BEFORE</span><span>AFTER</span></div>
+          <div class="compare-wrap">
+            <div class="compare-labels" aria-hidden="true"><span>整える前</span><span>整えた後</span></div>
             <div class="device compare" id="compare">
               <div class="screen">
                 <!-- ピアノ -->
@@ -751,19 +601,20 @@
                   <div class="layer before" role="img" aria-label="整える前：写真と古いお知らせが先頭にあり、体験の案内はメニューの奥">
                     <div class="scr" aria-hidden="true">
                       <div class="m-bar"><span>ことのはピアノ教室</span><span class="m-burger"></span></div>
-                      <div class="m-piano"></div>
+                      <div class="m-piano mk"><span class="pen" style="left:30%;bottom:22%;width:16%;height:40%"><svg viewBox="0 0 60 30" preserveAspectRatio="none"><path pathLength="1" d="M58 26 C 40 30, 20 22, 6 6 M6 6 L 7 15 M6 6 L 15 7"/></svg></span><span class="pen-note light" style="left:4%;bottom:8%">最初は写真だけ</span></div>
                       <div class="m-pad">
                         <p class="m-label">お知らせ</p>
-                        <ul class="m-news">
+                        <div class="mk"><span class="pen" style="left:-2.5%;top:-4%;width:35%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:4%;top:-26%">2年前のまま</span><ul class="m-news">
                           <li><span class="date">2024.03.15</span>発表会のお知らせ</li>
                           <li><span class="date">2024.01.10</span>新年のごあいさつ</li>
                           <li><span class="date">2023.12.01</span>冬休みについて</li>
-                        </ul>
+                        </ul></div>
                         <p class="m-text" style="margin-top:.6em">当教室は音楽を通して子どもたちの豊かな心を育むことを大切に…</p>
-                        <p class="m-faint" style="margin-top:.5em">体験は「メニュー」→「教室案内」→ ページ下部から</p>
-                  <p class="m-label" style="margin-top:1em">講師紹介</p>
-                  <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後、ヤマ…（長い経歴が続く）</p>
+                        <p class="m-faint mk" style="margin-top:.4em">体験は「メニュー」→「教室案内」→ ページ下部から<span class="pen" style="left:0;bottom:-.45em;width:100%;height:.55em"><svg viewBox="0 0 100 10" preserveAspectRatio="none"><path pathLength="1" d="M1 5 Q 6 1 11 5 T 21 5 T 31 5 T 41 5 T 51 5 T 61 5 T 71 5 T 81 5 T 91 5 T 99 5"/></svg></span><span class="pen-note light" style="left:0;top:120%">体験はどこ？</span></p>
+                        <p class="m-label" style="margin-top:1em">講師紹介</p>
+                        <p class="m-text">幼少期よりピアノを始め、音楽大学を卒業後…（長い経歴が続く）</p>
                   <div class="m-ph" style="margin-top:.8em"></div>
+                  <p class="m-text" style="margin-top:.6em">レッスンでは、一人ひとりの個性を大切にしながら…</p>
                       </div>
                     </div>
                   </div>
@@ -775,12 +626,17 @@
                         <ul class="m-points"><li>4歳〜小学生・個人レッスン</li><li>月3回／平日夕方・土曜</li><li>駐車場あり</li></ul>
                         <span class="m-cta">体験レッスン・問い合わせ</span>
                       </div>
-                      <div class="m-piano" style="height:26cqw"></div>
-                      <div class="m-pad"><p class="m-label">お知らせ</p><p style="font-size:.92em;margin-top:.2em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
-                  <p class="m-label" style="margin-top:.9em">コース</p>
-                  <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
-                  <p class="m-label" style="margin-top:.9em">アクセス</p>
-                  <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p></div>
+                      <div class="m-pad">
+                        <p class="m-label">お知らせ</p>
+                        <p style="font-size:.92em"><span class="m-new">NEW</span>春の体験枠を受付中</p>
+                        <p class="m-label" style="margin-top:.8em">コース</p>
+                        <div class="m-cards"><span><b>はじめて</b>4歳〜・30分</span><span><b>じっくり</b>小学生・45分</span></div>
+                  <p class="m-label" style="margin-top:.8em">アクセス</p>
+                  <p style="font-size:.85em;color:#555">駐車場2台／自転車置き場あり</p>
+                  <p class="m-label" style="margin-top:.8em">講師より</p>
+                  <p class="m-text">はじめてでも大丈夫。まずは体験で、教室の雰囲気を見に来てください。</p>
+                      </div>
+                      <div class="m-piano" style="height:24cqw"></div>
                     </div>
                   </div>
                 </div>
@@ -791,11 +647,11 @@
                       <div class="m-map"><span class="m-pin"></span></div>
                       <div class="m-place"><b>キッズダンス ルミナ</b><span class="m-label">ダンス教室</span></div>
                       <div class="m-chips"><span class="m-chip">経路</span><span class="m-chip off">ウェブサイト</span><span class="m-chip off">予約</span></div>
-                      <div class="m-row"><i></i><span class="m-faint" style="font-size:1em">営業時間を追加</span></div>
-                      <div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">説明はありません</span></div>
+                      <div class="mk"><div class="m-row"><i></i><span class="m-faint" style="font-size:1em">営業時間を追加</span></div>
+                      <div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">説明はありません</span></div><span class="pen" style="left:1%;top:-6%;width:46%;height:112%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:22%;top:-62%">何曜日？</span></div>
                       <div class="m-thumbs"><span class="p1"></span><span class="empty"></span><span class="empty"></span></div>
-                      <div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">ウェブサイトを追加</span></div>
-                      <div class="m-row"><i></i><span class="m-faint" style="font-size:1em">予約リンクを追加</span></div>
+                      <div class="mk"><div class="m-row"><i class="info"></i><span class="m-faint" style="font-size:1em">ウェブサイトを追加</span></div>
+                      <div class="m-row"><i></i><span class="m-faint" style="font-size:1em">予約リンクを追加</span></div><span class="pen-note light" style="left:4%;top:96%">連絡先は？</span></div>
                     </div>
                   </div>
                   <div class="layer after" role="img" aria-label="整えた後のGoogleマップ：説明文、レッスン時間、写真、予約・問い合わせのリンクが入っている">
@@ -817,9 +673,9 @@
                     <div class="scr" aria-hidden="true">
                       <div class="m-pc">
                         <div class="m-pc-nav"><span>HOME</span><span>教室案内</span><span>コース</span><span>料金</span><span>アクセス</span><span>お問合せ</span></div>
-                        <div class="m-pc-cols">
+                        <div class="m-pc-cols mk"><span class="pen" style="left:28%;top:-4%;width:76%;height:108%"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><path pathLength="1" d="M10 20 C8 7 42 2 64 3 C90 5 99 13 96 23 C92 35 58 39 36 37 C12 35 3 27 9 15 C13 9 22 6 32 5"/></svg></span><span class="pen-note light" style="left:6%;top:104%;font-size:4.6cqw">小さくて読めない</span>
                           <div class="m-pc-side">新着情報<br>2024.02 春の生徒募集<br>2023.11 ハロウィン会<br><br>リンク<br>ブログ<br>Instagram</div>
-                          <div class="m-pc-main">
+                          <div>
                             <div class="m-pc-img"></div>
                             <p>えいごのアトリエ ポムへようこそ。幼児から小学生まで、英語を楽しく学べる教室です。少人数のクラスで、歌やゲームを取り入れながら…</p>
                             <p>コース：キッズ（3〜6歳）月4回／ジュニア（小1〜小6）月4回／料金は料金ページをご覧ください。</p>
@@ -830,7 +686,6 @@
                         <p>講師紹介：英語圏での滞在経験を生かし、子どもたちが自然に英語に親しめるよう…（続きを読む）</p>
                         <div class="m-pc-side" style="margin-top:.6em">アクセス｜教室の所在地・駐車場について・お問い合わせはこちら</div>
                       </div>
-                      <span class="m-zoom">拡大しないと読めない</span>
                     </div>
                   </div>
                   <div class="layer after" role="img" aria-label="整えた後：スマホ向けの大きな文字で、対象・回数と体験ボタンが並んでいる">
@@ -847,12 +702,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="handle" aria-hidden="true"><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span></div>
+                <div class="handle" aria-hidden="true"><span class="knob"></span></div>
               </div>
               <label class="sr-only" for="compare-range">整える前と後の表示の割合</label>
               <input type="range" id="compare-range" min="0" max="100" value="50">
             </div>
-            <p class="compare-hint" aria-hidden="true">← つまみを左右に動かして比べる →</p>
+            <p class="compare-hint" aria-hidden="true">つまみを左右に動かして比べる</p>
           </div>
         </div>
       </div>
@@ -861,36 +716,36 @@
     <!-- 4. 商品 -->
     <section class="section offer" id="offer" aria-labelledby="offer-title">
       <div class="wrap">
-        <div class="sec-head" data-in>
-          <p class="sec-no"><b>03</b>First step</p>
+        <div class="sec-head">
+          <p class="label">三　内容と料金</p>
           <div>
-            <h2 class="sec-title" id="offer-title"><span class="ln"><span style="--d:0">まずは</span></span><span class="ln"><span style="--d:1">「スマホの入口」だけ</span></span><span class="ln"><span style="--d:2">整えます。</span></span></h2>
-            <p class="sec-lead fade" style="--d:3">全面リニューアルではなく、保護者が最初に目にする場所に絞った小さなお仕事です。</p>
+            <h2 class="sec-title" id="offer-title"><span class="nb">最初のお仕事は、</span><span class="nb">ここまでにしています。</span></h2>
+            <p class="sec-lead">いきなり作り直すのではなく、保護者が最初に目にする場所だけを整えます。</p>
           </div>
         </div>
-
-        <div class="ticket fade" data-in>
-          <div class="ticket-main">
-            <p class="ticket-kicker">Plan</p>
-            <h3>スマホの入口整備</h3>
-            <p class="ticket-sub">Googleマップとホームページの「最初に見える場所」</p>
-            <ul class="incl">
-              <li><div><b>Googleマップ（Googleビジネスプロフィール）を整える</b><small>説明文・営業時間・写真・予約／問い合わせのリンク</small></div></li>
-              <li><div><b>ホームページの、スマホで最初に見える場所を整える</b><small>要点3つと「体験・問い合わせ」ボタンを置きます。今お使いの編集画面でできる範囲で行います。</small></div></li>
-              <li><div><b><span class="nb">作業前と作業後の</span><span class="nb">比較画像をお渡し</span></b></div></li>
-              <li><div><b>修正1回まで</b></div></li>
-            </ul>
-          </div>
-          <div class="ticket-stub">
-            <p class="price-tag">モニター価格<span>先着3件</span></p>
-            <p class="price">9,800<small>円（税込）</small></p>
-            <dl class="terms">
-              <dt>モニターの条件</dt>
-              <dd>作業前後の様子を、事例として掲載させていただくことにご協力ください。教室名入り・匿名のどちらかを選べます。</dd>
-              <dt>ご用意いただくもの</dt>
-              <dd>Googleビジネスプロフィールとホームページの編集権限</dd>
-            </dl>
-            <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">DMで相談する<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="indent">
+          <div class="plan">
+            <div class="plan-main">
+              <h3>スマホの入口整備</h3>
+              <p class="plan-sub">Googleマップとホームページの「最初に見える場所」</p>
+              <ul class="incl">
+                <li><span>一</span><div><b>Googleマップ（Googleビジネスプロフィール）を整える</b><small>説明文・営業時間・写真・予約／問い合わせのリンク</small></div></li>
+                <li><span>二</span><div><b>ホームページの、スマホで最初に見える場所を整える</b><small>要点3つと「体験・問い合わせ」ボタンを置きます。今お使いの編集画面でできる範囲で行います。</small></div></li>
+                <li><span>三</span><div><b><span class="nb">作業前と作業後の</span><span class="nb">比較画像をお渡し</span></b></div></li>
+                <li><span>四</span><div><b>修正1回まで</b></div></li>
+              </ul>
+            </div>
+            <div class="plan-side">
+              <p class="price-label">モニター価格<span>先着3件</span></p>
+              <p class="price">9,800<small>円（税込）</small></p>
+              <dl class="terms">
+                <dt>モニターの条件</dt>
+                <dd>作業前後の様子を、事例として掲載させていただくことにご協力ください。教室名入り・匿名のどちらかを選べます。</dd>
+                <dt>ご用意いただくもの</dt>
+                <dd>Googleビジネスプロフィールとホームページの編集権限</dd>
+              </dl>
+              <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">DMで相談する</a>
+            </div>
           </div>
         </div>
       </div>
@@ -899,79 +754,77 @@
     <!-- 5. 流れ -->
     <section class="section flow" id="flow" aria-labelledby="flow-title">
       <div class="wrap">
-        <div class="sec-head" data-in>
-          <p class="sec-no"><b>04</b>Flow</p>
+        <div class="sec-head">
+          <p class="label">四　流れ</p>
           <div>
-            <h2 class="sec-title" id="flow-title"><span class="ln"><span style="--d:0">ご依頼の流れ</span></span></h2>
-            <p class="sec-lead fade" style="--d:1">お申込みの前に、改善のイメージを見てから決めていただけます。</p>
+            <h2 class="sec-title" id="flow-title">頼むときの流れ</h2>
+            <p class="sec-lead">申し込む前に、改善のイメージを見てから決められます。</p>
           </div>
         </div>
-        <ol class="steps" id="steps">
-          <li class="step"><span class="step-dot">1</span><h3>DMでご相談</h3><p>教室のホームページやInstagram、Googleマップの名前を教えてください。気になっていることを伺います。</p></li>
-          <li class="step"><span class="step-dot">2</span><h3><span class="nb">改善イメージを</span><span class="nb">画像でお送り</span></h3><p>どこをどう変えるかを、画像1枚にまとめてお送りします。内容と金額に納得いただけたら、お申込みです。</p></li>
-          <li class="step"><span class="step-dot">3</span><h3>作業</h3><p>編集権限をお借りして、Googleマップとホームページを整えます。掲載する内容は、事前に先生に確認します。</p></li>
-          <li class="step"><span class="step-dot">4</span><h3>確認して完成</h3><p>作業前後の比較画像と一緒にご報告します。気になる点は1回まで修正します。</p></li>
-        </ol>
+        <div class="indent">
+          <ol class="flow-list">
+            <li><span class="flow-no">一</span><h3>DMでご相談</h3><p>教室のホームページやInstagram、Googleマップの名前を教えてください。気になっていることを伺います。</p></li>
+            <li><span class="flow-no">二</span><h3><span class="nb">改善イメージを</span><span class="nb">画像でお送り</span></h3><p>どこをどう変えるかを、画像1枚にまとめてお送りします。内容と金額に納得いただけたら、お申込みです。</p></li>
+            <li><span class="flow-no">三</span><h3>作業</h3><p>編集権限をお借りして、Googleマップとホームページを整えます。掲載する内容は、事前に先生に確認します。</p></li>
+            <li><span class="flow-no">四</span><h3>確認して完成</h3><p>作業前後の比較画像と一緒にご報告します。気になる点は1回まで修正します。</p></li>
+          </ol>
+        </div>
       </div>
     </section>
 
     <!-- 6. 運営者 -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <div class="about-grid">
-          <div data-in>
-            <p class="sec-no" style="margin-bottom:28px"><b>05</b>About</p>
-            <p class="hello" aria-hidden="true">Coucou,<span>from Niigata.</span><small>“COUCOU” は、フランス語の「やあ」</small></p>
-            <div class="peek" data-in aria-hidden="true"><img src="logo-160.png" alt="" width="112" height="112"></div>
-          </div>
-          <div data-in>
-            <h2 class="sr-only" id="about-title">運営者紹介</h2>
-            <p class="about-name fade"><small>Operator</small><span class="nb">運営：ヤマガタ</span><span class="nb">（Studio Coucou）</span></p>
-            <div class="about-body fade" style="--d:1">
+        <div class="sec-head">
+          <p class="label">五　運営者のこと</p>
+          <div class="about-body">
+            <h2 class="about-name" id="about-title"><span class="nb">運営：ヤマガタ</span><span class="nb">（Studio Coucou）</span></h2>
+            <div class="about-text">
               <p>新潟市在住。妻の地元・新潟に移り住み、いまは子育て中の父です。</p>
               <p>本業はシステムエンジニアとして、アプリの開発に携わっています。</p>
               <p>学生時代は塾講師として、子どもたちや保護者の方と向き合う時間が何よりのやりがいでした。</p>
               <p>これから習い事を探す親のひとりとして、保護者が「ここなら安心」と思える案内づくりを、新潟の教室と一緒に進めたいと思っています。</p>
             </div>
+            <div class="peek" id="peek" aria-hidden="true"><img src="logo-160.png" alt="" width="108" height="108"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7. FAQ -->
+    <!-- 7. 質問 -->
     <section class="section faq" id="faq" aria-labelledby="faq-title">
       <div class="wrap">
-        <div class="sec-head" data-in>
-          <p class="sec-no"><b>06</b>FAQ</p>
-          <h2 class="sec-title" id="faq-title"><span class="ln"><span style="--d:0">よくある質問</span></span></h2>
+        <div class="sec-head">
+          <p class="label">六　質問</p>
+          <h2 class="sec-title" id="faq-title">気になりそうなこと</h2>
         </div>
-        <div class="faq-list">
+        <div class="faq-list indent">
           <details>
-            <summary><span class="q">Q.</span><span>Wix・Ameba Ownd・Jimdo・Googleサイトで作ったホームページでも頼めますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>Wix・Ameba Ownd・Jimdo・Googleサイトで作ったホームページでも頼めますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>はい、ご相談いただけます。今お使いの編集画面でできる範囲で整えます。作業のときは、ログインや編集の権限をお借りします。</p><p>サービスの仕様上できないことがある場合は、作業の前にお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>ホームページが無くても大丈夫ですか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>ホームページが無くても大丈夫ですか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>Googleマップ（Googleビジネスプロフィール）や、Instagramのプロフィールを入口にしている教室もあると思います。今ある入口に合わせてどこまでできるか、ご相談のときにお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>作業のあとも、自分で更新を続けられますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>作業のあとも、自分で更新を続けられますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>今お使いの編集画面の中で整えるので、作業後もこれまでと同じ方法で更新できます。どこを変えたかは、比較画像と一緒にお伝えします。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>ログイン情報を渡すのが不安です。</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>ログイン情報を渡すのが不安です。</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>Googleビジネスプロフィールなど、管理者や編集者を追加できるサービスでは、パスワードをお預かりせずに招待していただく方法をご案内します。作業が終わったら、権限を外していただいてかまいません。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>支払いの方法とタイミングは？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>支払いの方法とタイミングは？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>ご相談のときにご案内します。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>相談したら、必ず申し込まないといけませんか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>相談したら、必ず申し込まないといけませんか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>いいえ。改善イメージをご覧になってから、頼むかどうかを決めてください。お断りいただいても、その後こちらから何度も連絡することはありません。</p></div>
           </details>
           <details>
-            <summary><span class="q">Q.</span><span>生徒が増えることは保証されますか？</span><span class="pm" aria-hidden="true"></span></summary>
+            <summary><span class="q">問</span><span>生徒が増えることは保証されますか？</span><span class="pm" aria-hidden="true"></span></summary>
             <div class="answer"><p>お約束はできません。このお仕事は、保護者がスマホで迷わずに体験・問い合わせへ進める入口を整えるところまでです。</p></div>
           </details>
         </div>
@@ -980,26 +833,31 @@
 
     <!-- お問い合わせ -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
-      <div class="wrap" data-in>
-        <p class="kicker">Contact</p>
-        <h2 id="contact-title"><span class="ln"><span style="--d:0">まずは、</span></span><span class="ln"><span style="--d:1">今のページを</span></span><span class="ln"><span style="--d:2">見せてください。</span></span></h2>
-        <p class="contact-lead fade" style="--d:3">ホームページやInstagram、Googleマップのどれかひとつで大丈夫です。気になっているところを一緒に見ていきます。</p>
-        <div class="contact-actions fade" style="--d:4">
-          <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">
-            <svg class="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            InstagramのDMで相談する
-          </a>
-          <a class="btn btn-line" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="label">七　相談する</p>
+          <div>
+            <h2 id="contact-title"><span class="nb">まずは、今のページを</span><span class="nb">見せてください。</span></h2>
+            <p class="contact-lead">ホームページやInstagram、Googleマップのどれかひとつで大丈夫です。気になっているところを一緒に見ていきます。</p>
+            <div class="contact-actions">
+              <a class="btn" href="https://www.instagram.com/studiocoucou.jp/" target="_blank" rel="noopener">
+                <svg class="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                InstagramのDMで相談する
+              </a>
+              <a class="btn btn-sub" href="mailto:studiocoucou2628@gmail.com">メールで相談する</a>
+            </div>
+            <p class="contact-ids">Instagram：@studiocoucou.jp ／ メール：studiocoucou2628@gmail.com</p>
+          </div>
         </div>
-        <p class="contact-ids fade" style="--d:5">Instagram：@studiocoucou.jp ／ メール：studiocoucou2628@gmail.com</p>
       </div>
-      <p class="wordmark" aria-hidden="true">Coucou<span>!</span></p>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© 2026 Studio Coucou</span>
-    <a href="#top">ページの先頭へ ↑</a>
+    <div class="footer-in">
+      <span>© 2026 Studio Coucou</span>
+      <a href="#top">ページの先頭へ</a>
+    </div>
   </footer>
 
   <nav class="dock" id="dock" aria-label="相談する">
@@ -1007,65 +865,78 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       DMで相談する
     </a>
-    <a class="d-mail" href="mailto:studiocoucou2628@gmail.com" aria-label="メールで相談する">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6 8.5-6"/></svg>
-    </a>
+    <a class="d-mail" href="mailto:studiocoucou2628@gmail.com">メール</a>
   </nav>
 
   <script>
   (() => {
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('still');
+    const root = document.documentElement;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('still');
     const $ = (s, el = document) => el.querySelector(s);
     const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
-    const loaded = () => document.body.classList.add('is-loaded');
-    requestAnimationFrame(loaded);
-    setTimeout(loaded, 150);
+    /* 画面に入ったら */
+    const seen = (el, fn, opts) => {
+      if (reduce) { fn(); return; }
+      new IntersectionObserver(([e], obs) => { if (e.isIntersecting) { fn(); obs.disconnect(); } }, opts || { rootMargin: '0px 0px -15% 0px' }).observe(el);
+    };
 
-    /* スクロールで現れる */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -12% 0px' });
-    $$('[data-in]').forEach((el) => io.observe(el));
+    /* セルフチェック：赤ペンでチェックを入れる */
+    const checks = $$('#check-list .draw');
+    seen($('#check-list'), () => checks.forEach((c, i) => setTimeout(() => c.classList.add('on'), reduce ? 0 : 400 + i * 450)));
+
+    /* 運営者：ロゴの犬が顔を出す */
+    seen($('#peek'), () => $('#peek').classList.add('in'));
 
     /* ヘッダー */
     const header = $('#header');
     let lastY = scrollY;
+    const heroActions = $('#hero-actions');
+    const contact = $('#contact');
+    const dock = $('#dock');
     const onScroll = () => {
       const y = scrollY;
       header.classList.toggle('is-solid', y > 10);
-      if (y > 400 && y > lastY + 2) header.classList.add('is-hidden');
-      else if (y < lastY - 2 || y <= 400) header.classList.remove('is-hidden');
+      if (y > 480 && y > lastY + 4) header.classList.add('is-hidden');
+      else if (y < lastY - 4 || y <= 480) header.classList.remove('is-hidden');
       lastY = y;
-      updateSteps();
-      syncDock();
+      const heroOut = heroActions.getBoundingClientRect().bottom < 0;
+      const contactIn = contact.getBoundingClientRect().top < innerHeight * .85;
+      dock.classList.toggle('is-on', heroOut && !contactIn);
     };
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    /* ヒーロー：整っていく様子 */
+    /* ヒーロー：赤ペンを入れて、整える */
     const screen = $('#hero-screen');
-    const stage = $('#hero-stage');
+    const marks = (step) => $$(`[data-step="${step}"]`, screen);
     let timers = [];
-    const clear = () => { timers.forEach(clearTimeout); timers = []; };
-    const setTidy = (on) => { screen.classList.toggle('is-tidy', on); stage.classList.toggle('is-tidy-stage', on); };
-    const play = (loop) => {
-      clear();
-      setTidy(false);
-      screen.classList.remove('is-tap');
-      timers.push(setTimeout(() => setTidy(true), 1900));
-      timers.push(setTimeout(() => { screen.classList.remove('is-tap'); void screen.offsetWidth; screen.classList.add('is-tap'); }, 3600));
-      if (loop) timers.push(setTimeout(() => play(true), 8200));
+    const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+    const reset = () => {
+      timers.forEach(clearTimeout); timers = [];
+      screen.classList.remove('is-after');
+      $$('[data-step]', screen).forEach((m) => m.classList.remove('on'));
     };
-    if (reduce) { setTidy(true); }
+    const play = () => {
+      reset();
+      at(500, () => marks(1).forEach((m) => m.classList.add('on')));
+      at(1500, () => marks(2).forEach((m) => m.classList.add('on')));
+      at(2500, () => marks(3).forEach((m) => m.classList.add('on')));
+      at(4600, () => screen.classList.add('is-after'));
+      at(5600, () => marks(4).forEach((m) => m.classList.add('on')));
+      at(10500, play);
+    };
+    const showFinal = () => { reset(); screen.classList.add('is-after'); marks(4).forEach((m) => m.classList.add('on')); };
+    if (/[?&]marks/.test(location.search)) { reset(); [1, 2, 3].forEach((n) => marks(n).forEach((m) => m.classList.add('on'))); }
+    else if (reduce) showFinal();
     else {
-      let visible = false;
+      let running = false;
       new IntersectionObserver(([e]) => {
-        if (e.isIntersecting && !visible) { visible = true; play(true); }
-        else if (!e.isIntersecting && visible) { visible = false; clear(); }
-      }, { threshold: .35 }).observe(stage);
+        if (e.isIntersecting && !running) { running = true; play(); }
+        else if (!e.isIntersecting && running) { running = false; reset(); }
+      }, { threshold: .3 }).observe(screen);
     }
-    $('#replay').addEventListener('click', () => { reduce ? setTidy(!screen.classList.contains('is-tidy')) : play(true); });
+    $('#replay').addEventListener('click', () => (reduce ? showFinal() : play()));
 
     /* 作例：比較スライダー */
     const compare = $('#compare');
@@ -1081,24 +952,18 @@
       setPos(((e.clientX - r.left) / r.width) * 100);
     };
     let dragging = false;
-    compare.addEventListener('pointerdown', (e) => {
-      dragging = true; touched = true;
-      compare.classList.add('is-drag');
-      compare.setPointerCapture(e.pointerId);
-      fromEvent(e);
-    });
+    compare.addEventListener('pointerdown', (e) => { dragging = true; touched = true; compare.setPointerCapture(e.pointerId); fromEvent(e); });
     compare.addEventListener('pointermove', (e) => { if (dragging) fromEvent(e); });
-    const end = () => { dragging = false; compare.classList.remove('is-drag'); };
+    const end = () => { dragging = false; };
     compare.addEventListener('pointerup', end);
     compare.addEventListener('pointercancel', end);
     range.addEventListener('input', () => { touched = true; setPos(+range.value); });
-
     const hint = () => {
       if (reduce || touched) return;
-      const keys = [50, 16, 84, 42];
-      const dur = 2200;
+      const keys = [50, 22, 78, 50];
+      const dur = 2000;
       const t0 = performance.now();
-      const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const ease = (t) => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
       const tick = (now) => {
         if (touched) return;
         const t = Math.min(1, (now - t0) / dur);
@@ -1109,9 +974,8 @@
       };
       requestAnimationFrame(tick);
     };
-    new IntersectionObserver(([e], obs) => {
-      if (e.isIntersecting) { setTimeout(hint, 500); obs.disconnect(); }
-    }, { threshold: .6 }).observe(compare);
+    seen(compare, () => setTimeout(hint, 400), { threshold: .6 });
+    const qtab = (location.search.match(/[?&]tab=(\w+)/) || [])[1];
 
     /* 作例：タブ */
     const tabs = $$('.tab');
@@ -1120,14 +984,13 @@
         const on = t === tab;
         t.setAttribute('aria-selected', on);
         t.tabIndex = on ? 0 : -1;
-        const panel = $('#' + t.getAttribute('aria-controls'));
-        panel.hidden = !on;
-        panel.classList.toggle('is-active', on);
+        $('#' + t.getAttribute('aria-controls')).hidden = !on;
       });
       $$('.case-screens').forEach((s) => s.classList.toggle('is-active', s.dataset.screens === tab.dataset.case));
       setPos(50);
       if (focus) tab.focus();
     };
+    if (qtab && $('#tab-' + qtab)) select($('#tab-' + qtab));
     tabs.forEach((t, i) => {
       t.addEventListener('click', () => select(t));
       t.addEventListener('keydown', (e) => {
@@ -1136,31 +999,6 @@
         }
       });
     });
-
-    /* 流れ：線が伸びる */
-    const steps = $('#steps');
-    const stepEls = $$('.step', steps);
-    function updateSteps() {
-      const r = steps.getBoundingClientRect();
-      const vh = innerHeight;
-      const p = reduce ? 1 : Math.max(0, Math.min(1, (vh * .72 - r.top) / r.height));
-      steps.style.setProperty('--p', p.toFixed(3));
-      stepEls.forEach((s) => s.classList.toggle('on', reduce || s.getBoundingClientRect().top < vh * .72));
-    }
-
-    /* スマホの固定ボタン */
-    const dock = $('#dock');
-    const heroActions = $('#hero-actions');
-    const contact = $('#contact');
-    function syncDock() {
-      const heroOut = heroActions.getBoundingClientRect().bottom < 0;
-      const contactIn = contact.getBoundingClientRect().top < innerHeight * .85;
-      dock.classList.toggle('is-on', heroOut && !contactIn);
-    }
-
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', updateSteps);
-    onScroll();
   })();
   </script>
 </body>
